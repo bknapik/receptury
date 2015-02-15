@@ -14,7 +14,6 @@ use yii\widgets\ActiveForm;
             <h1>Dodaj/edytuj składnik</h1>
             <?php
             $form = ActiveForm::begin([
-            'id' => 'skladnik-form',
             'options' => ['class' => 'form-horizontal'],
             ]) ?>
             <?= $form->field($model, 'nazwa_skladnika')->label('Nazwa składnika') ?>
@@ -24,6 +23,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'rodzic_id')->label('Rodzic, jeżeli składnik składnika złożonego')->dropDownList($parents) ?>
             <?= $form->field($model, 'przelicznik_szt_kg')->label('Przelicznik ile sztuk na kilogram') ?>
             <?= $form->field($model, 'przelicznik_l_kg')->label('Przelicznik ile litrów na kilogram') ?>
+            <?= $form->field($model, 'funkcja_technologiczna_id')->label('Funkcja technologiczna')->dropDownList($functions) ?>
             <?= $form->field($model, 'wartosc_cal')->label('Wartość kaloryczna') ?>
             <?= $form->field($model, 'bialko')->label('Białko') ?>
             <?= $form->field($model, 'tluszcz')->label('Tłuszcz') ?>

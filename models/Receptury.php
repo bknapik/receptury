@@ -9,7 +9,7 @@
 namespace app\models;
 use yii\db\ActiveRecord;
 
-class Recetury extends ActiveRecord {
+class Receptury extends ActiveRecord {
     public static function tableName(){
         return 'receptury';
     }

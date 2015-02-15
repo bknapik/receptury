@@ -36,8 +36,9 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Składniki', 'url' => ['/skladniki/index']],
-                    //['label' => 'About', 'url' => ['/site/about']],
-                    //['label' => 'Contact', 'url' => ['/site/contact']],
+                    ['label' => 'Receptury', 'url' => ['/receptury/index']],
+                    ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
+                    ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
                     //Yii::$app->user->isGuest ?
                     //    ['label' => 'Login', 'url' => ['/site/login']] :
                     //    ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',

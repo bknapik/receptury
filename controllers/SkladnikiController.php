@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\Funkcja;
 use Yii;
 use yii\web\Controller;
 use app\models\Skladniki;
@@ -30,8 +31,6 @@ class SkladnikiController extends Controller
             $model = Skladniki::findOne($id);
         }
         if (\Yii::$app->request->isPost) {
-//            var_dump(\Yii::$app->request->post('Skladniki'));
-            //$model->attributes = array_merge($model->attributes, \Yii::$app->request->post('Skladniki'));
             $post = Yii::$app->request->post();
             $ret = $model->load($post, 'Skladniki');
             if ($ret && $model->validate()) {
@@ -51,6 +50,22 @@ class SkladnikiController extends Controller
                 $parents_arr[$parent->id] = $parent->nazwa_skladnika;
             }
         }
-        return $this->render('add', array('model' => $model, 'parents' => $parents_arr));
+
+        $functions = Funkcja::find()->all();
+        $functions_arr = array();
+        $functions_arr[null] = 'Wybierz';
+        foreach($functions as $function){
+            $functions_arr[$function->id] = $function->nazwa;
+        }
+        return $this->render('add', array('model' => $model, 'parents' => $parents_arr, 'functions' => $functions_arr));
+    }
+
+    public function actionDel(){
+        $id = \Yii::$app->request->get('id');
+        if($id){
+            $model = Skladniki::findOne($id);
+            $model->delete();
+            $this->redirect('?r=skladniki%2Findex');
+        }
     }
 } 
