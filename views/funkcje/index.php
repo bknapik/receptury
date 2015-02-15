@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'Składniki';
+$this->title = 'Funkcje technologiczne';
 ?>
 <div class="site-index">
 

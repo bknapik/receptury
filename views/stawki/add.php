@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'Odbiorcy';
+$this->title = 'Stawki VAT';
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -11,12 +11,14 @@ use yii\widgets\ActiveForm;
     <div class="body-content">
 
         <div class="row">
-            <h1>Dodaj/edytuj odbiorcę</h1>
+            <h1>Dodaj/edytuj stawkę VAT</h1>
             <?php
             $form = ActiveForm::begin([
             'options' => ['class' => 'form-horizontal'],
             ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa') ?>
+            <?= $form->field($model, 'stawka')->label('Stawka') ?>
+            <?= $form->field($model, 'litera')->label('Litera') ?>
 
 
             <div class="form-group">

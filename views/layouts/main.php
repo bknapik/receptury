@@ -39,6 +39,7 @@ AppAsset::register($this);
                     ['label' => 'Receptury', 'url' => ['/receptury/index']],
                     ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
                     ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
+                    ['label' => 'Stawki VAT', 'url' => ['/stawki/index']],
                     //Yii::$app->user->isGuest ?
                     //    ['label' => 'Login', 'url' => ['/site/login']] :
                     //    ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
