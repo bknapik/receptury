@@ -8,9 +8,11 @@
 
 namespace app\controllers;
 
+use app\models\Skladniki;
 use Yii;
 use yii\web\Controller;
 use app\models\Receptury;
+use app\models\RS;
 
 class RecepturyController extends Controller
 {
@@ -28,6 +30,9 @@ class RecepturyController extends Controller
         $id = \Yii::$app->request->get('id');
         if ($id) {
             $model = Receptury::findOne($id);
+            $ingredientsForModel = RS::find()->where('receptura_id='.$id)->all();
+        } else {
+            $ingredientsForModel = array();
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
@@ -41,7 +46,14 @@ class RecepturyController extends Controller
                 $errors = $model->errors;
             }
         }
-        return $this->render('add', array('model' => $model));
+        $rs = new RS();
+        $ingredients = Skladniki::find()->all();
+        $ingredients_arr = array();
+        $ingredients_arr[null] = 'Wybierz';
+        foreach($ingredients as $ingredient){
+            $ingredients_arr[$ingredient->id] = $ingredient->nazwa_skladnika;
+        }
+        return $this->render('add', array('model' => $model,'ingredients' => $ingredients_arr, 'ingredientsForModel' => $ingredientsForModel, 'rs' => $rs));
     }
 
     public function actionDel(){
