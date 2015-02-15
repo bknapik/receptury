@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
             'options' => ['class' => 'form-horizontal'],
             ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa') ?>
+            <?= $form->field($model, 'aktywny')->label('Czy odbiorca aktywny')->checkbox() ?>
 
 
             <div class="form-group">

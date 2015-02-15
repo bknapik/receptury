@@ -37,6 +37,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Składniki', 'url' => ['/skladniki/index']],
                     ['label' => 'Receptury', 'url' => ['/receptury/index']],
+                    ['label' => 'Produkty', 'url' => ['/produkty/index']],
                     ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
                     ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
                     ['label' => 'Stawki VAT', 'url' => ['/stawki/index']],
