@@ -26,6 +26,10 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'vat_id')->label('Stawka VAT')->dropDownList($vat) ?>
             <?= $form->field($model, 'data_od')->label('Data od której obowiązuje produkt') ?>
             <?= $form->field($model, 'data_do')->label('Data do której obowiązuje produkt') ?>
+            <?php if($model->grafika != '' && $model->grafika != null): ?>
+                <img src="uploads/<?= $model->grafika ?>"/>
+                <?= $form->field($model,'file_rem')->checkbox(array('label'=>'Usuń grafikę')) ?>
+            <?php endif; ?>
             <?= $form->field($model, 'grafika')->fileInput() ?>
             <?= $form->field($model, 'opis')->label('Opis')->textarea() ?>
             <?= $form->field($model, 'nawazka')->label('Naważka') ?>
@@ -34,6 +38,7 @@ use yii\widgets\ActiveForm;
 
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
+                    <?= HTML::a(Html::button('Anuluj', ['class' => 'btn btn-primary']),'?r=produkty&index') ?>
                     <?= Html::submitButton('Zapisz', ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>

@@ -36,6 +36,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($rs, 'ilosc[]')->label('Ilość') ?>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
+                    <?= HTML::a(Html::button('Anuluj', ['class' => 'btn btn-primary']),'?r=receptury&index') ?>
                     <?= Html::submitButton('Zapisz', ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>

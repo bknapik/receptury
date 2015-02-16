@@ -13,6 +13,7 @@ use app\models\Receptury;
 use app\models\Stawki;
 use Yii;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class ProduktyController extends Controller
 {
@@ -44,8 +45,20 @@ class ProduktyController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
+            $grafika = $model->grafika;
             $ret = $model->load($post, 'Produkty');
+            $model->grafika = $grafika;
             if ($ret && $model->validate()) {
+                if (UploadedFile::getInstance($model, 'grafika') != null) {
+                    if ($model->grafika != null && $model->grafika != '') {
+                        unlink('uploads/' . $model->grafika);
+                    }
+                    $model->grafika = UploadedFile::getInstance($model, 'grafika');
+                    $model->grafika->saveAs('uploads/' . $model->grafika->baseName . '.' . $model->grafika->extension);
+                } else if ($model->file_rem == '1') {
+                    unlink('uploads/' . $model->grafika);
+                    $model->grafika = null;
+                }
                 $model->save();
                 $this->redirect('?r=produkty%2Findex');
                 // all inputs are valid

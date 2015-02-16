@@ -3,94 +3,37 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\Konfiguracja;
 
 class SiteController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     public function actionIndex()
     {
-        return $this->render('index');
+        $list = Konfiguracja::find()->all();
+        return $this->render('index', array('list' => $list));
     }
 
-    public function actionLogin()
-    {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+    public function actionEdit(){
+        $id = \Yii::$app->request->get('id');
+        if($id){
+            $model = Konfiguracja::findOne($id);
+            if (\Yii::$app->request->isPost) {
+                $post = Yii::$app->request->post();
+                $ret = $model->load($post, 'Konfiguracja');
+                if ($ret && $model->validate()) {
+                    $model->save();
+                    $this->redirect('?r=site%2Findex');
+                    // all inputs are valid
+                } else {
+                    // validation failed: $errors is an array containing error messages
+                    $errors = $model->errors;
+                }
+            }
+            $type = ($model->klucz == 'logo') ? 'file' : 'text';
+            return $this->render('edit', array('model' => $model, 'type' => $type));
         } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            $this->redirect('index.php');
         }
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    public function actionAbout()
-    {
-        return $this->render('about');
     }
 }

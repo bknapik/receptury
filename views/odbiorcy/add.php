@@ -22,6 +22,7 @@ use yii\widgets\ActiveForm;
 
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
+                    <?= HTML::a(Html::button('Anuluj', ['class' => 'btn btn-primary']),'?r=odbiorcy&index') ?>
                     <?= Html::submitButton('Zapisz', ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
