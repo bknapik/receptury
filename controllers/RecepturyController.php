@@ -27,10 +27,12 @@ class RecepturyController extends Controller
     public function actionAdd()
     {
         $model = new Receptury();
+        $rs = new RS();
+
         $id = \Yii::$app->request->get('id');
         if ($id) {
             $model = Receptury::findOne($id);
-            $ingredientsForModel = RS::find()->where('receptura_id='.$id)->all();
+            $ingredientsForModel = RS::find()->where('receptura_id=' . $id)->all();
         } else {
             $ingredientsForModel = array();
         }
@@ -39,6 +41,19 @@ class RecepturyController extends Controller
             $ret = $model->load($post, 'Receptury');
             if ($ret && $model->validate()) {
                 $model->save();
+                foreach($ingredientsForModel as $ingredient){
+                    $ingredient->delete();
+                }
+                foreach ($post['RS']['skladnik_id'] as $key => $value) {
+                    if ($value != '') {
+                        $rs = new RS();
+                        $rs->skladnik_id = $value;
+                        $rs->receptura_id = $model->id;
+                        $rs->jednostka = $post['RS']['jednostka'][$key];
+                        $rs->ilosc = $post['RS']['ilosc'][$key];
+                        $rs->save();
+                    }
+                }
                 $this->redirect('?r=receptury%2Findex');
                 // all inputs are valid
             } else {
@@ -46,19 +61,19 @@ class RecepturyController extends Controller
                 $errors = $model->errors;
             }
         }
-        $rs = new RS();
         $ingredients = Skladniki::find()->all();
         $ingredients_arr = array();
         $ingredients_arr[null] = 'Wybierz';
-        foreach($ingredients as $ingredient){
+        foreach ($ingredients as $ingredient) {
             $ingredients_arr[$ingredient->id] = $ingredient->nazwa_skladnika;
         }
-        return $this->render('add', array('model' => $model,'ingredients' => $ingredients_arr, 'ingredientsForModel' => $ingredientsForModel, 'rs' => $rs));
+        return $this->render('add', array('model' => $model, 'ingredients' => $ingredients_arr, 'ingredientsForModel' => $ingredientsForModel, 'rs' => $rs));
     }
 
-    public function actionDel(){
+    public function actionDel()
+    {
         $id = \Yii::$app->request->get('id');
-        if($id){
+        if ($id) {
             $model = Receptury::findOne($id);
             if (!empty($model)) {
                 $model->delete();
