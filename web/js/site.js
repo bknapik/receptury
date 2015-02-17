@@ -43,3 +43,23 @@ jQuery('.remove-ingredient').click(function(){
     }
     $parent.remove();
 });
+
+jQuery(document).ready(function(){
+    jQuery('.my-data-table').DataTable( {
+        "language": {
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "previous": "Poprzednia",
+                "next": "Natępna"
+            },
+            "emptyTable": "Brak danych",
+            "info": "Pokazywne _START_ do _END_ z _TOTAL_ wpisów",
+            "infoEmpty": "Brak wpisów",
+            "infoFiltered": " (wyfiltrowane z _MAX_ wpisów)",
+            "lengthMenu": "Pokazuj _MENU_ wpisów",
+            "search": "Szukaj: ",
+            "zeroRecords": "Brak wpisów do pokazania"
+        }
+    } );
+});

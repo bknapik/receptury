@@ -19,8 +19,10 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        '//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css',
     ];
     public $js = [
+        '//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js',
         'js/site.js',
     ];
     public $depends = [

@@ -101,3 +101,7 @@ a.desc:after {
     padding: 10px;
     margin-bottom: 10px;
 }
+
+.dataTables_filter input[type="search"]{
+    -webkit-appearance: textfield;
+}

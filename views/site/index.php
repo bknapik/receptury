@@ -9,11 +9,37 @@ $this->title = 'Receptury';
 
         <div class="row">
             <h1>Konfiguracja</h1>
-            <table class="table">
-                <tr><td>Nazwa</td><td>Opcje</td></tr>
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        Nazwa
+                    </th>
+                    <th>
+                        Wartość
+                    </th>
+                    <th>
+                        Opcje
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
                 <?php foreach ($list as $config): ?>
-                    <tr><td><?= $config->nazwa ?></td><td><a href="?r=site%2Fedit&id=<?= $config->klucz ?>" class="btn btn-primary">Edytuj</a></tr>
+                    <tr>
+                        <td>
+                            <?= $config->nazwa ?>
+                        </td>
+                        <td>
+                            <?= $config->wartosc ?>
+                        </td>
+                        <td>
+                            <a href="?r=site%2Fedit&id=<?= $config->klucz ?>" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
+                            </a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
 

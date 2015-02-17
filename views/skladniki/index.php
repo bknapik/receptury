@@ -9,12 +9,61 @@ $this->title = 'Składniki';
 
         <div class="row">
             <h1>Składniki</h1>
-            <a href="index.php?r=skladniki%2Fadd" class="btn btn-primary pull-right add-button">Dodaj nowy składnik</a>
-            <table class="table">
-                <tr><td>Id</td><td>Nazwa składnika</td><td>Opcje</td></tr>
+            <a href="index.php?r=skladniki%2Fadd" class="btn btn-primary pull-right add-button">
+                <i class="glyphicon glyphicon-plus"></i> Dodaj nowy składnik
+            </a>
+            <table class="table table-hover table-striped my-data-table">
+                <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Nazwa
+                    </th>
+                    <th>
+                        Nazwa do składu
+                    </th>
+                    <th>
+                        Alergen
+                    </th>
+                    <th>
+                        Wersja
+                    </th>
+                    <th>
+                        Opcje
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
                 <?php foreach ($list as $skladnik): ?>
-                    <tr><td><?= $skladnik->id ?></td><td><?= $skladnik->nazwa_skladnika ?></td><td><a href="?r=skladniki%2Fadd&id=<?= $skladnik->id ?>" class="btn btn-primary">Edytuj</a> <a href="?r=skladniki%2Fdel&id=<?= $skladnik->id ?>" class="btn btn-primary">Usuń</a></td></tr>
+                    <tr>
+                        <td>
+                            <?= $skladnik->id ?>
+                        </td>
+                        <td>
+                            <?= $skladnik->nazwa_skladnika ?>
+                        </td>
+                        <td>
+                            <?= $skladnik->nazwa_do_skladu ?>
+                        </td>
+                        <td>
+                            <?= $skladnik->alergen ?>
+                        </td>
+                        <td>
+                            <?= $skladnik->wersja ?>
+                        </td>
+                        <td>
+                            <a href="?r=skladniki%2Fadd&id=<?= $skladnik->id ?>" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
+                            </a>
+                            <a href="?r=skladniki%2Fdel&id=<?= $skladnik->id ?>" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
+                            </a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
 
