@@ -8,6 +8,7 @@
 
 namespace app\models;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 class Konfiguracja extends ActiveRecord {
     public static function tableName(){

@@ -24,18 +24,42 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'data_do')->label('Data do której receptura obowiązuje') ?>
             <?= $form->field($model, 'woda')->label('Woda') ?>
             <?= $form->field($model, 'uwagi')->label('Uwagi')->textarea() ?>
-            <h2>Składniki receptury</h2>
-            <?php foreach ($ingredientsForModel as $ifm): ?>
-                <div class="form-section">
-                    <?= $form->field($ifm, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
-                    <?= $form->field($ifm, 'jednostka')->label('Jednostka')->dropDownList(['kg' => 'kilogramy', 'szt' => 'sztuki', 'l' => 'litry']) ?>
-                    <?= $form->field($ifm, 'ilosc')->label('Ilość') ?>
-                </div>
-            <?php endforeach; ?>
-            <div class="form-section">
-                <?= $form->field($rs, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
-                <?= $form->field($rs, 'jednostka')->label('Jednostka')->dropDownList(['kg' => 'kilogramy', 'szt' => 'sztuki', 'l' => 'litry']) ?>
-                <?= $form->field($rs, 'ilosc')->label('Ilość') ?>
+            <div id="ingredients">
+                <h2>Składniki receptury
+                    <button class="btn btn-primary" id="add-ingredient" type="button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </h2>
+                <?php foreach ($ingredientsForModel as $ifm): ?>
+                    <div class="form-section <?= ($ifm == $ingredientsForModel[count($ingredientsForModel)-1]) ? 'last' : '' ?>">
+                        <button class="btn btn-link pull-right remove-ingredient" type="button">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                        <?= $form->field($ifm, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?=
+                        $form->field($ifm, 'jednostka')->label('Jednostka')->dropDownList([
+                            'kg' => 'kilogramy',
+                            'szt' => 'sztuki',
+                            'l' => 'litry'
+                        ]) ?>
+                        <?= $form->field($ifm, 'ilosc')->label('Ilość') ?>
+                    </div>
+                <?php endforeach; ?>
+                <?php if (empty($ingredientsForModel)): ?>
+                    <div class="form-section last">
+                        <button class="btn btn-link pull-right remove-ingredient" type="button">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                        <?= $form->field($rs, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?=
+                        $form->field($rs, 'jednostka')->label('Jednostka')->dropDownList([
+                            'kg' => 'kilogramy',
+                            'szt' => 'sztuki',
+                            'l' => 'litry'
+                        ]) ?>
+                        <?= $form->field($rs, 'ilosc')->label('Ilość') ?>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">

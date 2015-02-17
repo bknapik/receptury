@@ -13,3 +13,33 @@ try {
     }
 } catch (Exception) {
 }
+
+jQuery('#add-ingredient').click(function(){
+    var $formSection = jQuery('.last');
+    var $new = $formSection.clone(true);
+    $formSection.removeClass('last');
+    $new.appendTo('#ingredients');
+    var $formSelect = jQuery('.last select');
+    $formSelect[0].selectedIndex = 0;
+    $formSelect[1].selectedIndex = 0;
+    var $formInput = jQuery('.last input');
+    $formInput.val('');
+    jQuery('body, html').animate({ scrollTop: jQuery('.last').position().top+'px'});
+    return false;
+});
+
+jQuery('.remove-ingredient').click(function(){
+    var $this = jQuery(this);
+    var $parent = jQuery($this.parents('div')[0]);
+    if($parent.hasClass('last')){
+        var $formSections = jQuery('.form-section');
+        var $len = $formSections.length;
+        if($len>=2){
+            jQuery($formSections[$len-2]).addClass('last');
+        } else{
+            alert('Receptura musi zawierać przynajmniej jeden składnik');
+            return false;
+        }
+    }
+    $parent.remove();
+});
