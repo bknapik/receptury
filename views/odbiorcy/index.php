@@ -37,6 +37,9 @@ $this->title = 'Odbiorcy';
                             <a href="?r=odbiorcy%2Fadd&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
+                            <a href="?r=odbiorcy%2Fproducts&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Produkty
+                            </a>
                             <a href="?r=odbiorcy%2Fdel&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>

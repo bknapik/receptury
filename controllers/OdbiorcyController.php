@@ -9,6 +9,8 @@
 namespace app\controllers;
 
 use app\models\Odbiorcy;
+use app\models\OP;
+use app\models\Produkty;
 use Yii;
 use yii\web\Controller;
 
@@ -51,5 +53,30 @@ class OdbiorcyController extends Controller
             $model->delete();
             $this->redirect('?r=odbiorcy%2Findex');
         }
+    }
+
+    public function actionProducts(){
+        $id = \Yii::$app->request->get('id');
+        $list = Produkty::find()->all();
+        $model = new OP();
+        $listFilled = OP::find()->where('odbiorca_id='.$id)->all();
+        if (\Yii::$app->request->isPost) {
+            foreach($listFilled as $lf){
+                $lf->delete();
+            }
+            $post = Yii::$app->request->post();
+            foreach($post['produkt_id'] as $produkt_id){
+                $op = new OP();
+                $op->odbiorca_id = $id;
+                $op->produkt_id = $produkt_id;
+                $op->save();
+                $this->redirect('?r=odbiorcy%2Findex');
+            }
+        }
+        $ids = array();
+        foreach($listFilled as $lf){
+            $ids[] = $lf->produkt_id;
+        }
+        return $this->render('products', array('model' => $model, 'list' => $list, 'ids' => $ids));
     }
 } 
