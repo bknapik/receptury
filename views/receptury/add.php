@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
             <h1>Dodaj/edytuj recepturę</h1>
             <?php
             $form = ActiveForm::begin() ?>
-            <?= $form->field($model, 'nazwa')->label('Nazwa') ?>
+            <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'numer')->label('Numer') ?>
             <?= $form->field($model, 'nawazka')->label('Naważka') ?>
             <?= $form->field($model, 'ile_sztuk')->label('Ile sztuk z naważki') ?>

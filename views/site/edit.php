@@ -14,14 +14,16 @@ use yii\widgets\ActiveForm;
             <h1>Edytuj</h1>
             <?php
             $form = ActiveForm::begin([
-            'options' => ['class' => 'form-horizontal','enctype' => 'multipart/form-data'],
+            'options' => ['enctype' => 'multipart/form-data'],
             ]) ?>
             <?= $form->field($model, 'klucz')->hiddenInput()->label('') ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',array('readonly' => 'readonly')) ?>
-            <?php if($model->klucz = 'logo' && $model->wartosc != '' && $model->wartosc != null): ?>
+            <?php if($model->klucz == 'logo' && $model->wartosc != '' && $model->wartosc != null): ?>
                 <img src="uploads/<?= $model->wartosc ?>"/>
             <?php endif; ?>
-            <?= ($type == 'file') ? $form->field($model, 'wartosc')->label('Wartość')->fileInput() : $form->field($model, 'wartosc')->label('Wartość') ?>
+            <?= ($type == 'file') ?
+                $form->field($model, 'wartosc')->label('Wartość')->fileInput() :
+                $form->field($model, 'wartosc')->label('Wartość')->input('text',['required' => 'required']) ?>
 
 
             <div class="form-group">

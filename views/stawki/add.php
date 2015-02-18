@@ -13,12 +13,10 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <h1>Dodaj/edytuj stawkę VAT</h1>
             <?php
-            $form = ActiveForm::begin([
-            'options' => ['class' => 'form-horizontal'],
-            ]) ?>
-            <?= $form->field($model, 'nazwa')->label('Nazwa') ?>
-            <?= $form->field($model, 'stawka')->label('Stawka') ?>
-            <?= $form->field($model, 'litera')->label('Litera') ?>
+            $form = ActiveForm::begin() ?>
+            <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
+            <?= $form->field($model, 'stawka')->label('Stawka')->input('number',['step' => 0.01]) ?>
+            <?= $form->field($model, 'litera')->label('Litera')->input('text',['required' => 'required', 'maxlength' => 1]) ?>
 
 
             <div class="form-group">

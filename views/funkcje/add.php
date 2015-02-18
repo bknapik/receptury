@@ -13,10 +13,8 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <h1>Dodaj/edytuj funkcję technologiczną</h1>
             <?php
-            $form = ActiveForm::begin([
-            'options' => ['class' => 'form-horizontal'],
-            ]) ?>
-            <?= $form->field($model, 'nazwa')->label('Nazwa') ?>
+            $form = ActiveForm::begin([]) ?>
+            <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
 
 
             <div class="form-group">

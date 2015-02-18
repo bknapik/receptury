@@ -63,3 +63,11 @@ jQuery(document).ready(function(){
         }
     } );
 });
+jQuery(function() {
+    jQuery( "#produkty-data_od" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery( "#produkty-data_do" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery( "#receptury-data_od" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery( "#receptury-data_do" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery( "#skladniki-od_kiedy" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery( "#skladniki-do_kiedy" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+});

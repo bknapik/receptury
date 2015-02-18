@@ -33,6 +33,7 @@ class SkladnikiController extends Controller
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             $ret = $model->load($post, 'Skladniki');
+//            var_dump($model->validate());die;
             if ($ret && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=skladniki%2Findex');

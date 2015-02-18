@@ -13,10 +13,8 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <h1>Dodaj/edytuj składnik</h1>
             <?php
-            $form = ActiveForm::begin([
-            'options' => ['class' => 'form-horizontal'],
-            ]) ?>
-            <?= $form->field($model, 'nazwa_skladnika')->label('Nazwa składnika') ?>
+            $form = ActiveForm::begin() ?>
+            <?= $form->field($model, 'nazwa_skladnika')->label('Nazwa składnika')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'nazwa_do_skladu')->label('Nazwa do składu') ?>
             <?= $form->field($model, 'alergen')->label('Alergen') ?>
             <?= $form->field($model, 'jednostka')->label('Jednostka')->dropDownList(['kg' => 'kilogramy','szt'=>'sztuki','l'=>'litry']) ?>

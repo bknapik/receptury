@@ -17,4 +17,11 @@ class Produkty  extends ActiveRecord{
     public static function tableName(){
         return 'produkty';
     }
+
+    public function rules()
+    {
+        return [
+            [['grafika'], 'file'],
+        ];
+    }
 } 
