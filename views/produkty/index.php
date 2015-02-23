@@ -48,7 +48,7 @@ $this->title = 'Produkty';
                             <?= $produkt->nazwa ?>
                         </td>
                         <td>
-                            <?= $produkt->masa_netto ?>
+                            <?= $produkt->get_formatted('masa_netto') ?>
                         </td>
                         <td>
                             <a href="?r=produkty%2Fadd&id=<?= $produkt->id ?>" class="btn btn-primary">

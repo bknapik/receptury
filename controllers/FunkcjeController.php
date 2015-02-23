@@ -35,10 +35,6 @@ class FunkcjeController extends Controller
             if ($ret && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=funkcje%2Findex');
-                // all inputs are valid
-            } else {
-                // validation failed: $errors is an array containing error messages
-                $errors = $model->errors;
             }
         }
         return $this->render('add', array('model' => $model));

@@ -28,7 +28,6 @@ class RecepturyController extends Controller
     {
         $model = new Receptury();
         $rs = new RS();
-
         $id = \Yii::$app->request->get('id');
         if ($id) {
             $model = Receptury::findOne($id);
@@ -41,32 +40,11 @@ class RecepturyController extends Controller
             $ret = $model->load($post, 'Receptury');
             if ($ret && $model->validate()) {
                 $model->save();
-                foreach($ingredientsForModel as $ingredient){
-                    $ingredient->delete();
-                }
-                foreach ($post['RS']['skladnik_id'] as $key => $value) {
-                    if ($value != '') {
-                        $rs = new RS();
-                        $rs->skladnik_id = $value;
-                        $rs->receptura_id = $model->id;
-                        $rs->jednostka = $post['RS']['jednostka'][$key];
-                        $rs->ilosc = $post['RS']['ilosc'][$key];
-                        $rs->save();
-                    }
-                }
+                $model->saveIngredients($ingredientsForModel,$post);
                 $this->redirect('?r=receptury%2Findex');
-                // all inputs are valid
-            } else {
-                // validation failed: $errors is an array containing error messages
-                $errors = $model->errors;
             }
         }
-        $ingredients = Skladniki::find()->all();
-        $ingredients_arr = array();
-        $ingredients_arr[null] = 'Wybierz';
-        foreach ($ingredients as $ingredient) {
-            $ingredients_arr[$ingredient->id] = $ingredient->nazwa_skladnika;
-        }
+        $ingredients_arr = $model->getIngredientsArr();
         return $this->render('add', array('model' => $model, 'ingredients' => $ingredients_arr, 'ingredientsForModel' => $ingredientsForModel, 'rs' => $rs));
     }
 

@@ -37,7 +37,6 @@ use yii\widgets\ActiveForm;
                         <td>
                             <?= $produkt->id ?>
                         </td>
-                        </td>
                         <td>
                             <?= $produkt->nazwa ?>
                         </td>

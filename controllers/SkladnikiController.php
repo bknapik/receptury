@@ -37,27 +37,10 @@ class SkladnikiController extends Controller
             if ($ret && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=skladniki%2Findex');
-                // all inputs are valid
-            } else {
-                // validation failed: $errors is an array containing error messages
-                $errors = $model->errors;
             }
         }
-        $parents = $model->find()->all();
-        $parents_arr = array();
-        $parents_arr[null] = 'Wybierz';
-        foreach ($parents as $parent) {
-            if ($parent->id != $id) {
-                $parents_arr[$parent->id] = $parent->nazwa_skladnika;
-            }
-        }
-
-        $functions = Funkcja::find()->all();
-        $functions_arr = array();
-        $functions_arr[null] = 'Wybierz';
-        foreach($functions as $function){
-            $functions_arr[$function->id] = $function->nazwa;
-        }
+        $parents_arr = $model->getParentsArr($id);
+        $functions_arr = $model->getFunctionsArr();
         return $this->render('add', array('model' => $model, 'parents' => $parents_arr, 'functions' => $functions_arr));
     }
 

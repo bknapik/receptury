@@ -47,4 +47,24 @@ class Skladniki extends ActiveRecord
                 'message' => 'Musisz podać przelicznik litrów na kilogramy'],
         ];
     }
+
+    public function getParentsArr($id){
+        $parents = $this->find()->where('id='.$id)->all();
+        $parents_arr = array();
+        $parents_arr[null] = 'Wybierz';
+        foreach ($parents as $parent) {
+            $parents_arr[$parent->id] = $parent->nazwa_skladnika;
+        }
+        return $parents_arr;
+    }
+
+    public function getFunctionsArr(){
+        $functions = Funkcja::find()->all();
+        $functions_arr = array();
+        $functions_arr[null] = 'Wybierz';
+        foreach($functions as $function){
+            $functions_arr[$function->id] = $function->nazwa;
+        }
+        return $functions_arr;
+    }
 } 

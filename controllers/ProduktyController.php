@@ -14,10 +14,8 @@ use app\models\Produkty;
 use app\models\Receptury;
 use app\models\RS;
 use app\models\Skladniki;
-use app\models\Stawki;
 use Yii;
 use yii\web\Controller;
-use yii\web\UploadedFile;
 
 class ProduktyController extends Controller
 {
@@ -36,51 +34,21 @@ class ProduktyController extends Controller
         if ($id) {
             $model = Produkty::findOne($id);
         } else {
-            $max = Produkty::find()->having('sortowanie = max(sortowanie)')->all();
-            if (empty($max)) {
-                $model->sortowanie = 1;
-            } else {
-                $model->sortowanie = $max[0]->sortowanie + 1;
-            }
-            $model->cena_det_netto = 0;
-            $model->cena_det_brutto = 0;
-            $model->cena_hurt_netto = 0;
-            $model->cena_hurt_brutto = 0;
+            $model->setDefault();
         }
         if (\Yii::$app->request->isPost) {
-            $post = Yii::$app->request->post();
+            $post = \Yii::$app->request->post();
             $grafika = $model->grafika;
             $ret = $model->load($post, 'Produkty');
             $model->grafika = $grafika;
             if ($ret && $model->validate()) {
-                if (UploadedFile::getInstance($model, 'grafika') != null) {
-                    if ($model->grafika != null && $model->grafika != '') {
-                        unlink('uploads/' . $model->grafika);
-                    }
-                    $model->grafika = UploadedFile::getInstance($model, 'grafika');
-                    $model->grafika->saveAs('uploads/' . $model->grafika->baseName . '.' . $model->grafika->extension);
-                } else if ($model->file_rem == '1') {
-                    unlink('uploads/' . $model->grafika);
-                    $model->grafika = null;
-                }
+                $model->managePicture();
                 $model->save();
                 $this->redirect('?r=produkty%2Findex');
-                // all inputs are valid
-            } else {
-                // validation failed: $errors is an array containing error messages
-                $errors = $model->errors;
             }
         }
-        $recipes = Receptury::find()->where('(data_od IS NULL OR data_od <= NOW()) && (data_do IS NULL OR data_do >= NOW())')->all();
-        $recipes_arr = array();
-        foreach ($recipes as $recipe) {
-            $recipes_arr[$recipe->id] = $recipe->nazwa;
-        }
-        $vat = Stawki::find()->all();
-        $vat_arr = array();
-        foreach ($vat as $v) {
-            $vat_arr[$v->id] = $v->nazwa;
-        }
+        $recipes_arr = $model->getRecipesArr();
+        $vat_arr = $model->getVatArr();
         return $this->render('add', array('model' => $model, 'recipes' => $recipes_arr, 'vat' => $vat_arr));
     }
 
@@ -98,49 +66,29 @@ class ProduktyController extends Controller
     {
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
-        $model = new Produkty();
-        $config_list = Konfiguracja::find()->all();
-        $list = $model->find()->all();
-        $html = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                    <link href="css/print.css" rel="stylesheet">
-                    </head><body>
-                    <div class="header">
-                        ' . $config_list[2]->wartosc . '<br/>
-                        ' . $config_list[0]->wartosc . '
-                        <img class="logo" src="uploads/' . $config_list[1]->wartosc . '" />
-                    </div>
-                    <table>
-                    <thead>
-                    <tr>
-                        <th>ASORTYMENT</th>
-                        <th>Masa (kg)</th>
-                        <th>DETAL (zł)</th>
-                        <th>HURT NETTO (zł)</th>
-                        <th>HURT BRUTTO (zł) </th>
-                    </tr>
-                    </thead>
-                    <tbody>';
-        foreach ($list as $produkt):
+        $list = Produkty::find()->all();
+        $html = $this->makeHeader();
+        $html .= $this->makeTableHeader(['ASORTYMENT','Masa (kg)','DETAL (zł)','HURT NETTO (zł)','HURT BRUTTO (zł)']);
+        foreach ($list as $produkt){
             $html .= '<tr>
-                        <td>'
-                . $produkt->nazwa . '
+                        <td>
+                            '. $produkt->nazwa . '
                         </td>
                         <td class="center">
-                            ' . number_format($produkt->masa_netto, 2, ',', ' ') . '
+                            ' . $produkt->get_formatted('masa_netto') . '
                         </td>
                         <td class="right">
-                            ' . (($produkt->cena_det_brutto > 0) ? number_format($produkt->cena_det_brutto, 2, ',', ' ') : '') . '
+                            ' . $produkt->get_formatted('cena_det_brutto') . '
                         </td>
                         <td class="right">
-                            ' . (($produkt->cena_hurt_netto > 0) ? number_format($produkt->cena_hurt_netto, 2, ',', ' ') : '') . '
+                            ' . $produkt->get_formatted('cena_hurt_netto') . '
                         </td>
                         <td class="right">
-                            ' . (($produkt->cena_hurt_brutto > 0) ? number_format($produkt->cena_hurt_brutto, 2, ',', ' ') : '') . '
+                            ' . $produkt->get_formatted('cena_hurt_brutto') . '
                         </td>
                     </tr>';
-        endforeach;
-        $html .= '<div class="footer">' . date('Y-m-d') . '</div></tbody>
-                </table></body></html>';
+        }
+        $html .= $this->makeSimpleFooter();
 //        echo $html;die;
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
@@ -152,45 +100,26 @@ class ProduktyController extends Controller
     {
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
-        $model = new Produkty();
-        $config_list = Konfiguracja::find()->all();
-        $list = $model->find()->all();
-        $html = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                    <link href="css/print.css" rel="stylesheet">
-                    </head><body>
-                    <div class="header">
-                        ' . $config_list[2]->wartosc . '<br/>
-                        ' . $config_list[0]->wartosc . '
-                        <img class="logo" src="uploads/' . $config_list[1]->wartosc . '" />
-                    </div>
-                    <table>
-                    <thead>
-                    <tr>
-                        <th>ASORTYMENT</th>
-                        <th>Masa (kg)</th>
-                        <th>Cena (zł)</th>
-                        <th>Cen za 1 kg</th>
-                    </tr>
-                    </thead>
-                    <tbody>';
-        foreach ($list as $produkt):
+        $list = Produkty::find()->all();
+        $html = $this->makeHeader();
+        $html .= $this->makeTableHeader(['ASORTYMENT','Masa (kg)','Cena (zł)','Cena za 1 kg']);
+        foreach ($list as $produkt){
             $html .= '<tr>
-                        <td>'
-                . $produkt->nazwa . '
+                        <td>
+                            ' . $produkt->nazwa . '
                         </td>
                         <td class="center">
-                            ' . number_format($produkt->masa_netto, 2, ',', ' ') . '
+                            ' . $produkt->get_formatted('masa_netto') . '
                         </td>
                         <td class="right">
-                            ' . (($produkt->cena_det_brutto > 0) ? number_format($produkt->cena_det_brutto, 2, ',', ' ') : '') . '
+                            ' . $produkt->get_formatted('cena_det_brutto') . '
                         </td>
                         <td class="right">
-                            ' . (($produkt->cena_det_brutto > 0) ? number_format($produkt->cena_det_brutto / $produkt->masa_netto, 2, ',', ' ') : '') . '
+                            ' . $produkt->getZlPerKg() . '
                         </td>
                     </tr>';
-        endforeach;
-        $html .= '<div class="footer">' . date('Y-m-d') . '</div></tbody>
-                </table></body></html>';
+        }
+        $html .= $this->makeSimpleFooter();
 //        echo $html;die;
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
@@ -201,23 +130,19 @@ class ProduktyController extends Controller
     public function actionSkladPdf()
     {
         require_once("../vendor/dompdf/dompdf_config.inc.php");
-        $model = new Produkty();
-        $config_list = Konfiguracja::find()->all();
-        $list = $model->find()->all();
-        $html = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                    <link href="css/print.css" rel="stylesheet">
-                    </head><body>
-                    <div class="header">
-                        ' . $config_list[2]->wartosc . '<br/>
-                        ' . $config_list[0]->wartosc . '
-                        <img class="logo" src="uploads/' . $config_list[1]->wartosc . '" />
-                    </div>';
+
+        $list = Produkty::find()->all();
+        $html = $this->makeHeader();
         foreach ($list as $produkt):
             $recipe = Receptury::findOne($produkt->receptura_id);
             $rs = RS::find()->where('receptura_id=' . $produkt->receptura_id)->orderBy('ilosc DESC')->all();
             $html .= '<div class="page_break">';
             $html .= '<div class="recipe_header"><p><span>Nazwa produktu</span> ' . $produkt->nazwa . '</p></div>';
-            $html .= '<div class="recipe_weight"><p><span>masa netto [kg]</span> ' . number_format($produkt->masa_netto, 2, ',', ' ') . '</p></div>';
+            $html .= '<div class="recipe_weight">
+                        <p>
+                            <span>masa netto [kg]</span> ' . $produkt->get_fomatted('masa_netto') . '
+                        </p>
+                    </div>';
             $html .= '<div class="recipe_ingredient"><p class="ingredient_header">skład</p></div>';
             foreach ($rs as $rs_) {
                 $ingredient = Skladniki::findOne($rs_->skladnik_id);
@@ -245,7 +170,7 @@ class ProduktyController extends Controller
             $html .= '</div>';
 
         endforeach;
-        $html .= '<div class="footer bigger"><p>Produkty mogą dodatkowo zawierać <strong>sezam, soję, orzechy,seler, gorczycę, jaja, mleko, łubin i produkty pochodne</strong></p></div></tbody>
+        $html .= '<div class="footer bigger"><p>Produkty mogą dodatkowo zawierać <strong>sezam, soję, orzechy, seler, gorczycę, jaja, mleko, łubin i produkty pochodne</strong></p></div></tbody>
                 </table></body></html>';
 //        echo $html;
 //        die;
@@ -253,5 +178,35 @@ class ProduktyController extends Controller
         $dompdf->load_html($html);
         $dompdf->render();
         $dompdf->stream("sklad.pdf");
+    }
+
+    public function makeHeader(){
+        $config_list = Konfiguracja::find()->all();
+        return '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                    <link href="css/print.css" rel="stylesheet">
+                    </head><body>
+                    <div class="header">
+                        ' . $config_list[2]->wartosc . '<br/>
+                        ' . $config_list[0]->wartosc . '
+                        <img class="logo" src="uploads/' . $config_list[1]->wartosc . '" />
+                    </div>';
+    }
+
+    public function makeTableHeader($ths){
+        $html = '<table>
+                    <thead>
+                    <tr>';
+        foreach($ths as $th){
+            $html .= '<th>'.$th.'</th>';
+        }
+        $html .='</tr>
+                    </thead>
+                    <tbody>';
+        return $html;
+    }
+
+    public function makeSimpleFooter(){
+        return '<div class="footer">' . date('Y-m-d') . '</div></tbody>
+                </table></body></html>';
     }
 } 

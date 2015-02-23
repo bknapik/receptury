@@ -37,10 +37,6 @@ class OdbiorcyController extends Controller
             if ($ret && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=odbiorcy%2Findex');
-                // all inputs are valid
-            } else {
-                // validation failed: $errors is an array containing error messages
-                $errors = $model->errors;
             }
         }
         return $this->render('add', array('model' => $model));
@@ -59,7 +55,7 @@ class OdbiorcyController extends Controller
         $id = \Yii::$app->request->get('id');
         $list = Produkty::find()->all();
         $model = new OP();
-        $listFilled = OP::find()->where('odbiorca_id='.$id)->all();
+        $listFilled = $model->find()->where('odbiorca_id='.$id)->all();
         if (\Yii::$app->request->isPost) {
             foreach($listFilled as $lf){
                 $lf->delete();
@@ -70,8 +66,8 @@ class OdbiorcyController extends Controller
                 $op->odbiorca_id = $id;
                 $op->produkt_id = $produkt_id;
                 $op->save();
-                $this->redirect('?r=odbiorcy%2Findex');
             }
+            $this->redirect('?r=odbiorcy%2Findex');
         }
         $ids = array();
         foreach($listFilled as $lf){
