@@ -22,6 +22,9 @@ $this->title = 'Odbiorcy';
                         Nazwa
                     </th>
                     <th>
+                        Aktywny
+                    </th>
+                    <th>
                         Opcje
                     </th>
                 </tr>
@@ -31,7 +34,11 @@ $this->title = 'Odbiorcy';
                     <tr>
                         <td>
                             <?= $odbiorca->id ?></td>
-                        <td><?= $odbiorca->nazwa ?>
+                        <td>
+                            <?= $odbiorca->nazwa ?>
+                        </td>
+                        <td>
+                            <?= ($odbiorca->aktywny == 1) ? 'Tak' : 'Nie' ?>
                         </td>
                         <td>
                             <a href="?r=odbiorcy%2Fadd&id=<?= $odbiorca->id ?>" class="btn btn-primary">

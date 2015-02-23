@@ -1,0 +1,86 @@
+body{
+    font-family: arial;
+    padding: 2.5cm 0 1cm 0;
+}
+.header{
+    position: fixed;
+    top: -0.5cm;
+    right: 0;
+    left: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+}
+
+.bigger{
+    bottom: 25px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+td,th{
+    border: 2px solid #666666;
+    padding: 2px 10px;
+}
+.logo{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 1.5cm;
+    width: 2.5cm;
+}
+.center{
+    text-align: center;
+}
+.right{
+    text-align: right;
+}
+.recipe_header{
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    margin-top: 1cm;
+}
+
+.recipe_header span, .recipe_weight span{
+    display: inline-block;
+    margin-right: 1cm;
+}
+
+.recipe_weight{
+    margin-left: 1cm;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+.recipe_weight p{
+    margin: 0;
+    padding: 5px 0;
+}
+
+.recipe_weight span{
+    font-weight: bold;
+}
+
+.recipe_ingredient{
+    margin-left: 4cm;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.recipe_ingredient p{
+    margin: 0;
+    padding: 0 5px;
+}
+
+.ingredient_header{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.page_break{
+    page-break-inside: avoid;
+}
