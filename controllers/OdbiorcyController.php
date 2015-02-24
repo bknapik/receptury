@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: knapi_000
+ * User: kinga
  * Date: 15.02.15
  * Time: 12:16
  */
@@ -14,9 +14,17 @@ use app\models\Produkty;
 use Yii;
 use yii\web\Controller;
 
+/**
+ * Class OdbiorcyController
+ * @package app\controllers
+ */
 class OdbiorcyController extends Controller
 {
 
+    /**
+     * Displays list of customers
+     * @return string html code
+     */
     public function actionIndex()
     {
         $model = new Odbiorcy();
@@ -24,38 +32,49 @@ class OdbiorcyController extends Controller
         return $this->render('index', array('list' => $list));
     }
 
+    /**
+     * Displays form for customer and saves it
+     * @return string html code
+     */
     public function actionAdd()
     {
         $model = new Odbiorcy();
-        $id = \Yii::$app->request->get('id');
-        if ($id) {
-            $model = Odbiorcy::findOne($id);
+        $customer_id = \Yii::$app->request->get('id');
+        if ($customer_id) {
+            $model = Odbiorcy::findOne($customer_id);
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             $ret = $model->load($post, 'Odbiorcy');
             if ($ret && $model->validate()) {
                 $model->save();
-                $this->redirect('?r=odbiorcy%2Findex');
+                $this->redirect('?r=odbiorcy/index');
             }
         }
         return $this->render('add', array('model' => $model));
     }
 
+    /**
+     * Deletes customer with given id from database
+     */
     public function actionDel(){
-        $id = \Yii::$app->request->get('id');
-        if($id){
-            $model = Odbiorcy::findOne($id);
+        $customer_id = \Yii::$app->request->get('id');
+        if($customer_id){
+            $model = Odbiorcy::findOne($customer_id);
             $model->delete();
-            $this->redirect('?r=odbiorcy%2Findex');
+            $this->redirect('?r=odbiorcy/index');
         }
     }
 
+    /**
+     * Displays form for customers products and saves it
+     * @return string html code
+     */
     public function actionProducts(){
-        $id = \Yii::$app->request->get('id');
+        $customer_id = \Yii::$app->request->get('id');
         $list = Produkty::find()->all();
         $model = new OP();
-        $listFilled = $model->find()->where('odbiorca_id='.$id)->all();
+        $listFilled = $model->find()->where('odbiorca_id='.$customer_id)->all();
         if (\Yii::$app->request->isPost) {
             foreach($listFilled as $lf){
                 $lf->delete();
@@ -63,16 +82,16 @@ class OdbiorcyController extends Controller
             $post = Yii::$app->request->post();
             foreach($post['produkt_id'] as $produkt_id){
                 $op = new OP();
-                $op->odbiorca_id = $id;
+                $op->odbiorca_id = $customer_id;
                 $op->produkt_id = $produkt_id;
                 $op->save();
             }
-            $this->redirect('?r=odbiorcy%2Findex');
+            $this->redirect('?r=odbiorcy/index');
         }
-        $ids = array();
+        $customerProductsIds = array();
         foreach($listFilled as $lf){
-            $ids[] = $lf->produkt_id;
+            $customerProductsIds[] = $lf->produkt_id;
         }
-        return $this->render('products', array('model' => $model, 'list' => $list, 'ids' => $ids));
+        return $this->render('products', array('model' => $model, 'list' => $list, 'ids' => $customerProductsIds));
     }
 } 

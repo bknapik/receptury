@@ -1,5 +1,7 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $type
+ */
 $this->title = 'Funkcje technologiczne';
 
 use yii\helpers\Html;

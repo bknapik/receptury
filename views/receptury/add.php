@@ -1,5 +1,9 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $ingredientsForModel
+ * @var $ingredients
+ * @var $recipe_ingredients
+ */
 $this->title = 'Receptury';
 
 use yii\helpers\Html;
@@ -50,14 +54,14 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($rs, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?= $form->field($recipe_ingredients, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
                         <?=
-                        $form->field($rs, 'jednostka')->label('Jednostka')->dropDownList([
+                        $form->field($recipe_ingredients, 'jednostka')->label('Jednostka')->dropDownList([
                             'kg' => 'kilogramy',
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($rs, 'ilosc')->label('Ilość') ?>
+                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość') ?>
                     </div>
                 <?php endif; ?>
             </div>

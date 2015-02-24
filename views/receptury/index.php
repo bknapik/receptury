@@ -1,5 +1,7 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $list
+ */
 $this->title = 'Receptury';
 ?>
 <div class="site-index">
@@ -9,7 +11,7 @@ $this->title = 'Receptury';
 
         <div class="row">
             <h1>Receptury</h1>
-            <a href="index.php?r=receptury%2Fadd" class="btn btn-primary pull-right add-button">
+            <a href="index.php?r=receptury/add" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-plus"></i> Dodaj nową recepturę
             </a>
             <table class="table table-hover table-striped my-data-table">
@@ -33,7 +35,8 @@ $this->title = 'Receptury';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($list as $receptura): ?>
+                <?php /** @var $receptura \app\models\Receptury */
+                foreach ($list as $receptura): ?>
                     <tr>
                         <td>
                             <?= $receptura->id ?>
@@ -48,10 +51,10 @@ $this->title = 'Receptury';
                             <?= $receptura->masa_koncowa ?>
                         </td>
                         <td>
-                            <a href="?r=receptury%2Fadd&id=<?= $receptura->id ?>" class="btn btn-primary">
+                            <a href="?r=receptury/add&id=<?= $receptura->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=receptury%2Fdel&id=<?= $receptura->id ?>" class="btn btn-primary">
+                            <a href="?r=receptury/del&id=<?= $receptura->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

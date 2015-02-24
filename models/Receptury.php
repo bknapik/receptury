@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: knapi_000
+ * User: kinga
  * Date: 15.02.15
  * Time: 12:10
  */
@@ -9,11 +9,16 @@
 namespace app\models;
 use yii\db\ActiveRecord;
 
+/**
+ * Class Receptury
+ * @package app\models
+ */
 class Receptury extends ActiveRecord {
-    public static function tableName(){
-        return 'receptury';
-    }
 
+    /**
+     * Makes assoc array of ingredients with additional null value at the beginning
+     * @return array Skladniki array with valid ingredients
+     */
     public function getIngredientsArr(){
         $ingredients = Skladniki::find()->all();
         $ingredients_arr = array();
@@ -24,7 +29,13 @@ class Receptury extends ActiveRecord {
         return $ingredients_arr;
     }
 
+    /**
+     * Saves ingredients for recipe
+     * @param $ingredientsForModel array array of ingredients saved for recipe before
+     * @param $post array post request array
+     */
     public function saveIngredients($ingredientsForModel,$post){
+        /** @var $ingredient Skladniki */
         foreach($ingredientsForModel as $ingredient){
             $ingredient->delete();
         }

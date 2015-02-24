@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: knapi_000
+ * User: kinga
  * Date: 16.02.15
  * Time: 20:12
  */
@@ -11,12 +11,15 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 
+/**
+ * Class Konfiguracja
+ * @package app\models
+ */
 class Konfiguracja extends ActiveRecord {
 
-    public static function tableName(){
-        return 'konfiguracja';
-    }
-
+    /**
+     * Saves company logo if edited key is 'logo'
+     */
     public function managePicture(){
         if($this->klucz == 'logo'){
             if (UploadedFile::getInstance($this, 'wartosc') != null) {

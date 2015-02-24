@@ -6,18 +6,32 @@ use Yii;
 use yii\web\Controller;
 use app\models\Konfiguracja;
 
+/**
+ * Class SiteController
+ * @package app\controllers
+ */
 class SiteController extends Controller
 {
+    /**
+     * Displays list of configuration elements
+     * @return string html code
+     */
     public function actionIndex()
     {
         $list = Konfiguracja::find()->all();
         return $this->render('index', array('list' => $list));
     }
 
+    /**
+     * Displays form for configuration an saves it
+     * @return string html code
+     */
     public function actionEdit(){
-        $id = \Yii::$app->request->get('id');
-        if($id){
-            $model = Konfiguracja::findOne($id);
+        $config_id = \Yii::$app->request->get('id');
+        if($config_id){
+
+            /** @var $model Konfiguracja */
+            $model = Konfiguracja::findOne($config_id);
             if (\Yii::$app->request->isPost) {
                 $post = Yii::$app->request->post();
                 $wartosc = $model->wartosc;
@@ -26,7 +40,7 @@ class SiteController extends Controller
                 if ($ret && $model->validate()) {
                     $model->managePicture();
                     $model->save();
-                    $this->redirect('?r=site%2Findex');
+                    $this->redirect('?r=site/index');
                 }
             }
             $type = ($model->klucz == 'logo') ? 'file' : 'text';

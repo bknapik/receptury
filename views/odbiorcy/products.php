@@ -1,5 +1,8 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $list
+ * @var $ids
+ */
 $this->title = 'Odbiorcy';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -29,10 +32,15 @@ use yii\widgets\ActiveForm;
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($list as $produkt): ?>
+                <?php /** @var $produkt \app\models\Produkty */
+                foreach ($list as $produkt): ?>
                     <tr>
                         <td>
-                            <input type="checkbox" name="produkt_id[]" value="<?= $produkt->id ?>" <?= (in_array($produkt->id,$ids)) ? 'checked="checked"' : '' ?>/>
+                            <label>
+                                <input type="checkbox" name="produkt_id[]"
+                                       value="<?= $produkt->id ?>"
+                                    <?= (in_array($produkt->id,$ids)) ? 'checked="checked"' : '' ?>/>
+                            </label>
                         </td>
                         <td>
                             <?= $produkt->id ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: knapi_000
+ * User: kinga
  * Date: 15.02.15
  * Time: 11:41
  */
@@ -10,13 +10,18 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
+/**
+ * Class Skladniki
+ * @package app\models
+ */
 class Skladniki extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return 'skladniki';
-    }
 
+    /**
+     * Defines rules for validator
+     * Overrides method from Model class
+     * @return array validation rules
+     */
     public function rules()
     {
         return [
@@ -48,8 +53,13 @@ class Skladniki extends ActiveRecord
         ];
     }
 
-    public function getParentsArr($id){
-        $parents = $this->find()->where('id='.$id)->all();
+    /**
+     * Makes assoc array of ingredients without one which is just edited with additional null value
+     * @param $ingredient_id int id of ingredient that is just edited
+     * @return array Skladniki array of valid ingredients
+     */
+    public function getParentsArr($ingredient_id){
+        $parents = $this->find()->where('id!='.$ingredient_id)->all();
         $parents_arr = array();
         $parents_arr[null] = 'Wybierz';
         foreach ($parents as $parent) {
@@ -58,6 +68,10 @@ class Skladniki extends ActiveRecord
         return $parents_arr;
     }
 
+    /**
+     * Makes assoc array of functions with additional null value
+     * @return array Funkcja array of valid functions
+     */
     public function getFunctionsArr(){
         $functions = Funkcja::find()->all();
         $functions_arr = array();

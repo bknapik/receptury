@@ -1,5 +1,8 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $recipes
+ * @var $vat
+ */
 $this->title = 'Produkty';
 
 use yii\helpers\Html;

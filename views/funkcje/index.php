@@ -9,7 +9,7 @@ $this->title = 'Funkcje technologiczne';
 
         <div class="row">
             <h1>Funkcje technologiczne</h1>
-            <a href="index.php?r=funkcje%2Fadd" class="btn btn-primary pull-right add-button">
+            <a href="index.php?r=funkcje/add" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-plus"></i> Dodaj nową funkcję technologiczną
             </a>
             <table class="table table-hover table-striped my-data-table">
@@ -36,10 +36,10 @@ $this->title = 'Funkcje technologiczne';
                             <?= $funkcja->nazwa ?>
                         </td>
                         <td>
-                            <a href="?r=funkcje%2Fadd&id=<?= $funkcja->id ?>" class="btn btn-primary">
+                            <a href="?r=funkcje/add&id=<?= $funkcja->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=funkcje%2Fdel&id=<?= $funkcja->id ?>" class="btn btn-primary">
+                            <a href="?r=funkcje/del&id=<?= $funkcja->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

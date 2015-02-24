@@ -1,5 +1,7 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $list
+ */
 $this->title = 'Odbiorcy';
 ?>
 <div class="site-index">
@@ -9,7 +11,7 @@ $this->title = 'Odbiorcy';
 
         <div class="row">
             <h1>Odbiorcy</h1>
-            <a href="index.php?r=odbiorcy%2Fadd" class="btn btn-primary pull-right add-button">
+            <a href="index.php?r=odbiorcy/add" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-plus"></i> Dodaj nowego odbiorcę
             </a>
             <table class="table table-hover table-striped my-data-table">
@@ -30,7 +32,8 @@ $this->title = 'Odbiorcy';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($list as $odbiorca): ?>
+                <?php /** @var $odbiorca \app\models\Odbiorcy */
+                foreach ($list as $odbiorca): ?>
                     <tr>
                         <td>
                             <?= $odbiorca->id ?></td>
@@ -41,13 +44,13 @@ $this->title = 'Odbiorcy';
                             <?= ($odbiorca->aktywny == 1) ? 'Tak' : 'Nie' ?>
                         </td>
                         <td>
-                            <a href="?r=odbiorcy%2Fadd&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="?r=odbiorcy/add&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=odbiorcy%2Fproducts&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="?r=odbiorcy/products&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Produkty
                             </a>
-                            <a href="?r=odbiorcy%2Fdel&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

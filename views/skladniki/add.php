@@ -1,5 +1,9 @@
 <?php
-/* @var $this yii\web\View */
+/** @var $this yii\web\View
+ * @var $parents array
+ * @var $functions array
+ */
+
 $this->title = 'Składniki';
 
 use yii\helpers\Html;

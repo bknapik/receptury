@@ -1,5 +1,7 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $list
+ */
 $this->title = 'Receptury';
 ?>
 <div class="site-index">
@@ -24,7 +26,8 @@ $this->title = 'Receptury';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($list as $config): ?>
+                <?php /** @var $config \app\models\Konfiguracja */
+                foreach ($list as $config): ?>
                     <tr>
                         <td>
                             <?= $config->nazwa ?>
@@ -33,7 +36,7 @@ $this->title = 'Receptury';
                             <?= $config->wartosc ?>
                         </td>
                         <td>
-                            <a href="?r=site%2Fedit&id=<?= $config->klucz ?>" class="btn btn-primary">
+                            <a href="?r=site/edit&id=<?= $config->klucz ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
                         </td>

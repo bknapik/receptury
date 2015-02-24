@@ -1,5 +1,7 @@
 <?php
-/* @var $this yii\web\View */
+/* @var $this yii\web\View
+ * @var $list
+ */
 $this->title = 'Stawki VAT';
 ?>
 <div class="site-index">
@@ -9,7 +11,7 @@ $this->title = 'Stawki VAT';
 
         <div class="row">
             <h1>Stawki VAT</h1>
-            <a href="index.php?r=stawki%2Fadd" class="btn btn-primary pull-right add-button">
+            <a href="index.php?r=stawki/add" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-plus"></i> Dodaj nową stawkę VAT
             </a>
             <table class="table table-hover table-striped my-data-table">
@@ -33,7 +35,8 @@ $this->title = 'Stawki VAT';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($list as $stawka): ?>
+                <?php /** @var $stawka \app\models\Stawki */
+                foreach ($list as $stawka): ?>
                     <tr>
                         <td>
                             <?= $stawka->id ?>
@@ -48,10 +51,10 @@ $this->title = 'Stawki VAT';
                             <?= $stawka->litera ?>
                         </td>
                         <td>
-                            <a href="?r=stawki%2Fadd&id=<?= $stawka->id ?>" class="btn btn-primary">
+                            <a href="?r=stawki/add&id=<?= $stawka->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=stawki%2Fdel&id=<?= $stawka->id ?>" class="btn btn-primary">
+                            <a href="?r=stawki/del&id=<?= $stawka->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

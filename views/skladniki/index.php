@@ -1,5 +1,7 @@
 <?php
-/* @var $this yii\web\View */
+/** @var $this yii\web\View
+ * @var $list array Skladniki
+ */
 $this->title = 'Składniki';
 ?>
 <div class="site-index">
@@ -9,7 +11,7 @@ $this->title = 'Składniki';
 
         <div class="row">
             <h1>Składniki</h1>
-            <a href="index.php?r=skladniki%2Fadd" class="btn btn-primary pull-right add-button">
+            <a href="index.php?r=skladniki/add" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-plus"></i> Dodaj nowy składnik
             </a>
             <table class="table table-hover table-striped my-data-table">
@@ -36,7 +38,8 @@ $this->title = 'Składniki';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($list as $skladnik): ?>
+                <?php /** @var $skladnik \app\models\Skladniki */
+                foreach ($list as $skladnik): ?>
                     <tr>
                         <td>
                             <?= $skladnik->id ?>
@@ -54,10 +57,10 @@ $this->title = 'Składniki';
                             <?= $skladnik->wersja ?>
                         </td>
                         <td>
-                            <a href="?r=skladniki%2Fadd&id=<?= $skladnik->id ?>" class="btn btn-primary">
+                            <a href="?r=skladniki/add&id=<?= $skladnik->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=skladniki%2Fdel&id=<?= $skladnik->id ?>" class="btn btn-primary">
+                            <a href="?r=skladniki/del&id=<?= $skladnik->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

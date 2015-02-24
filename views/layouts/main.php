@@ -41,11 +41,6 @@ AppAsset::register($this);
                     ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
                     ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
                     ['label' => 'Stawki VAT', 'url' => ['/stawki/index']],
-                    //Yii::$app->user->isGuest ?
-                    //    ['label' => 'Login', 'url' => ['/site/login']] :
-                    //    ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    //        'url' => ['/site/logout'],
-                    //        'linkOptions' => ['data-method' => 'post']],
                 ],
             ]);
             NavBar::end();
