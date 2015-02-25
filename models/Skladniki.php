@@ -91,4 +91,22 @@ class Skladniki extends ActiveRecord
         return $parents_arr;
     }
 
+    /**
+     * @param string $where where params
+     * @param string $name name of the field
+     * @param string $nullValue
+     * @return array assoc array id => {$name}
+     */
+    public function getAssocArr($where = '1', $name = 'nazwa', $nullValue = ''){
+        $parents = $this->find()->where($where)->all();
+        $parents_arr = array();
+        if($nullValue != ''){
+            $parents_arr[null] = 'Wybierz';
+        }
+        foreach ($parents as $parent) {
+            $parents_arr[$parent->id] = $parent->{$name};
+        }
+        return $parents_arr;
+    }
+
 } 

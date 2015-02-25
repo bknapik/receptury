@@ -57,8 +57,8 @@ class RecepturyController extends Controller
                 $this->redirect('?r=receptury/index');
             }
         }
-        $functionsModel = new FunkcjaTechnologiczna();
-        $ingredients_arr = $functionsModel->getAssocArr('1','nazwa','Wybierz');
+        $ingredientsModel = new Skladniki();
+        $ingredients_arr = $ingredientsModel->getAssocArr('1','nazwa','Wybierz');
         return $this->render('add', array(
             'model' => $model,
             'ingredients' => $ingredients_arr,
