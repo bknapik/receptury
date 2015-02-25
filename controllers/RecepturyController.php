@@ -58,7 +58,7 @@ class RecepturyController extends Controller
             }
         }
         $ingredientsModel = new Skladniki();
-        $ingredients_arr = $ingredientsModel->getAssocArr('1','nazwa','Wybierz');
+        $ingredients_arr = $ingredientsModel->getAssocArr('1','nazwa_skladnika','Wybierz');
         return $this->render('add', array(
             'model' => $model,
             'ingredients' => $ingredients_arr,

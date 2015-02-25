@@ -97,7 +97,7 @@ class Skladniki extends ActiveRecord
      * @param string $nullValue
      * @return array assoc array id => {$name}
      */
-    public function getAssocArr($where = '1', $name = 'nazwa', $nullValue = ''){
+    public function getAssocArr($where = '1', $name = 'nazwa_skladnika', $nullValue = ''){
         $parents = $this->find()->where($where)->all();
         $parents_arr = array();
         if($nullValue != ''){
