@@ -9,7 +9,7 @@
 namespace app\controllers;
 
 use app\models\Odbiorcy;
-use app\models\OP;
+use app\models\OdbiorcyProdukty;
 use app\models\Produkty;
 use Yii;
 use yii\web\Controller;
@@ -45,8 +45,8 @@ class OdbiorcyController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $ret = $model->load($post, 'Odbiorcy');
-            if ($ret && $model->validate()) {
+            $return = $model->load($post, 'Odbiorcy');
+            if ($return && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=odbiorcy/index');
             }
@@ -73,15 +73,15 @@ class OdbiorcyController extends Controller
     public function actionProducts(){
         $customer_id = \Yii::$app->request->get('id');
         $list = Produkty::find()->all();
-        $model = new OP();
+        $model = new OdbiorcyProdukty();
         $listFilled = $model->find()->where('odbiorca_id='.$customer_id)->all();
         if (\Yii::$app->request->isPost) {
-            foreach($listFilled as $lf){
-                $lf->delete();
+            foreach($listFilled as $item){
+                $item->delete();
             }
             $post = Yii::$app->request->post();
             foreach($post['produkt_id'] as $produkt_id){
-                $op = new OP();
+                $op = new OdbiorcyProdukty();
                 $op->odbiorca_id = $customer_id;
                 $op->produkt_id = $produkt_id;
                 $op->save();
@@ -89,8 +89,8 @@ class OdbiorcyController extends Controller
             $this->redirect('?r=odbiorcy/index');
         }
         $customerProductsIds = array();
-        foreach($listFilled as $lf){
-            $customerProductsIds[] = $lf->produkt_id;
+        foreach($listFilled as $item){
+            $customerProductsIds[] = $item->produkt_id;
         }
         return $this->render('products', array('model' => $model, 'list' => $list, 'ids' => $customerProductsIds));
     }

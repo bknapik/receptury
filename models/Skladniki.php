@@ -26,30 +26,49 @@ class Skladniki extends ActiveRecord
     {
         return [
             [['nazwa_skladnika'], 'required'],
-            ['alergen', 'required', 'when' => function ($model) {
+            [
+                'alergen',
+                'required',
+                'when' => function ($model) {
                     return $model->nazwa_do_skladu == '';
-                }, 'whenClient' => "function (attribute, value) {
+                },
+                'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-nazwa_do_skladu').val() == '';
                         }",
-                'message' => 'Alergen musi być wypełniony jeżeli nie ma nazwy do składu'],
-            ['nazwa_do_skladu', 'required', 'when' => function ($model) {
+                'message' => 'Alergen musi być wypełniony jeżeli nie ma nazwy do składu'
+            ],
+            [
+                'nazwa_do_skladu',
+                'required',
+                'when' => function ($model) {
                     return $model->alergen == '';
-                }, 'whenClient' => "function (attribute, value) {
+                },
+                'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-alergen').val() == '';
                         }",
-                'message' => 'Nazwa do składu musi być wypełniona jeżeli nie ma alergenu'],
-            ['przelicznik_szt_kg', 'required', 'when' => function ($model) {
+                'message' => 'Nazwa do składu musi być wypełniona jeżeli nie ma alergenu'
+            ],
+            [
+                'przelicznik_szt_kg',
+                'required',
+                'when' => function ($model) {
                     return $model->jednostka == 'szt';
                 }, 'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-jednostka')[0].selectedIndex == 1;
                         }",
-                'message' => 'Musisz podać przelicznik sztuk na kilogramy'],
-            ['przelicznik_l_kg', 'required', 'when' => function ($model) {
+                'message' => 'Musisz podać przelicznik sztuk na kilogramy'
+            ],
+            [
+                'przelicznik_l_kg',
+                'required',
+                'when' => function ($model) {
                     return $model->jednostka == 'l';
-                }, 'whenClient' => "function (attribute, value) {
+                },
+                'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-jednostka')[0].selectedIndex == 2;
                         }",
-                'message' => 'Musisz podać przelicznik litrów na kilogramy'],
+                'message' => 'Musisz podać przelicznik litrów na kilogramy'
+            ],
         ];
     }
 
@@ -59,7 +78,11 @@ class Skladniki extends ActiveRecord
      * @return array Skladniki array of valid ingredients
      */
     public function getParentsArr($ingredient_id){
-        $parents = $this->find()->where('id!='.$ingredient_id)->all();
+        if($ingredient_id != null && $ingredient_id != ''){
+            $parents = $this->find()->where('id!='.$ingredient_id)->all();
+        } else {
+            $parents = $this->find()->all();
+        }
         $parents_arr = array();
         $parents_arr[null] = 'Wybierz';
         foreach ($parents as $parent) {
@@ -68,17 +91,4 @@ class Skladniki extends ActiveRecord
         return $parents_arr;
     }
 
-    /**
-     * Makes assoc array of functions with additional null value
-     * @return array Funkcja array of valid functions
-     */
-    public function getFunctionsArr(){
-        $functions = Funkcja::find()->all();
-        $functions_arr = array();
-        $functions_arr[null] = 'Wybierz';
-        foreach($functions as $function){
-            $functions_arr[$function->id] = $function->nazwa;
-        }
-        return $functions_arr;
-    }
 } 

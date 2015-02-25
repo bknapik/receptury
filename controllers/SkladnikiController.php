@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\FunkcjaTechnologiczna;
 use Yii;
 use yii\web\Controller;
 use app\models\Skladniki;
@@ -51,7 +52,8 @@ class SkladnikiController extends Controller
             }
         }
         $parents_arr = $model->getParentsArr($ingredient_id);
-        $functions_arr = $model->getFunctionsArr();
+        $functionModel = new FunkcjaTechnologiczna();
+        $functions_arr = $functionModel->getAssocArr();
         return $this->render('add', array('model' => $model, 'parents' => $parents_arr, 'functions' => $functions_arr));
     }
 

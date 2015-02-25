@@ -21,13 +21,6 @@ class Produkty  extends ActiveRecord{
      */
     public $file_rem = 0;
 
-    /**
-     * Overrides method from ActiveRecord class
-     * @return string database table name
-     */
-    public static function tableName(){
-        return 'produkty';
-    }
 
     /**
      * Defines rules for validator
@@ -62,7 +55,7 @@ class Produkty  extends ActiveRecord{
      * @param $name string name of the field to format
      * @return string formatted value of field
      */
-    public function get_formatted($name){
+    public function getFormatted($name){
         if($this->{$name} != '' && $this->{$name} != null && $this->{$name} > 0){
             return number_format($this->{$name}, 2, ',',' ');
         } else {
@@ -74,14 +67,16 @@ class Produkty  extends ActiveRecord{
      * Count price for 1 kilogram of product and formats it as x xxx,xx
      * @return string formatted price for kilogram
      */
-    public function getZlPerKg(){
-        return (($this->cena_det_brutto > 0) ? number_format($this->cena_det_brutto / $this->masa_netto, 2, ',', ' ') : '');
+    public function getPLNPerKg(){
+        return (($this->cena_det_brutto > 0) ?
+            number_format($this->cena_det_brutto / $this->masa_netto, 2, ',', ' ') :
+            '');
     }
 
     /**
      * Saves picture for product
      */
-    public function managePicture(){
+    public function handlePictureUpload(){
         if (UploadedFile::getInstance($this, 'grafika') != null) {
             if ($this->grafika != null && $this->grafika != '') {
                 unlink('uploads/' . $this->grafika);
@@ -92,31 +87,5 @@ class Produkty  extends ActiveRecord{
             unlink('uploads/' . $this->grafika);
             $this->grafika = null;
         }
-    }
-
-    /**
-     * Makes assoc array with recipes
-     * @return array Receptury array of valid recipes
-     */
-    public function getRecipesArr(){
-        $recipes = Receptury::find()->where('(data_od IS NULL OR data_od <= NOW()) && (data_do IS NULL OR data_do >= NOW())')->all();
-        $recipes_arr = array();
-        foreach ($recipes as $recipe) {
-            $recipes_arr[$recipe->id] = $recipe->nazwa;
-        }
-        return $recipes_arr;
-    }
-
-    /**
-     * Makes assoc array wit tax rates
-     * @return array Stawki array of valid tax rates
-     */
-    public function getVatArr(){
-        $vat = Stawki::find()->all();
-        $vat_arr = array();
-        foreach ($vat as $v) {
-            $vat_arr[$v->id] = $v->nazwa;
-        }
-        return $vat_arr;
     }
 } 

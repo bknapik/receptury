@@ -1,15 +1,15 @@
 try {
-    $list = jQuery('select[name="RS[skladnik_id]"]');
+    $list = jQuery('select[name="RecepturySkladniki[skladnik_id]"]');
     for (var $i = 0; $i < $list.length; $i++) {
-        jQuery($list[$i])[0].setAttribute('name', "RS[skladnik_id][]");
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[skladnik_id][]");
     }
-    $list = jQuery('select[name="RS[jednostka]"]');
+    $list = jQuery('select[name="RecepturySkladniki[jednostka]"]');
     for ($i = 0; $i < $list.length; $i++) {
-        jQuery($list[$i])[0].setAttribute('name', "RS[jednostka][]");
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[jednostka][]");
     }
-    $list = jQuery('input[name="RS[ilosc]"]');
+    $list = jQuery('input[name="RecepturySkladniki[ilosc]"]');
     for ($i = 0; $i < $list.length; $i++) {
-        jQuery($list[$i])[0].setAttribute('name', "RS[ilosc][]");
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[ilosc][]");
     }
 } catch (Exception) {
 }

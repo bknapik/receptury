@@ -8,12 +8,13 @@
 
 namespace app\controllers;
 
-use app\models\Funkcja;
+use app\models\FunkcjaTechnologiczna;
 use app\models\Konfiguracja;
 use app\models\Produkty;
 use app\models\Receptury;
-use app\models\RS;
+use app\models\RecepturySkladniki;
 use app\models\Skladniki;
+use app\models\StawkiVat;
 use Yii;
 use yii\web\Controller;
 
@@ -53,14 +54,21 @@ class ProduktyController extends Controller
             $ret = $model->load($post, 'Produkty');
             $model->grafika = $grafika;
             if ($ret && $model->validate()) {
-                $model->managePicture();
+                $model->handlePictureUpload();
                 $model->save();
                 $this->redirect('?r=produkty/index');
             }
         }
-        $recipes_arr = $model->getRecipesArr();
-        $vat_arr = $model->getVatArr();
-        return $this->render('add', array('model' => $model, 'recipes' => $recipes_arr, 'vat' => $vat_arr));
+        $recipeModel = new Receptury();
+        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR data_od <= NOW())
+                                                    && (data_do IS NULL OR data_do >= NOW())');
+        $rateModel = new StawkiVat();
+        $vat_arr = $rateModel->getAssocArr();
+        return $this->render('add', array(
+                                            'model' => $model,
+                                            'recipes' => $recipes_arr,
+                                            'vat' => $vat_arr
+                                            ));
     }
 
     /**
@@ -86,7 +94,14 @@ class ProduktyController extends Controller
 
         $list = Produkty::find()->all();
         $html = $this->makeHeader();
-        $html .= $this->makeTableHeader(['ASORTYMENT', 'Masa (kg)', 'DETAL (zł)', 'HURT NETTO (zł)', 'HURT BRUTTO (zł)']);
+        $html .= $this->makeTableHeader(
+                                        [
+                                            'ASORTYMENT',
+                                            'Masa (kg)',
+                                            'DETAL (zł)',
+                                            'HURT NETTO (zł)',
+                                            'HURT BRUTTO (zł)'
+                                        ]);
         /** @var $produkt Produkty */
         foreach ($list as $produkt) {
             $html .= '<tr>
@@ -94,16 +109,16 @@ class ProduktyController extends Controller
                             ' . $produkt->nazwa . '
                         </td>
                         <td class="center">
-                            ' . $produkt->get_formatted('masa_netto') . '
+                            ' . $produkt->getFormatted('masa_netto') . '
                         </td>
                         <td class="right">
-                            ' . $produkt->get_formatted('cena_det_brutto') . '
+                            ' . $produkt->getFormatted('cena_det_brutto') . '
                         </td>
                         <td class="right">
-                            ' . $produkt->get_formatted('cena_hurt_netto') . '
+                            ' . $produkt->getFormatted('cena_hurt_netto') . '
                         </td>
                         <td class="right">
-                            ' . $produkt->get_formatted('cena_hurt_brutto') . '
+                            ' . $produkt->getFormatted('cena_hurt_brutto') . '
                         </td>
                     </tr>';
         }
@@ -133,13 +148,13 @@ class ProduktyController extends Controller
                             ' . $produkt->nazwa . '
                         </td>
                         <td class="center">
-                            ' . $produkt->get_formatted('masa_netto') . '
+                            ' . $produkt->getFormatted('masa_netto') . '
                         </td>
                         <td class="right">
-                            ' . $produkt->get_formatted('cena_det_brutto') . '
+                            ' . $produkt->getFormatted('cena_det_brutto') . '
                         </td>
                         <td class="right">
-                            ' . $produkt->getZlPerKg() . '
+                            ' . $produkt->getPLNPerKg() . '
                         </td>
                     </tr>';
         }
@@ -165,12 +180,12 @@ class ProduktyController extends Controller
         foreach ($list as $produkt):
             /** @var $recipe Receptury */
             $recipe = Receptury::findOne($produkt->receptura_id);
-            $recipeIngredients = RS::find()->where('receptura_id=' . $produkt->receptura_id)->orderBy('ilosc DESC')->all();
+            $recipeIngredients = RecepturySkladniki::find()->where('receptura_id=' . $produkt->receptura_id)->orderBy('ilosc DESC')->all();
             $html .= '<div class="page_break">';
             $html .= '<div class="recipe_header"><p><span>Nazwa produktu</span> ' . $produkt->nazwa . '</p></div>';
             $html .= '<div class="recipe_weight">
                         <p>
-                            <span>masa netto [kg]</span> ' . $produkt->get_formatted('masa_netto') . '
+                            <span>masa netto [kg]</span> ' . $produkt->getFormatted('masa_netto') . '
                         </p>
                     </div>';
             $html .= '<div class="recipe_ingredient"><p class="ingredient_header">skład</p></div>';
@@ -180,8 +195,8 @@ class ProduktyController extends Controller
                 $ingredients = Skladniki::find()->where('rodzic_id=' . $ingredient->id)->all();
                 $quantity = ($recipe->masa_koncowa / $recipeIngredient->ilosc) * 100;
                 if ($ingredient->funkcja_technologiczna_id != null) {
-                    /** @var $function Funkcja */
-                    $function = Funkcja::findOne($ingredient->funkcja_technologiczna_id);
+                    /** @var $function FunkcjaTechnologiczna */
+                    $function = FunkcjaTechnologiczna::findOne($ingredient->funkcja_technologiczna_id);
                     $function_span = '<span class="ingredient_function">' . $function->nazwa . ': </span><br />';
                 } else {
                     $function_span = '';

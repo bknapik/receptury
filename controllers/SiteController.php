@@ -38,7 +38,7 @@ class SiteController extends Controller
                 $ret = $model->load($post, 'Konfiguracja');
                 $model->wartosc = $wartosc;
                 if ($ret && $model->validate()) {
-                    $model->managePicture();
+                    $model->handlePictureUpload();
                     $model->save();
                     $this->redirect('?r=site/index');
                 }

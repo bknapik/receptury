@@ -8,7 +8,7 @@
 
 namespace app\controllers;
 
-use app\models\Stawki;
+use app\models\StawkiVat;
 use Yii;
 use yii\web\Controller;
 
@@ -25,7 +25,7 @@ class StawkiController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Stawki();
+        $model = new StawkiVat();
         $list = $model->find()->all();
         return $this->render('index', array('list' => $list));
     }
@@ -36,14 +36,14 @@ class StawkiController extends Controller
      */
     public function actionAdd()
     {
-        $model = new Stawki();
+        $model = new StawkiVat();
         $rate_id = \Yii::$app->request->get('id');
         if ($rate_id) {
-            $model = Stawki::findOne($rate_id);
+            $model = StawkiVat::findOne($rate_id);
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $ret = $model->load($post, 'Stawki');
+            $ret = $model->load($post, 'StawkiVat');
             if ($ret && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=stawki/index');
@@ -58,7 +58,7 @@ class StawkiController extends Controller
     public function actionDel(){
         $rate_id = \Yii::$app->request->get('id');
         if($rate_id){
-            $model = Stawki::findOne($rate_id);
+            $model = StawkiVat::findOne($rate_id);
             $model->delete();
             $this->redirect('?r=stawki/index');
         }

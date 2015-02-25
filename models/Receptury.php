@@ -39,15 +39,33 @@ class Receptury extends ActiveRecord {
         foreach($ingredientsForModel as $ingredient){
             $ingredient->delete();
         }
-        foreach ($post['RS']['skladnik_id'] as $key => $value) {
+        foreach ($post['RecepturySkladniki']['skladnik_id'] as $key => $value) {
             if ($value != '') {
-                $rs = new RS();
+                $rs = new RecepturySkladniki();
                 $rs->skladnik_id = $value;
                 $rs->receptura_id = $this->id;
-                $rs->jednostka = $post['RS']['jednostka'][$key];
-                $rs->ilosc = $post['RS']['ilosc'][$key];
+                $rs->jednostka = $post['RecepturySkladniki']['jednostka'][$key];
+                $rs->ilosc = $post['RecepturySkladniki']['ilosc'][$key];
                 $rs->save();
             }
         }
+    }
+
+    /**
+     * @param string $where where params
+     * @param string $name name of the field
+     * @param string $nullValue
+     * @return array assoc array id => {$name}
+     */
+    public function getAssocArr($where = '1', $name = 'nazwa', $nullValue = ''){
+        $recipes = Receptury::find()->where($where)->all();
+        $recipes_arr = array();
+        if($nullValue != ''){
+            $recipes_arr[null] = $nullValue;
+        }
+        foreach ($recipes as $recipe) {
+            $recipes_arr[$recipe->id] = $recipe->{$name};
+        }
+        return $recipes_arr;
     }
 } 

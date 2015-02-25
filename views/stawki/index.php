@@ -2,7 +2,7 @@
 /* @var $this yii\web\View
  * @var $list
  */
-$this->title = 'Stawki VAT';
+$this->title = 'StawkiVat VAT';
 ?>
 <div class="site-index">
 
@@ -35,7 +35,7 @@ $this->title = 'Stawki VAT';
                 </tr>
                 </thead>
                 <tbody>
-                <?php /** @var $stawka \app\models\Stawki */
+                <?php /** @var $stawka \app\models\StawkiVat */
                 foreach ($list as $stawka): ?>
                     <tr>
                         <td>

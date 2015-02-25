@@ -8,7 +8,7 @@
 
 namespace app\controllers;
 
-use app\models\Funkcja;
+use app\models\FunkcjaTechnologiczna;
 use Yii;
 use yii\web\Controller;
 
@@ -25,7 +25,7 @@ class FunkcjeController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Funkcja();
+        $model = new FunkcjaTechnologiczna();
         $list = $model->find()->all();
         return $this->render('index', array('list' => $list));
     }
@@ -36,15 +36,15 @@ class FunkcjeController extends Controller
      */
     public function actionAdd()
     {
-        $model = new Funkcja();
+        $model = new FunkcjaTechnologiczna();
         $function_id = \Yii::$app->request->get('id');
         if ($function_id) {
-            $model = Funkcja::findOne($function_id);
+            $model = FunkcjaTechnologiczna::findOne($function_id);
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            $ret = $model->load($post, 'Funkcja');
-            if ($ret && $model->validate()) {
+            $return = $model->load($post, 'FunkcjaTechnologiczna');
+            if ($return && $model->validate()) {
                 $model->save();
                 $this->redirect('?r=funkcje/index');
             }
@@ -58,7 +58,7 @@ class FunkcjeController extends Controller
     public function actionDel(){
         $function_id = \Yii::$app->request->get('id');
         if($function_id){
-            $model = Funkcja::findOne($function_id);
+            $model = FunkcjaTechnologiczna::findOne($function_id);
             $model->delete();
             $this->redirect('?r=funkcje/index');
         }

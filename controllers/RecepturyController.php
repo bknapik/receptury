@@ -8,10 +8,12 @@
 
 namespace app\controllers;
 
+use app\models\FunkcjaTechnologiczna;
+use app\models\Skladniki;
 use Yii;
 use yii\web\Controller;
 use app\models\Receptury;
-use app\models\RS;
+use app\models\RecepturySkladniki;
 
 /**
  * Class RecepturyController
@@ -38,11 +40,11 @@ class RecepturyController extends Controller
     public function actionAdd()
     {
         $model = new Receptury();
-        $recipe_ingredient = new RS();
+        $recipe_ingredient = new RecepturySkladniki();
         $recipe_id = \Yii::$app->request->get('id');
         if ($recipe_id) {
             $model = Receptury::findOne($recipe_id);
-            $ingredientsForModel = RS::find()->where('receptura_id=' . $recipe_id)->all();
+            $ingredientsForModel = RecepturySkladniki::find()->where('receptura_id=' . $recipe_id)->all();
         } else {
             $ingredientsForModel = array();
         }
@@ -55,8 +57,14 @@ class RecepturyController extends Controller
                 $this->redirect('?r=receptury/index');
             }
         }
-        $ingredients_arr = $model->getIngredientsArr();
-        return $this->render('add', array('model' => $model, 'ingredients' => $ingredients_arr, 'ingredientsForModel' => $ingredientsForModel, 'recipe_ingredients' => $recipe_ingredient));
+        $functionsModel = new FunkcjaTechnologiczna();
+        $ingredients_arr = $functionsModel->getAssocArr('1','nazwa','Wybierz');
+        return $this->render('add', array(
+            'model' => $model,
+            'ingredients' => $ingredients_arr,
+            'ingredientsForModel' => $ingredientsForModel,
+            'recipe_ingredients' => $recipe_ingredient
+        ));
     }
 
     /**

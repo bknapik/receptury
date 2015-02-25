@@ -20,7 +20,7 @@ class Konfiguracja extends ActiveRecord {
     /**
      * Saves company logo if edited key is 'logo'
      */
-    public function managePicture(){
+    public function handlePictureUpload(){
         if($this->klucz == 'logo'){
             if (UploadedFile::getInstance($this, 'wartosc') != null) {
                 if ($this->wartosc != null && $this->wartosc != '') {
