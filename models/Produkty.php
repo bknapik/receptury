@@ -88,4 +88,12 @@ class Produkty  extends ActiveRecord{
             $this->grafika = null;
         }
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecipe()
+    {
+        return $this->hasOne(Receptury::className(), ['id' => 'receptura_id']);
+    }
 } 

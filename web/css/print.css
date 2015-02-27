@@ -16,7 +16,7 @@ body{
 }
 
 .bigger{
-    bottom: 25px;
+    bottom: 30px;
 }
 table{
     width: 100%;
@@ -26,12 +26,30 @@ td,th{
     border: 2px solid #666666;
     padding: 2px 10px;
 }
+
+table.no-border{
+    width: auto;
+}
+table.no-border td,th{
+    border: none;
+    padding: 0;
+}
+
 .logo{
     position: absolute;
     top: 0;
     right: 0;
     height: 1.5cm;
     width: 2.5cm;
+}
+.first-page-logo{
+    margin: 7cm 5cm;
+    text-align: center;
+}
+.logo-big{
+    height: 100%;
+    max-height: 20cm;
+    width: 100%;
 }
 .center{
     text-align: center;
@@ -68,17 +86,22 @@ td,th{
     margin-left: 4cm;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
+    padding: 0 5px;
 }
 
 .recipe_ingredient p{
     margin: 0;
-    padding: 0 5px;
+    padding: 0;
 }
 
 .ingredient_header{
     font-weight: bold;
     font-style: italic;
     font-size: 12px;
+}
+
+.ingredient_alergen{
+    font-weight: bold;
 }
 
 .page_break{

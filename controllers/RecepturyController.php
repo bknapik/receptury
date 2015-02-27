@@ -8,7 +8,6 @@
 
 namespace app\controllers;
 
-use app\models\FunkcjaTechnologiczna;
 use app\models\Skladniki;
 use Yii;
 use yii\web\Controller;

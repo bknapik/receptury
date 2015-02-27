@@ -14,5 +14,11 @@ use yii\db\ActiveRecord;
  * @package app\models
  */
 class RecepturySkladniki extends ActiveRecord {
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIngredient()
+    {
+        return $this->hasOne(Skladniki::className(), ['id' => 'skladnik_id']);
+    }
 } 

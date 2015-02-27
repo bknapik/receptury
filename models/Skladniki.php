@@ -109,4 +109,19 @@ class Skladniki extends ActiveRecord
         return $parents_arr;
     }
 
+    /**
+     * @return array|\yii\db\ActiveRecord[] list of child ingredients of complex ingredient
+     */
+    public function getChildren(){
+        return $this->find()->where('rodzic_id='.$this->id)->all();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFunction()
+    {
+        return $this->hasOne(FunkcjaTechnologiczna::className(), ['id' => 'funkcja_technologiczna_id']);
+    }
+
 } 

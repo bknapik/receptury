@@ -68,4 +68,12 @@ class Receptury extends ActiveRecord {
         }
         return $recipes_arr;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecipeIngredients()
+    {
+        return $this->hasMany(RecepturySkladniki::className(), ['receptura_id' => 'id']);
+    }
 } 

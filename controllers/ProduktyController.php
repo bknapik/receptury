@@ -175,57 +175,12 @@ class ProduktyController extends Controller
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
         $list = Produkty::find()->all();
-        $html = $this->makeHeader();
-        /** @var $produkt Produkty */
-        foreach ($list as $produkt):
-            /** @var $recipe Receptury */
-            $recipe = Receptury::findOne($produkt->receptura_id);
-            $recipeIngredients = RecepturySkladniki::find()->where('receptura_id=' . $produkt->receptura_id)->orderBy('ilosc DESC')->all();
-            $html .= '<div class="page_break">';
-            $html .= '<div class="recipe_header"><p><span>Nazwa produktu</span> ' . $produkt->nazwa . '</p></div>';
-            $html .= '<div class="recipe_weight">
-                        <p>
-                            <span>masa netto [kg]</span> ' . $produkt->getFormatted('masa_netto') . '
-                        </p>
-                    </div>';
-            $html .= '<div class="recipe_ingredient"><p class="ingredient_header">skład</p></div>';
-            foreach ($recipeIngredients as $recipeIngredient) {
-                /** @var $ingredient Skladniki */
-                $ingredient = Skladniki::findOne($recipeIngredient->skladnik_id);
-                $ingredients = Skladniki::find()->where('rodzic_id=' . $ingredient->id)->all();
-                $quantity = ($recipe->masa_koncowa / $recipeIngredient->ilosc) * 100;
-                if ($ingredient->funkcja_technologiczna_id != null) {
-                    /** @var $function FunkcjaTechnologiczna */
-                    $function = FunkcjaTechnologiczna::findOne($ingredient->funkcja_technologiczna_id);
-                    $function_span = '<span class="ingredient_function">' . $function->nazwa . ': </span><br />';
-                } else {
-                    $function_span = '';
-                }
-                $html .= '<div class="recipe_ingredient"><p>' . $function_span . '<span class="ingredient_name">' . $ingredient->nazwa_do_skladu . '</span>' . (($ingredient->alergen != '') ? ' <span class="ingredient_alergen">' . $ingredient->alergen . '</span>' : '');
-                if (!empty($ingredients) && $quantity >= 2) {
-                    $html .= ' (';
-                    foreach ($ingredients as $i) {
-                        $html .= '<span class="ingredient_name">' . $i->nazwa_do_skladu . '</span>' . (($i->alergen) ? ' <span>' . $i->alergen . '</span>, ' : ', ');
-                    }
-                    $html = substr($html, 0, -2);
-                    $html .= ')';
-                }
-                $html .= '</p></div>';
-            }
-            $html .= '</div>';
+        $config_list = Konfiguracja::find()->all();
+        $html = $this->renderPartial('ingredientsPdf',array(
+                                                        'config_list' => $config_list,
+                                                        'list' => $list,
+                                                    ));
 
-        endforeach;
-        $html .= '<div class="footer bigger">
-                <p>
-                    Produkty mogą dodatkowo zawierać <strong>sezam, soję, orzechy, seler, gorczycę, jaja, mleko, łubin i produkty pochodne</strong>
-                </p>
-            </div>
-            </tbody>
-         </table>
-    </body>
-</html>';
-//        echo $html;
-//        die;
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
         $dompdf->render();
