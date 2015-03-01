@@ -22,7 +22,7 @@
 foreach ($list as $produkt):
     /** @var $recipe \app\models\Receptury */
     $recipe = $produkt->recipe;
-    $recipeIngredients = $produkt->recipe->recipeIngredients;
+    $recipeIngredients = $produkt->recipe->recipeIngredientsWithOrder;
     ?>
     <div class="page_break">
         <div class="recipe_header">

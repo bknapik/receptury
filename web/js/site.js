@@ -11,6 +11,10 @@ try {
     for ($i = 0; $i < $list.length; $i++) {
         jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[ilosc][]");
     }
+    $list = jQuery('input[name="RecepturySkladniki[wyswietlac_procent]"]');
+    for ($i = 0; $i < $list.length; $i++) {
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][]");
+    }
 } catch (Exception) {
 }
 
@@ -24,6 +28,7 @@ jQuery('#add-ingredient').click(function(){
     $formSelect[1].selectedIndex = 0;
     var $formInput = jQuery('.last input');
     $formInput.val('');
+    $formInput[2].checked = false;
     jQuery('body, html').animate({ scrollTop: jQuery('.last').position().top+'px'});
     return false;
 });

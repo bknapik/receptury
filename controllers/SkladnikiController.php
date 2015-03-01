@@ -53,7 +53,7 @@ class SkladnikiController extends Controller
         }
         $parents_arr = $model->getParentsArr($ingredient_id);
         $functionModel = new FunkcjaTechnologiczna();
-        $functions_arr = $functionModel->getAssocArr();
+        $functions_arr = $functionModel->getAssocArr('1','nazwa','Wybierz');
         return $this->render('add', array('model' => $model, 'parents' => $parents_arr, 'functions' => $functions_arr));
     }
 

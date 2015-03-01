@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
             <?php
             $form = ActiveForm::begin([]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
+            <?= $form->field($model, 'nazwa_wielokrotna')->label('Nazwa (liczba mnoga)')->input('text',['required' => 'required']) ?>
 
 
             <div class="form-group">

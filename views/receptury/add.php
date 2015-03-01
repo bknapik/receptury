@@ -47,6 +47,7 @@ use yii\widgets\ActiveForm;
                             'l' => 'litry'
                         ]) ?>
                         <?= $form->field($ifm, 'ilosc')->label('Ilość') ?>
+                        <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endforeach; ?>
                 <?php if (empty($ingredientsForModel)): ?>
@@ -62,6 +63,7 @@ use yii\widgets\ActiveForm;
                             'l' => 'litry'
                         ]) ?>
                         <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość') ?>
+                        <?= $form->field($recipe_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endif; ?>
             </div>
