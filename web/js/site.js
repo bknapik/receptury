@@ -12,8 +12,10 @@ try {
         jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[ilosc][]");
     }
     $list = jQuery('input[name="RecepturySkladniki[wyswietlac_procent]"]');
+    var $j = 0;
     for ($i = 0; $i < $list.length; $i++) {
-        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][]");
+        $j = Math.floor($i/2);
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent]["+$j+"]");
     }
 } catch (Exception) {
 }
@@ -29,6 +31,12 @@ jQuery('#add-ingredient').click(function(){
     var $formInput = jQuery('.last input');
     $formInput.val('');
     $formInput[2].checked = false;
+    var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
+    var $j = 0;
+    for ($i = 0; $i < $list.length; $i++) {
+        $j = Math.floor($i/2);
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent]["+$j+"]");
+    }
     jQuery('body, html').animate({ scrollTop: jQuery('.last').position().top+'px'});
     return false;
 });
@@ -47,6 +55,12 @@ jQuery('.remove-ingredient').click(function(){
         }
     }
     $parent.remove();
+    var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
+    var $j = 0;
+    for ($i = 0; $i < $list.length; $i++) {
+        $j = Math.floor($i/2);
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent]["+$j+"]");
+    }
 });
 
 jQuery(document).ready(function(){

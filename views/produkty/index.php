@@ -36,6 +36,9 @@ $this->title = 'Produkty';
                         Masa netto
                     </th>
                     <th>
+                        Kolejność
+                    </th>
+                    <th>
                         Opcje
                     </th>
                 </tr>
@@ -52,6 +55,9 @@ $this->title = 'Produkty';
                         </td>
                         <td>
                             <?= $produkt->getFormatted('masa_netto') ?>
+                        </td>
+                        <td>
+                            <?= $produkt->sortowanie ?>
                         </td>
                         <td>
                             <a href="?r=produkty/add&id=<?= $produkt->id ?>" class="btn btn-primary">

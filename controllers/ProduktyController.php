@@ -180,7 +180,6 @@ class ProduktyController extends Controller
                                                         'config_list' => $config_list,
                                                         'list' => $list,
                                                     ));
-
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
         $dompdf->render();

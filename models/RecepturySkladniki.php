@@ -21,4 +21,21 @@ class RecepturySkladniki extends ActiveRecord {
     {
         return $this->hasOne(Skladniki::className(), ['id' => 'skladnik_id']);
     }
+
+    /**
+     * Calculates amount of ingredients in kg
+     * @return float
+     */
+    public function countAmount(){
+        switch($this->jednostka){
+            default:
+            case 'kg' : return $this->ilosc;
+            case 'l' : return ($this->ingredient->przelicznik_l_kg != 0) ?
+                                $this->ilosc/($this->ingredient->przelicznik_l_kg) :
+                                $this->ilosc;
+            case 'szt' : return ($this->ingredient->przelicznik_szt_kg != 0) ?
+                                $this->ilosc/($this->ingredient->przelicznik_szt_kg) :
+                                $this->ilosc;
+        }
+    }
 } 

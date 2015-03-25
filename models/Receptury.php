@@ -47,6 +47,7 @@ class Receptury extends ActiveRecord {
                 $rs->jednostka = $post['RecepturySkladniki']['jednostka'][$key];
                 $rs->ilosc = $post['RecepturySkladniki']['ilosc'][$key];
                 $rs->wyswietlac_procent = $post['RecepturySkladniki']['wyswietlac_procent'][$key];
+                $rs->ilosc_przeliczona = $rs->countAmount();
                 $rs->save();
             }
         }
@@ -82,7 +83,7 @@ class Receptury extends ActiveRecord {
      * @return \yii\db\ActiveQuery
      */
     public function getRecipeIngredientsWithOrder(){
-        return $this->hasMany(RecepturySkladniki::className(), ['receptura_id' => 'id'])->addOrderBy('ilosc DESC');
+        return $this->hasMany(RecepturySkladniki::className(), ['receptura_id' => 'id'])->addOrderBy('ilosc_przeliczona DESC');
     }
 
 } 
