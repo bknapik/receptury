@@ -8,13 +8,11 @@
 
 namespace app\controllers;
 
-use app\models\FunkcjaTechnologiczna;
 use app\models\Konfiguracja;
 use app\models\Produkty;
 use app\models\Receptury;
-use app\models\RecepturySkladniki;
-use app\models\Skladniki;
 use app\models\StawkiVat;
+use app\models\OdbiorcyProdukty;
 use Yii;
 use yii\web\Controller;
 
@@ -24,6 +22,9 @@ use yii\web\Controller;
  */
 class ProduktyController extends Controller
 {
+
+    public $enableCsrfValidation = false;
+
     /**
      * Displays list of products
      * @return string rendered page for products index
@@ -65,10 +66,10 @@ class ProduktyController extends Controller
         $rateModel = new StawkiVat();
         $vat_arr = $rateModel->getAssocArr();
         return $this->render('add', array(
-                                            'model' => $model,
-                                            'recipes' => $recipes_arr,
-                                            'vat' => $vat_arr
-                                            ));
+            'model' => $model,
+            'recipes' => $recipes_arr,
+            'vat' => $vat_arr
+        ));
     }
 
     /**
@@ -95,13 +96,13 @@ class ProduktyController extends Controller
         $list = Produkty::find()->all();
         $html = $this->makeHeader();
         $html .= $this->makeTableHeader(
-                                        [
-                                            'ASORTYMENT',
-                                            'Masa (kg)',
-                                            'DETAL (zł)',
-                                            'HURT NETTO (zł)',
-                                            'HURT BRUTTO (zł)'
-                                        ]);
+            [
+                'ASORTYMENT',
+                'Masa (kg)',
+                'DETAL (zł)',
+                'HURT NETTO (zł)',
+                'HURT BRUTTO (zł)'
+            ]);
         /** @var $produkt Produkty */
         foreach ($list as $produkt) {
             $html .= '<tr>
@@ -168,22 +169,55 @@ class ProduktyController extends Controller
 
     /**
      * Makes pdf with recipes for products
+     * @param string $which
      */
-    public function actionSkladPdf()
+    public function actionSkladPdf($which = '')
     {
         /** @noinspection PhpIncludeInspection */
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
-        $list = Produkty::find()->all();
+        if (empty($which)) {
+            $list = Produkty::find()->all();
+        } else {
+            $list = Produkty::find()->where('id IN (' . $which . ')')->all();
+        }
         $config_list = Konfiguracja::find()->all();
-        $html = $this->renderPartial('ingredientsPdf',array(
-                                                        'config_list' => $config_list,
-                                                        'list' => $list,
-                                                    ));
+        $html = $this->renderPartial('ingredientsPdf', array(
+            'config_list' => $config_list,
+            'list' => $list,
+        ));
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
         $dompdf->render();
         $dompdf->stream("sklad.pdf");
+    }
+
+    public function actionSkladPdfWhich()
+    {
+        if (\Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (isset($post['product_id'])) {
+                $this->actionSkladPdf(implode(',', $post['product_id']));
+            } else {
+                $this->actionSkladPdf();
+            }
+        }
+    }
+
+    public function actionSkladPdfCustomer()
+    {
+        $customer_id = \Yii::$app->request->get('id');
+        $model = new OdbiorcyProdukty();
+        $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->all();
+        $ids = [];
+        foreach ($listFilled as $item) {
+            $ids[] = $item->produkt_id;
+        }
+        if (!empty($ids)) {
+            $this->actionSkladPdf(implode(',', $ids));
+        } else {
+            $this->actionSkladPdf();
+        }
     }
 
     /**

@@ -57,9 +57,10 @@ class OdbiorcyController extends Controller
     /**
      * Deletes customer with given id from database
      */
-    public function actionDel(){
+    public function actionDel()
+    {
         $customer_id = \Yii::$app->request->get('id');
-        if($customer_id){
+        if ($customer_id) {
             $model = Odbiorcy::findOne($customer_id);
             $model->delete();
             $this->redirect('?r=odbiorcy/index');
@@ -70,17 +71,18 @@ class OdbiorcyController extends Controller
      * Displays form for customers products and saves it
      * @return string html code
      */
-    public function actionProducts(){
+    public function actionProducts()
+    {
         $customer_id = \Yii::$app->request->get('id');
         $list = Produkty::find()->all();
         $model = new OdbiorcyProdukty();
-        $listFilled = $model->find()->where('odbiorca_id='.$customer_id)->all();
+        $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->all();
         if (\Yii::$app->request->isPost) {
-            foreach($listFilled as $item){
+            foreach ($listFilled as $item) {
                 $item->delete();
             }
-            $post = Yii::$app->request->post();
-            foreach($post['produkt_id'] as $produkt_id){
+            $post = \Yii::$app->request->post();
+            foreach ($post['produkt_id'] as $produkt_id) {
                 $op = new OdbiorcyProdukty();
                 $op->odbiorca_id = $customer_id;
                 $op->produkt_id = $produkt_id;
@@ -89,7 +91,7 @@ class OdbiorcyController extends Controller
             $this->redirect('?r=odbiorcy/index');
         }
         $customerProductsIds = array();
-        foreach($listFilled as $item){
+        foreach ($listFilled as $item) {
             $customerProductsIds[] = $item->produkt_id;
         }
         return $this->render('products', array('model' => $model, 'list' => $list, 'ids' => $customerProductsIds));

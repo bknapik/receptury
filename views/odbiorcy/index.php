@@ -53,6 +53,9 @@ $this->title = 'Odbiorcy';
                             <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
+                            <a href="index.php?r=produkty/sklad-pdf-customer&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-print"></i> Drukuj skład produktów odbiorcy
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
