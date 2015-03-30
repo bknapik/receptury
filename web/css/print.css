@@ -107,3 +107,12 @@ table.no-border td,th{
 .page_break{
     page-break-inside: avoid;
 }
+
+body.wide{
+    padding: 0;
+}
+
+.big-table td{
+    text-align: center;
+    font-size: 14px;
+}

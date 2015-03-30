@@ -220,6 +220,27 @@ class ProduktyController extends Controller
         }
     }
 
+    public function actionPrintCards(){
+        /** @noinspection PhpIncludeInspection */
+        require_once("../vendor/dompdf/dompdf_config.inc.php");
+        $productId = \Yii::$app->request->get('id');
+        $model = Produkty::findOne($productId);
+
+        $config_list = Konfiguracja::find()->all();
+
+        $html = $this->renderPartial('cards', array(
+            'config_list' => $config_list,
+            'model' => $model,
+        ));
+        //echo $html;die;
+
+        $dompdf = new \DOMPDF();
+        $dompdf->load_html($html);
+        $dompdf->render();
+        $dompdf->stream("kartki_".$model->nazwa.".pdf");
+
+    }
+
     /**
      * Makes head and header with configuration elements
      * @return string html code with head and header

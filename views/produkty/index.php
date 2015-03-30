@@ -55,7 +55,9 @@ $this->title = 'Produkty';
                     foreach ($list as $produkt): ?>
                         <tr>
                             <td>
-                                <input type="checkbox" name="product_id[]" value="<?= $produkt->id ?>"/>
+                                <label>
+                                    <input type="checkbox" name="product_id[]" value="<?= $produkt->id ?>"/>
+                                </label>
                             </td>
                             <td>
                                 <?= $produkt->id ?>
@@ -75,6 +77,9 @@ $this->title = 'Produkty';
                                 </a>
                                 <a href="?r=produkty/del&id=<?= $produkt->id ?>" class="btn btn-primary">
                                     <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
+                                </a>
+                                <a href="?r=produkty/print-cards&id=<?= $produkt->id ?>" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-print"></i>&nbsp;&nbsp;Drukuj kartki
                                 </a>
 
                                 <a href="?r=receptury/add&id=<?= $produkt->receptura_id ?>" class="btn btn-primary">

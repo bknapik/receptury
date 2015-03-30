@@ -36,7 +36,9 @@ class SiteController extends Controller
                 $post = Yii::$app->request->post();
                 $wartosc = $model->wartosc;
                 $ret = $model->load($post, 'Konfiguracja');
-                $model->wartosc = $wartosc;
+                if($model->klucz == 'logo'){
+                    $model->wartosc = $wartosc;
+                }
                 if ($ret && $model->validate()) {
                     $model->handlePictureUpload();
                     $model->save();
