@@ -73,7 +73,7 @@ endforeach; ?>
                     <?= $config_list[2]->wartosc ?><br/>
                     <?= $config_list[0]->wartosc ?><br/>
                     <?= $model->nazwa ?><br/>
-                    masa netto <?= $model->getFormatted('masa_netto') ?> kg<br/>
+                    <span class="mass">masa netto <?= $model->getFormatted('masa_netto') ?> kg</span><br/>
                     <?= $html; ?>
                 </td>
             <?php endfor; ?>

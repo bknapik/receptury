@@ -46,7 +46,7 @@ Detects when a field, formal or local variable is declared with a long name.
         </description>
         <priority>3</priority>
         <properties>
-            <property name="maximum" description="The variable length reporting threshold" value="20"/>
+            <property name="maximum" description="The variable length reporting threshold" value="30"/>
         </properties>
         <example>
             <![CDATA[

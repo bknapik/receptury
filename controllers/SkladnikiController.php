@@ -12,6 +12,7 @@ use app\models\FunkcjaTechnologiczna;
 use Yii;
 use yii\web\Controller;
 use app\models\Skladniki;
+use app\models\SkladnikiSkladniki;
 
 /**
  * Class SkladnikiController
@@ -41,6 +42,9 @@ class SkladnikiController extends Controller
         $ingredient_id = \Yii::$app->request->get('id');
         if ($ingredient_id) {
             $model = Skladniki::findOne($ingredient_id);
+            $ingredientsForModel = SkladnikiSkladniki::find()->where('rodzic_id=' . $ingredient_id)->all();
+        } else {
+            $ingredientsForModel = array();
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
@@ -48,13 +52,23 @@ class SkladnikiController extends Controller
 //            var_dump($model->validate());die;
             if ($ret && $model->validate()) {
                 $model->save();
+                $model->saveIngredients($ingredientsForModel,$post);
                 $this->redirect('?r=skladniki/index');
             }
         }
         $parents_arr = $model->getParentsArr($ingredient_id);
         $functionModel = new FunkcjaTechnologiczna();
         $functions_arr = $functionModel->getAssocArr('1','nazwa','Wybierz');
-        return $this->render('add', array('model' => $model, 'parents' => $parents_arr, 'functions' => $functions_arr));
+        $ingredientsModel = new Skladniki();
+        $ingredients_arr = $ingredientsModel->getAssocArr('1','nazwa_skladnika','Wybierz');
+        $ingredient_ingredients = new SkladnikiSkladniki();
+        return $this->render('add', array('model' => $model,
+                                            'parents' => $parents_arr,
+                                            'functions' => $functions_arr,
+                                            'ingredientsForModel' => $ingredientsForModel,
+                                            'ingredients' => $ingredients_arr,
+                                            'ingredient_ingredients' => $ingredient_ingredients,
+                                            ));
     }
 
     /**

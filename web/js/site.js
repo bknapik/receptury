@@ -14,43 +14,77 @@ try {
     $list = jQuery('input[name="RecepturySkladniki[wyswietlac_procent]"]');
     var $j = 0;
     for ($i = 0; $i < $list.length; $i++) {
-        $j = Math.floor($i/2);
-        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent]["+$j+"]");
+        $j = Math.floor($i / 2);
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][" + $j + "]");
+    }
+} catch (Exception) {
+}
+try {
+    $list = jQuery('select[name="SkladnikiSkladniki[skladnik_id]"]');
+    for (var $i = 0; $i < $list.length; $i++) {
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[skladnik_id][]");
+    }
+    $list = jQuery('select[name="SkladnikiSkladniki[jednostka]"]');
+    for ($i = 0; $i < $list.length; $i++) {
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[jednostka][]");
+    }
+    $list = jQuery('input[name="SkladnikiSkladniki[ilosc]"]');
+    for ($i = 0; $i < $list.length; $i++) {
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[ilosc][]");
+    }
+    $list = jQuery('input[name="SkladnikiSkladniki[wyswietlac_procent]"]');
+    var $j = 0;
+    for ($i = 0; $i < $list.length; $i++) {
+        $j = Math.floor($i / 2);
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[wyswietlac_procent][" + $j + "]");
     }
 } catch (Exception) {
 }
 
-jQuery('#add-ingredient').click(function(){
+jQuery('#add-ingredient').click(function () {
     var $formSection = jQuery('.last');
     var $new = $formSection.clone(true);
     $formSection.removeClass('last');
     $new.appendTo('#ingredients');
     var $formSelect = jQuery('.last select');
     $formSelect[0].selectedIndex = 0;
-    $formSelect[1].selectedIndex = 0;
+    try {
+        $formSelect[1].selectedIndex = 0;
+    } catch (Exception) {
+    }
     var $formInput = jQuery('.last input');
     $formInput.val('');
-    $formInput[2].checked = false;
+    try {
+        $formInput[2].checked = false
+        $formInput[3].checked = false
+    } catch (Exception) {
+    }
     var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
     var $j = 0;
     for ($i = 0; $i < $list.length; $i++) {
-        $j = Math.floor($i/2);
-        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent]["+$j+"]");
+        $j = Math.floor($i / 2);
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][" + $j + "]");
     }
-    jQuery('body, html').animate({ scrollTop: jQuery('.last').position().top+'px'});
+    $list = jQuery('input[name^="SkladnikiSkladniki[wyswietlac_procent]"]');
+    $j = 0;
+    for ($i = 0; $i < $list.length; $i++) {
+        $j = Math.floor($i / 2);
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[wyswietlac_procent][" + $j + "]");
+    }
+    jQuery('body, html').animate({ scrollTop: jQuery('.last').position().top + 'px'});
     return false;
 });
 
-jQuery('.remove-ingredient').click(function(){
+jQuery('.remove-ingredient').click(function () {
     var $this = jQuery(this);
     var $parent = jQuery($this.parents('div')[0]);
-    if($parent.hasClass('last')){
+    if ($parent.hasClass('last')) {
         var $formSections = jQuery('.form-section');
         var $len = $formSections.length;
-        if($len>=2){
-            jQuery($formSections[$len-2]).addClass('last');
-        } else{
-            alert('Receptura musi zawierać przynajmniej jeden składnik');
+        if ($len >= 2) {
+            jQuery($formSections[$len - 2]).addClass('last');
+        } else {
+            alert('Musi zawierać przynajmniej jeden składnik');
             return false;
         }
     }
@@ -58,13 +92,19 @@ jQuery('.remove-ingredient').click(function(){
     var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
     var $j = 0;
     for ($i = 0; $i < $list.length; $i++) {
-        $j = Math.floor($i/2);
-        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent]["+$j+"]");
+        $j = Math.floor($i / 2);
+        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][" + $j + "]");
+    }
+    $list = jQuery('input[name^="SkladnikiSkladniki[wyswietlac_procent]"]');
+    $j = 0;
+    for ($i = 0; $i < $list.length; $i++) {
+        $j = Math.floor($i / 2);
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[wyswietlac_procent][" + $j + "]");
     }
 });
 
-jQuery(document).ready(function(){
-    jQuery('.my-data-table').DataTable( {
+jQuery(document).ready(function () {
+    jQuery('.my-data-table').DataTable({
         "language": {
             "paginate": {
                 "first": "Pierwsza",
@@ -80,13 +120,13 @@ jQuery(document).ready(function(){
             "search": "Szukaj: ",
             "zeroRecords": "Brak wpisów do pokazania"
         }
-    } );
+    });
 });
-jQuery(function() {
-    jQuery( "#produkty-data_od" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery( "#produkty-data_do" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery( "#receptury-data_od" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery( "#receptury-data_do" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery( "#skladniki-od_kiedy" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery( "#skladniki-do_kiedy" ).datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+jQuery(function () {
+    jQuery("#produkty-data_od").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#produkty-data_do").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#receptury-data_od").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#receptury-data_do").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#skladniki-od_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#skladniki-do_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
 });

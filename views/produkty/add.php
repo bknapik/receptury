@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
             <h1>Dodaj/edytuj produkt</h1>
             <?php
             $form = ActiveForm::begin([
-            'options' => ['enctype' => 'multipart/form-data'],
+            'options' => ['enctype' => 'multipart/form-data', 'class' => 'form-horizontal'],
             ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'masa_netto')->label('Masa netto')->input('number',['required' => 'required', 'step' => 0.01]) ?>

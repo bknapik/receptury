@@ -124,4 +124,31 @@ class Skladniki extends ActiveRecord
         return $this->hasOne(FunkcjaTechnologiczna::className(), ['id' => 'funkcja_technologiczna_id']);
     }
 
+    /**
+     * Saves ingredients for ingredient
+     * @param $ingredientsForModel array array of ingredients saved for ingredient before
+     * @param $post array post request array
+     */
+    public function saveIngredients($ingredientsForModel,$post){
+        /** @var $ingredient Skladniki */
+        foreach($ingredientsForModel as $ingredient){
+            $ingredient->delete();
+        }
+        $sum = 0;
+        foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
+            $sum += $post['SkladnikiSkladniki']['kilogramy'][$key];
+        }
+        foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
+            if ($value != '') {
+                $ss = new SkladnikiSkladniki();
+                $ss->skladnik_id = $value;
+                $ss->rodzic_id = $this->id;
+                $ss->kilogramy = $post['SkladnikiSkladniki']['kilogramy'][$key];
+                $ss->procenty = $ss->countPercent($post['SkladnikiSkladniki']['procenty'][$key],$post['SkladnikiSkladniki']['kilogramy'][$key],$sum);
+                $ss->wyswietlac_procent = $post['SkladnikiSkladniki']['wyswietlac_procent'][$key];
+                $ss->save();
+            }
+        }
+    }
+
 } 

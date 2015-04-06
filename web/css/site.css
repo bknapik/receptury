@@ -105,3 +105,11 @@ a.desc:after {
 .dataTables_filter input[type="search"]{
     -webkit-appearance: textfield;
 }
+
+.form-group{
+    margin-bottom: 0px;
+}
+
+.help-block{
+    margin: 0;
+}
