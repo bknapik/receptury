@@ -139,7 +139,7 @@ class Skladniki extends ActiveRecord
             $ingredient->delete();
         }
         $sum = 0;
-        if (isset($post['SkladnikiSkladniki']['skladnik_id']) && !empty($post['SkladnikiSkladniki']['skladnik_id'])) {
+        if (isset($post['SkladnikiSkladniki']['skladnik_id'][0]) && !empty($post['SkladnikiSkladniki']['skladnik_id'][0])) {
             foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
                 $sum += $post['SkladnikiSkladniki']['kilogramy'][$key];
             }
