@@ -30,8 +30,8 @@ class Skladniki extends ActiveRecord
                 'alergen',
                 'required',
                 'when' => function ($model) {
-                    return $model->nazwa_do_skladu == '';
-                },
+                        return $model->nazwa_do_skladu == '';
+                    },
                 'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-nazwa_do_skladu').val() == '';
                         }",
@@ -41,8 +41,8 @@ class Skladniki extends ActiveRecord
                 'nazwa_do_skladu',
                 'required',
                 'when' => function ($model) {
-                    return $model->alergen == '';
-                },
+                        return $model->alergen == '';
+                    },
                 'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-alergen').val() == '';
                         }",
@@ -52,8 +52,8 @@ class Skladniki extends ActiveRecord
                 'przelicznik_szt_kg',
                 'required',
                 'when' => function ($model) {
-                    return $model->jednostka == 'szt';
-                }, 'whenClient' => "function (attribute, value) {
+                        return $model->jednostka == 'szt';
+                    }, 'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-jednostka')[0].selectedIndex == 1;
                         }",
                 'message' => 'Musisz podać przelicznik sztuk na kilogramy'
@@ -62,8 +62,8 @@ class Skladniki extends ActiveRecord
                 'przelicznik_l_kg',
                 'required',
                 'when' => function ($model) {
-                    return $model->jednostka == 'l';
-                },
+                        return $model->jednostka == 'l';
+                    },
                 'whenClient' => "function (attribute, value) {
                         return jQuery('#skladniki-jednostka')[0].selectedIndex == 2;
                         }",
@@ -77,9 +77,10 @@ class Skladniki extends ActiveRecord
      * @param $ingredient_id int id of ingredient that is just edited
      * @return array Skladniki array of valid ingredients
      */
-    public function getParentsArr($ingredient_id){
-        if($ingredient_id != null && $ingredient_id != ''){
-            $parents = $this->find()->where('id!='.$ingredient_id)->all();
+    public function getParentsArr($ingredient_id)
+    {
+        if ($ingredient_id != null && $ingredient_id != '') {
+            $parents = $this->find()->where('id!=' . $ingredient_id)->all();
         } else {
             $parents = $this->find()->all();
         }
@@ -97,10 +98,11 @@ class Skladniki extends ActiveRecord
      * @param string $nullValue
      * @return array assoc array id => {$name}
      */
-    public function getAssocArr($where = '1', $name = 'nazwa_skladnika', $nullValue = ''){
+    public function getAssocArr($where = '1', $name = 'nazwa_skladnika', $nullValue = '')
+    {
         $parents = $this->find()->where($where)->all();
         $parents_arr = array();
-        if($nullValue != ''){
+        if ($nullValue != '') {
             $parents_arr[null] = 'Wybierz';
         }
         foreach ($parents as $parent) {
@@ -112,8 +114,9 @@ class Skladniki extends ActiveRecord
     /**
      * @return array|\yii\db\ActiveRecord[] list of child ingredients of complex ingredient
      */
-    public function getChildren(){
-        return $this->find()->where('rodzic_id='.$this->id)->all();
+    public function getChildren()
+    {
+        return $this->find()->where('rodzic_id=' . $this->id)->all();
     }
 
     /**
@@ -129,24 +132,27 @@ class Skladniki extends ActiveRecord
      * @param $ingredientsForModel array array of ingredients saved for ingredient before
      * @param $post array post request array
      */
-    public function saveIngredients($ingredientsForModel,$post){
+    public function saveIngredients($ingredientsForModel, $post)
+    {
         /** @var $ingredient Skladniki */
-        foreach($ingredientsForModel as $ingredient){
+        foreach ($ingredientsForModel as $ingredient) {
             $ingredient->delete();
         }
         $sum = 0;
-        foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
-            $sum += $post['SkladnikiSkladniki']['kilogramy'][$key];
-        }
-        foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
-            if ($value != '') {
-                $ss = new SkladnikiSkladniki();
-                $ss->skladnik_id = $value;
-                $ss->rodzic_id = $this->id;
-                $ss->kilogramy = $post['SkladnikiSkladniki']['kilogramy'][$key];
-                $ss->procenty = $ss->countPercent($post['SkladnikiSkladniki']['procenty'][$key],$post['SkladnikiSkladniki']['kilogramy'][$key],$sum);
-                $ss->wyswietlac_procent = $post['SkladnikiSkladniki']['wyswietlac_procent'][$key];
-                $ss->save();
+        if (isset($post['SkladnikiSkladniki']['skladnik_id']) && !empty($post['SkladnikiSkladniki']['skladnik_id'])) {
+            foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
+                $sum += $post['SkladnikiSkladniki']['kilogramy'][$key];
+            }
+            foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
+                if ($value != '') {
+                    $ss = new SkladnikiSkladniki();
+                    $ss->skladnik_id = $value;
+                    $ss->rodzic_id = $this->id;
+                    $ss->kilogramy = $post['SkladnikiSkladniki']['kilogramy'][$key];
+                    $ss->procenty = $ss->countPercent($post['SkladnikiSkladniki']['procenty'][$key], $post['SkladnikiSkladniki']['kilogramy'][$key], $sum);
+                    $ss->wyswietlac_procent = $post['SkladnikiSkladniki']['wyswietlac_procent'][$key];
+                    $ss->save();
+                }
             }
         }
     }
