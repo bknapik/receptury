@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'do_kiedy')->label('Do kiedy składnik dostępny') ?>
             <div id="ingredients">
                 <h2>Składniki składnika
-                    <button class="btn btn-primary" id="add-ingredient" type="button">
+                    <button class="btn btn-primary add-ingredient" type="button">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </h2>
@@ -61,6 +61,9 @@ use yii\widgets\ActiveForm;
                     </div>
                 <?php endif; ?>
             </div>
+            <button class="btn btn-primary add-ingredient" type="button">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
 
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">

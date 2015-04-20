@@ -60,7 +60,7 @@ $this->title = 'Składniki';
                             <a href="?r=skladniki/add&id=<?= $skladnik->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=skladniki/del&id=<?= $skladnik->id ?>" class="btn btn-primary">
+                            <a href="?r=skladniki/del&id=<?= $skladnik->id ?>" class="btn btn-primary remove-button">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

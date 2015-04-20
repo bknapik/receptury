@@ -24,13 +24,13 @@ try {
     for (var $i = 0; $i < $list.length; $i++) {
         jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[skladnik_id][]");
     }
-    $list = jQuery('select[name="SkladnikiSkladniki[jednostka]"]');
+    $list = jQuery('input[name="SkladnikiSkladniki[kilogramy]"]');
     for ($i = 0; $i < $list.length; $i++) {
-        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[jednostka][]");
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[kilogramy][]");
     }
-    $list = jQuery('input[name="SkladnikiSkladniki[ilosc]"]');
+    $list = jQuery('input[name="SkladnikiSkladniki[procenty]"]');
     for ($i = 0; $i < $list.length; $i++) {
-        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[ilosc][]");
+        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[procenty][]");
     }
     $list = jQuery('input[name="SkladnikiSkladniki[wyswietlac_procent]"]');
     var $j = 0;
@@ -41,7 +41,7 @@ try {
 } catch (Exception) {
 }
 
-jQuery('#add-ingredient').click(function () {
+jQuery('.add-ingredient').click(function () {
     var $formSection = jQuery('.last');
     var $new = $formSection.clone(true);
     $formSection.removeClass('last');
@@ -52,11 +52,12 @@ jQuery('#add-ingredient').click(function () {
         $formSelect[1].selectedIndex = 0;
     } catch (Exception) {
     }
-    var $formInput = jQuery('.last input');
+    var $formInput = jQuery('.last input[type="text"]');
     $formInput.val('');
+    $formInput =  jQuery('.last input[type="checkbox"]');
     try {
-        $formInput[2].checked = false
-        $formInput[3].checked = false
+        $formInput[0].checked = false
+        $formInput[1].checked = false
     } catch (Exception) {
     }
     var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
@@ -129,4 +130,12 @@ jQuery(function () {
     jQuery("#receptury-data_do").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
     jQuery("#skladniki-od_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
     jQuery("#skladniki-do_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+});
+
+jQuery('.remove-button').click(function(){
+    var returnVal = false;
+
+    returnVal = confirm('Na pewno usunąć?');
+
+    return returnVal;
 });

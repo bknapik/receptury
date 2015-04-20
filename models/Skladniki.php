@@ -150,7 +150,8 @@ class Skladniki extends ActiveRecord
                     $ss->rodzic_id = $this->id;
                     $ss->kilogramy = $post['SkladnikiSkladniki']['kilogramy'][$key];
                     $ss->procenty = $ss->countPercent($post['SkladnikiSkladniki']['procenty'][$key], $post['SkladnikiSkladniki']['kilogramy'][$key], $sum);
-                    $ss->wyswietlac_procent = $post['SkladnikiSkladniki']['wyswietlac_procent'][$key];
+                    $ss->wyswietlac_procent = $post['SkladnikiSkladniki']['wyswietlac_procent'][$key];\
+                    var_dump($ss);
                     $ss->save();
                 }
             }

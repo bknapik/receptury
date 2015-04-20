@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'uwagi')->label('Uwagi')->textarea() ?>
             <div id="ingredients">
                 <h2>Składniki receptury
-                    <button class="btn btn-primary" id="add-ingredient" type="button">
+                    <button class="btn btn-primary add-ingredient" type="button">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </h2>
@@ -67,6 +67,9 @@ use yii\widgets\ActiveForm;
                     </div>
                 <?php endif; ?>
             </div>
+            <button class="btn btn-primary add-ingredient" type="button">
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
                     <?= HTML::a(Html::button('Anuluj', ['class' => 'btn btn-primary']), '?r=receptury&index') ?>

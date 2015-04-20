@@ -54,7 +54,7 @@ $this->title = 'Receptury';
                             <a href="?r=receptury/add&id=<?= $receptura->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=receptury/del&id=<?= $receptura->id ?>" class="btn btn-primary">
+                            <a href="?r=receptury/del&id=<?= $receptura->id ?>" class="btn btn-primary remove-button">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

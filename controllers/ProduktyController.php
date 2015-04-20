@@ -93,7 +93,7 @@ class ProduktyController extends Controller
         /** @noinspection PhpIncludeInspection */
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
-        $list = Produkty::find()->all();
+        $list = Produkty::find()->orderBy('sortowanie ASC')->all();
         $html = $this->makeHeader();
         $html .= $this->makeTableHeader(
             [
@@ -139,7 +139,7 @@ class ProduktyController extends Controller
         /** @noinspection PhpIncludeInspection */
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
-        $list = Produkty::find()->all();
+        $list = Produkty::find()->orderBy('sortowanie ASC')->all();
         $html = $this->makeHeader();
         $html .= $this->makeTableHeader(['ASORTYMENT', 'Masa (kg)', 'Cena (zł)', 'Cena za 1 kg']);
         /** @var $produkt Produkty */
@@ -177,9 +177,9 @@ class ProduktyController extends Controller
         require_once("../vendor/dompdf/dompdf_config.inc.php");
 
         if (empty($which)) {
-            $list = Produkty::find()->all();
+            $list = Produkty::find()->orderBy('sortowanie ASC')->all();
         } else {
-            $list = Produkty::find()->where('id IN (' . $which . ')')->all();
+            $list = Produkty::find()->where('id IN (' . $which . ')')->orderBy('sortowanie ASC')->all();
         }
         $config_list = Konfiguracja::find()->all();
         $html = $this->renderPartial('ingredientsPdf', array(
@@ -208,7 +208,7 @@ class ProduktyController extends Controller
     {
         $customer_id = \Yii::$app->request->get('id');
         $model = new OdbiorcyProdukty();
-        $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->all();
+        $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->orderBy('sortowanie ASC')->all();
         $ids = [];
         foreach ($listFilled as $item) {
             $ids[] = $item->produkt_id;

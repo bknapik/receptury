@@ -39,7 +39,7 @@ $this->title = 'Funkcje technologiczne';
                             <a href="?r=funkcje/add&id=<?= $funkcja->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=funkcje/del&id=<?= $funkcja->id ?>" class="btn btn-primary">
+                            <a href="?r=funkcje/del&id=<?= $funkcja->id ?>" class="btn btn-primary remove-button">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

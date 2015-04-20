@@ -113,3 +113,11 @@ a.desc:after {
 .help-block{
     margin: 0;
 }
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #B0DBFF;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #337AB7;
+}

@@ -50,7 +50,7 @@ $this->title = 'Odbiorcy';
                             <a href="?r=odbiorcy/products&id=<?= $odbiorca->id ?>" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Produkty
                             </a>
-                            <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary remove-button">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                             <a href="index.php?r=produkty/sklad-pdf-customer&id=<?= $odbiorca->id ?>" class="btn btn-primary">

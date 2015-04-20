@@ -75,7 +75,7 @@ $this->title = 'Produkty';
                                 <a href="?r=produkty/add&id=<?= $produkt->id ?>" class="btn btn-primary">
                                     <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                                 </a>
-                                <a href="?r=produkty/del&id=<?= $produkt->id ?>" class="btn btn-primary">
+                                <a href="?r=produkty/del&id=<?= $produkt->id ?>" class="btn btn-primary remove-button">
                                     <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                                 </a>
                                 <a href="?r=produkty/print-cards&id=<?= $produkt->id ?>" class="btn btn-primary">

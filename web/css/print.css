@@ -115,6 +115,7 @@ body.wide{
 .big-table td{
     text-align: center;
     font-size: 14px;
+    border: 1px dashed #EEEEEE;
 }
 
 span.mass{
