@@ -37,7 +37,7 @@ foreach ($recipeIngredients as $recipeIngredient):
         endforeach;
     endif;
     if ($recipeIngredient->wyswietlac_procent == 1):
-        $html .= ' (' . $quantity . '%)';
+        $html .= ' (' . number_format($quantity, 2, ',', ' ') . '%)';
     endif;
     if ($recipeIngredient != $recipeIngredients[count($recipeIngredients) - 1] || !empty($recipeIngredientsWithFunction)):
         $html .= ', ';
@@ -53,9 +53,9 @@ foreach ($recipeIngredientsWithFunction as $key => $functionArray):
     foreach ($functionArray as $functionIngredient):
         $ingredient = $functionIngredient->ingredient;
         $quantity = ($functionIngredient->ilosc_przeliczona / ($suma)) * 100;
-        $html .= $functionIngredient->nazwa_do_skladu;
-        if ($functionIngredient->alergen != '') :
-            $html .= ' <strong>' . $functionIngredient->alergen . '</strong>';
+        $html .= $ingredient->nazwa_do_skladu;
+        if ($ingredient->alergen != '') :
+            $html .= ' <strong>' . $ingredient->alergen . '</strong>';
         endif;
         if ($functionIngredient->wyswietlac_procent == 1):
             $html .= '(' . number_format($quantity, 2, ',', ' ') . '%)';
@@ -79,7 +79,7 @@ endforeach; ?>
         <tr>
             <?php for ($i = 0; $i < $break; $i++): ?>
                 <td>
-                    <?= $config_list[2]->wartosc ?><br/>
+                    <?= $config_list[3]->wartosc ?><br/>
                     <?= $config_list[0]->wartosc ?><br/>
                     <?= $model->nazwa ?><br/>
                     <span class="mass">masa netto <?= $model->getFormatted('masa_netto') ?> kg</span><br/>
