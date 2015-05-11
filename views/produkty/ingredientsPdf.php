@@ -24,7 +24,12 @@ foreach ($list as $produkt):
     $recipe = $produkt->recipe;
     $recipeIngredients = $produkt->recipe->recipeIngredientsWithOrder;
     $recipeIngredientsWithFunction = array();
+    /** @var float $suma */
+    $suma = 0;
     ?>
+    <?php foreach ($recipeIngredients as $recipeIngredient):
+        $suma += $recipeIngredient->ilosc_przeliczona;
+    endforeach; ?>
     <div class="page_break">
         <div class="recipe_header">
             <table class="no-border">
@@ -56,9 +61,9 @@ foreach ($list as $produkt):
                 <?php /** @var $ingredient \app\models\Skladniki */ ?>
                 <?php $ingredient = $recipeIngredient->ingredient; ?>
                 <?php $ingredients = $ingredient->getChildren();
-                $quantity = ($recipeIngredient->ilosc_przeliczona / $recipe->masa_koncowa) * 100;
+                $quantity = ($recipeIngredient->ilosc_przeliczona / ($suma)) * 100;
                 if ($ingredient->funkcja_technologiczna_id != null):?>
-                    <?php $recipeIngredientsWithFunction[$ingredient->funkcja_technologiczna_id][] = $ingredient ?>
+                    <?php $recipeIngredientsWithFunction[$ingredient->funkcja_technologiczna_id][] = $recipeIngredient ?>
                     <?php continue; ?>
                 <?php endif; ?>
                 <?= $ingredient->nazwa_do_skladu ?>
@@ -78,24 +83,30 @@ foreach ($list as $produkt):
                     <?php endforeach; ?>
                     )
                 <?php endif; ?>
-                <?php if($recipeIngredient->wyswietlac_procent == 1): ?>
-                    <?= '('.$quantity.'%)' ?>
+                <?php if ($recipeIngredient->wyswietlac_procent == 1): ?>
+                    <?= '(' . number_format($quantity, 2, ',', ' ') . '%)' ?>
                 <?php endif; ?>
-                <?php if ($recipeIngredient != $recipeIngredients[count($recipeIngredients) - 1] || !empty($recipeIngredientsWithFunction)): ?>
+                <?php if ($recipeIngredient != $recipeIngredients[count($recipeIngredients) - 1]
+                    || !empty($recipeIngredientsWithFunction)): ?>
                     ,
                 <?php endif; ?>
             <?php endforeach; ?>
-            <?php foreach($recipeIngredientsWithFunction as $key => $functionArray): ?>
+            <?php foreach ($recipeIngredientsWithFunction as $key => $functionArray): ?>
                 <?php $function = \app\models\FunkcjaTechnologiczna::findOne($key); ?>
-                <?php if(count($functionArray) > 1): ?>
+                <?php if (count($functionArray) > 1): ?>
                     <?= $function->nazwa_wielokrotna; ?>:
                 <?php else : ?>
                     <?= $function->nazwa; ?>:
                 <?php endif; ?>
-                <?php foreach($functionArray as $functionIngredient): ?>
-                    <?= $functionIngredient->nazwa_do_skladu ?>
-                    <?php if ($functionIngredient->alergen != '') : ?>
-                        <strong><?= $functionIngredient->alergen ?></strong>
+                <?php foreach ($functionArray as $functionIngredient): ?>
+                    <?php $ingredient = $functionIngredient->ingredient; ?>
+                    <?php $quantity = ($functionIngredient->ilosc_przeliczona / ($suma)) * 100; ?>
+                    <?= $ingredient->nazwa_do_skladu ?>
+                    <?php if ($ingredient->alergen != '') : ?>
+                        <strong><?= $ingredient->alergen ?></strong>
+                    <?php endif; ?>
+                    <?php if ($functionIngredient->wyswietlac_procent == 1): ?>
+                        <?= '(' . number_format($quantity, 2, ',', ' ') . '%)' ?>
                     <?php endif; ?>
                     <?php if ($functionIngredient != $functionArray[count($functionArray) - 1]): ?>
                         ,
