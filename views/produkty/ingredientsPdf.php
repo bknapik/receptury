@@ -11,12 +11,12 @@
 </head>
 <body>
 <div class="header">
-    <?= $config_list[2]->wartosc ?><br/>
+    <?= $config_list[3]->wartosc ?><br/>
     <?= $config_list[0]->wartosc ?>
-    <img class="logo" src="uploads/<?= $config_list[1]->wartosc ?>"/>
+    <img class="logo" src="uploads/<?= $config_list[2]->wartosc ?>"/>
 </div>
 <div class="first-page-logo">
-    <img class="logo-big" src="uploads/<?= $config_list[1]->wartosc ?>"/>
+    <img class="logo-big" src="uploads/<?= $config_list[2]->wartosc ?>"/>
 </div>
 <?php /** @var $produkt \app\models\Produkty */
 foreach ($list as $produkt):
@@ -121,7 +121,6 @@ foreach ($list as $produkt):
 <?php endforeach; ?>
 <div class="footer bigger">
     <p>
-        Produkty mogą dodatkowo zawierać <strong>sezam, soję, orzechy, seler, gorczycę, jaja, mleko, łubin i produkty
-            pochodne</strong>
+        Produkty mogą dodatkowo zawierać alergen: <strong><?= $config_list[1]->wartosc ?></strong>
     </p>
 </div>

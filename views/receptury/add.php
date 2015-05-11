@@ -18,7 +18,9 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <h1>Dodaj/edytuj recepturę</h1>
             <?php
-            $form = ActiveForm::begin() ?>
+            $form = ActiveForm::begin([
+                'options' => ['class' => 'form-horizontal']
+            ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'numer')->label('Numer') ?>
             <?= $form->field($model, 'nawazka')->label('Naważka') ?>

@@ -17,7 +17,9 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <h1>Dodaj/edytuj składnik</h1>
             <?php
-            $form = ActiveForm::begin() ?>
+            $form = ActiveForm::begin([
+                'options' => ['class' => 'form-horizontal']
+            ]) ?>
             <?= $form->field($model, 'nazwa_skladnika')->label('Nazwa składnika')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'nazwa_do_skladu')->label('Nazwa do składu') ?>
             <?= $form->field($model, 'alergen')->label('Alergen') ?>
@@ -25,7 +27,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'przelicznik_szt_kg')->label('Przelicznik ile sztuk na kilogram') ?>
             <?= $form->field($model, 'przelicznik_l_kg')->label('Przelicznik ile litrów na kilogram') ?>
             <?= $form->field($model, 'funkcja_technologiczna_id')->label('Funkcja technologiczna')->dropDownList($functions) ?>
-            <?= $form->field($model, 'wartosc_cal')->label('Wartość kaloryczna') ?>
+            <?= $form->field($model, 'wartosc_cal')->label('Wartość kaloryczna na 100g') ?>
             <?= $form->field($model, 'bialko')->label('Białko') ?>
             <?= $form->field($model, 'tluszcz')->label('Tłuszcz') ?>
             <?= $form->field($model, 'weglowodany')->label('Węglowodany') ?>

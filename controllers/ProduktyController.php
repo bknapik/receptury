@@ -208,7 +208,7 @@ class ProduktyController extends Controller
     {
         $customer_id = \Yii::$app->request->get('id');
         $model = new OdbiorcyProdukty();
-        $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->orderBy('sortowanie ASC')->all();
+        $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->all();
         $ids = [];
         foreach ($listFilled as $item) {
             $ids[] = $item->produkt_id;
@@ -252,9 +252,9 @@ class ProduktyController extends Controller
                     <link href="css/print.css" rel="stylesheet">
                     </head><body>
                     <div class="header">
-                        ' . $config_list[2]->wartosc . '<br/>
+                        ' . $config_list[3]->wartosc . '<br/>
                         ' . $config_list[0]->wartosc . '
-                        <img class="logo" src="uploads/' . $config_list[1]->wartosc . '" />
+                        <img class="logo" src="uploads/' . $config_list[2]->wartosc . '" />
                     </div>';
     }
 

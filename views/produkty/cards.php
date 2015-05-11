@@ -10,13 +10,17 @@ $recipeIngredientsWithFunction = array();
 $recipe = $model->recipe;
 $break = (count($recipeIngredients) >= 10) ? 3 : 4;
 $html = '';
+$suma = 0;
+foreach ($recipeIngredients as $recipeIngredient):
+    $suma += $recipeIngredient->ilosc_przeliczona;
+endforeach;
 foreach ($recipeIngredients as $recipeIngredient):
     /** @var $ingredient \app\models\Skladniki */
     $ingredient = $recipeIngredient->ingredient;
     $ingredients = $ingredient->getChildren();
-    $quantity = ($recipeIngredient->ilosc_przeliczona / $recipe->masa_koncowa) * 100;
+    $quantity = ($recipeIngredient->ilosc_przeliczona / $suma) * 100;
     if ($ingredient->funkcja_technologiczna_id != null):
-        $recipeIngredientsWithFunction[$ingredient->funkcja_technologiczna_id][] = $ingredient;
+        $recipeIngredientsWithFunction[$ingredient->funkcja_technologiczna_id][] = $recipeIngredient;
         continue;
     endif;
     $html .= $ingredient->nazwa_do_skladu;
@@ -47,9 +51,14 @@ foreach ($recipeIngredientsWithFunction as $key => $functionArray):
         $html .= $function->nazwa . ': ';
     endif;
     foreach ($functionArray as $functionIngredient):
+        $ingredient = $functionIngredient->ingredient;
+        $quantity = ($functionIngredient->ilosc_przeliczona / ($suma)) * 100;
         $html .= $functionIngredient->nazwa_do_skladu;
         if ($functionIngredient->alergen != '') :
             $html .= ' <strong>' . $functionIngredient->alergen . '</strong>';
+        endif;
+        if ($functionIngredient->wyswietlac_procent == 1):
+            $html .= '(' . number_format($quantity, 2, ',', ' ') . '%)';
         endif;
         if ($functionIngredient != $functionArray[count($functionArray) - 1]):
             $html .= ', ';

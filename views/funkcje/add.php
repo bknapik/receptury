@@ -13,7 +13,9 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <h1>Dodaj/edytuj funkcję technologiczną</h1>
             <?php
-            $form = ActiveForm::begin(['class' => 'form-inline']) ?>
+            $form = ActiveForm::begin([
+                'options' => ['class' => 'form-horizontal']
+            ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'nazwa_wielokrotna')->label('Nazwa (liczba mnoga)')->input('text',['required' => 'required']) ?>
 
