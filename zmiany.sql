@@ -30,3 +30,7 @@ ADD CONSTRAINT `skladniki_skladniki_ibfk_2` FOREIGN KEY (`skladnik_id`) REFERENC
 
 ALTER TABLE `skladniki` ADD `numer_zewnetrzny` VARCHAR(255) NULL ;
 ALTER TABLE `produkty` ADD `numer_zewnetrzny` VARCHAR(255) NULL ;
+
+
+
+INSERT INTO `receptury`.`konfiguracja` (`klucz`, `nazwa`, `wartosc`) VALUES ('alergeny', 'Może zawierać', 'sezam, soja, orzechy, seler, gorczyca, jaja, mleko, łubin i produkty pochodne');
