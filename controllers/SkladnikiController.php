@@ -42,7 +42,7 @@ class SkladnikiController extends Controller
         $ingredient_id = \Yii::$app->request->get('id');
         if ($ingredient_id) {
             $model = Skladniki::findOne($ingredient_id);
-            $ingredientsForModel = SkladnikiSkladniki::find()->where('rodzic_id=' . $ingredient_id)->all();
+            $ingredientsForModel = SkladnikiSkladniki::find()->where('rodzic_id=' . $ingredient_id)->orderBy('procenty DESC')->all();
         } else {
             $ingredientsForModel = array();
         }

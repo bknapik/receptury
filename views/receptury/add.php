@@ -68,7 +68,7 @@ use yii\widgets\ActiveForm;
                 <?php endif; ?>
             </div>
             <button class="btn btn-primary add-ingredient" type="button">
-                <i class="glyphicon glyphicon-plus"></i>
+                <i class="glyphicon glyphicon-plus"></i> Dodaj następny składnik
             </button>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">

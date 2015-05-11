@@ -43,7 +43,7 @@ class RecepturyController extends Controller
         $recipe_id = \Yii::$app->request->get('id');
         if ($recipe_id) {
             $model = Receptury::findOne($recipe_id);
-            $ingredientsForModel = RecepturySkladniki::find()->where('receptura_id=' . $recipe_id)->all();
+            $ingredientsForModel = RecepturySkladniki::find()->where('receptura_id=' . $recipe_id)->orderBy('ilosc_przeliczona DESC')->all();
         } else {
             $ingredientsForModel = array();
         }

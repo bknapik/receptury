@@ -77,30 +77,35 @@ jQuery('.add-ingredient').click(function () {
 });
 
 jQuery('.remove-ingredient').click(function () {
-    var $this = jQuery(this);
-    var $parent = jQuery($this.parents('div')[0]);
-    if ($parent.hasClass('last')) {
-        var $formSections = jQuery('.form-section');
-        var $len = $formSections.length;
-        if ($len >= 2) {
-            jQuery($formSections[$len - 2]).addClass('last');
-        } else {
-            alert('Musi zawierać przynajmniej jeden składnik');
-            return false;
+    var $removeVal = false;
+
+    $removeVal = confirm('Na pewno usunąć?');
+    if($removeVal){
+        var $this = jQuery(this);
+        var $parent = jQuery($this.parents('div')[0]);
+        if ($parent.hasClass('last')) {
+            var $formSections = jQuery('.form-section');
+            var $len = $formSections.length;
+            if ($len >= 2) {
+                jQuery($formSections[$len - 2]).addClass('last');
+            } else {
+                alert('Musi zawierać przynajmniej jeden składnik');
+                return false;
+            }
         }
-    }
-    $parent.remove();
-    var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
-    var $j = 0;
-    for ($i = 0; $i < $list.length; $i++) {
-        $j = Math.floor($i / 2);
-        jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][" + $j + "]");
-    }
-    $list = jQuery('input[name^="SkladnikiSkladniki[wyswietlac_procent]"]');
-    $j = 0;
-    for ($i = 0; $i < $list.length; $i++) {
-        $j = Math.floor($i / 2);
-        jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[wyswietlac_procent][" + $j + "]");
+        $parent.remove();
+        var $list = jQuery('input[name^="RecepturySkladniki[wyswietlac_procent]"]');
+        var $j = 0;
+        for ($i = 0; $i < $list.length; $i++) {
+            $j = Math.floor($i / 2);
+            jQuery($list[$i])[0].setAttribute('name', "RecepturySkladniki[wyswietlac_procent][" + $j + "]");
+        }
+        $list = jQuery('input[name^="SkladnikiSkladniki[wyswietlac_procent]"]');
+        $j = 0;
+        for ($i = 0; $i < $list.length; $i++) {
+            $j = Math.floor($i / 2);
+            jQuery($list[$i])[0].setAttribute('name', "SkladnikiSkladniki[wyswietlac_procent][" + $j + "]");
+        }
     }
 });
 
