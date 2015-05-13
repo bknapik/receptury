@@ -42,6 +42,7 @@ AppAsset::register($this);
                     ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
                     ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
                     ['label' => 'Stawki VAT', 'url' => ['/stawki/index']],
+                    ['label' => 'Alergeny', 'url' => ['/alergeny/index']],
                 ],
             ]);
             NavBar::end();

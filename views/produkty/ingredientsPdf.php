@@ -2,6 +2,7 @@
 /**
  * @var $config_list
  * @var $list
+ * @var $allergens
  */
 ?>
 <html>
@@ -121,6 +122,11 @@ foreach ($list as $produkt):
 <?php endforeach; ?>
 <div class="footer bigger">
     <p>
-        Produkty mogą dodatkowo zawierać alergen: <strong><?= $config_list[1]->wartosc ?></strong>
+        Produkty mogą dodatkowo zawierać alergen:
+        <?php foreach($allergens as $allergen): ?>
+            <?= $allergen->nazwa_bez ?>
+            <strong><?= $allergen->nazwa_z ?></strong>,
+        <?php endforeach; ?>
+        <strong><?= $config_list[1]->wartosc ?></strong>
     </p>
 </div>

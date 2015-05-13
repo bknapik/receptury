@@ -57,6 +57,9 @@ $this->title = 'Receptury';
                             <a href="?r=receptury/del&id=<?= $receptura->id ?>" class="btn btn-primary remove-button">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
+                            <a href="?r=receptury/add-similar&id=<?= $receptura->id ?>" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;Dodaj podobną
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

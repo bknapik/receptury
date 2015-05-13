@@ -28,10 +28,10 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'przelicznik_l_kg')->label('Przelicznik ile litrów na kilogram') ?>
             <?= $form->field($model, 'funkcja_technologiczna_id')->label('Funkcja technologiczna')->dropDownList($functions) ?>
             <?= $form->field($model, 'wartosc_cal')->label('Wartość kaloryczna na 100g') ?>
-            <?= $form->field($model, 'bialko')->label('Białko') ?>
-            <?= $form->field($model, 'tluszcz')->label('Tłuszcz') ?>
-            <?= $form->field($model, 'weglowodany')->label('Węglowodany') ?>
-            <?= $form->field($model, 'cukier')->label('Cukier') ?>
+            <?= $form->field($model, 'bialko')->label('Białko na 100g') ?>
+            <?= $form->field($model, 'tluszcz')->label('Tłuszcz na 100g') ?>
+            <?= $form->field($model, 'weglowodany')->label('Węglowodany na 100g') ?>
+            <?= $form->field($model, 'cukier')->label('Cukier na 100g') ?>
             <?= $form->field($model, 'od_kiedy')->label('Od kiedy składnik dostępny') ?>
             <?= $form->field($model, 'do_kiedy')->label('Do kiedy składnik dostępny') ?>
             <div id="ingredients">
@@ -46,8 +46,8 @@ use yii\widgets\ActiveForm;
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
                         <?= $form->field($ifm, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
-                        <?= $form->field($ifm, 'kilogramy')->label('Ilość w kilogramach') ?>
-                        <?= $form->field($ifm, 'procenty')->label('Ilość w procentach') ?>
+                        <?= $form->field($ifm, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ifm, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endforeach; ?>
@@ -57,8 +57,8 @@ use yii\widgets\ActiveForm;
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
                         <?= $form->field($ingredient_ingredients, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
-                        <?= $form->field($ingredient_ingredients, 'kilogramy')->label('Ilość w kilogramach') ?>
-                        <?= $form->field($ingredient_ingredients, 'procenty')->label('Ilość w procentach') ?>
+                        <?= $form->field($ingredient_ingredients, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ingredient_ingredients, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ingredient_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endif; ?>

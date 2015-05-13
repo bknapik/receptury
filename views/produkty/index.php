@@ -43,6 +43,12 @@ $this->title = 'Produkty';
                             Masa netto
                         </th>
                         <th>
+                            Presa
+                        </th>
+                        <th>
+                            Sztuk z presy
+                        </th>
+                        <th>
                             Kolejność
                         </th>
                         <th>
@@ -67,6 +73,12 @@ $this->title = 'Produkty';
                             </td>
                             <td>
                                 <?= $produkt->getFormatted('masa_netto') ?>
+                            </td>
+                            <td>
+                                <?= $produkt->getFormatted('presa') ?>
+                            </td>
+                            <td>
+                                <?= $produkt->ile_sztuk ?>
                             </td>
                             <td>
                                 <?= $produkt->sortowanie ?>

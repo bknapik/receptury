@@ -20,12 +20,12 @@ use yii\widgets\ActiveForm;
             'options' => ['enctype' => 'multipart/form-data', 'class' => 'form-horizontal'],
             ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
-            <?= $form->field($model, 'masa_netto')->label('Masa netto')->input('number',['required' => 'required', 'step' => 0.01]) ?>
+            <?= $form->field($model, 'masa_netto')->label('Masa netto')->input('number',['required' => 'required', 'step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'receptura_id')->label('Receptura')->dropDownList($recipes) ?>
-            <?= $form->field($model, 'cena_det_netto')->label('Cena detaliczna netto')->input('number',['step' => 0.01]) ?>
-            <?= $form->field($model, 'cena_det_brutto')->label('Cena detaliczna brutto')->input('number',['step' => 0.01]) ?>
-            <?= $form->field($model, 'cena_hurt_netto')->label('Cena hurtowa netto')->input('number',['step' => 0.01]) ?>
-            <?= $form->field($model, 'cena_hurt_brutto')->label('Cena hurtowa brutto')->input('number',['step' => 0.01]) ?>
+            <?= $form->field($model, 'cena_det_netto')->label('Cena detaliczna netto')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+            <?= $form->field($model, 'cena_det_brutto')->label('Cena detaliczna brutto')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+            <?= $form->field($model, 'cena_hurt_netto')->label('Cena hurtowa netto')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+            <?= $form->field($model, 'cena_hurt_brutto')->label('Cena hurtowa brutto')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'vat_id')->label('Stawka VAT')->dropDownList($vat) ?>
             <?= $form->field($model, 'data_od')->label('Data od której obowiązuje produkt') ?>
             <?= $form->field($model, 'data_do')->label('Data do której obowiązuje produkt') ?>
@@ -35,7 +35,9 @@ use yii\widgets\ActiveForm;
             <?php endif; ?>
             <?= $form->field($model, 'grafika')->fileInput() ?>
             <?= $form->field($model, 'opis')->label('Opis')->textarea() ?>
-            <?= $form->field($model, 'nawazka')->label('Naważka')->input('number',['step' => 0.01]) ?>
+            <?= $form->field($model, 'nawazka')->label('Naważka')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+            <?= $form->field($model, 'presa')->label('Presa')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+            <?= $form->field($model, 'ile_sztuk')->label('Ile sztuk z presy')->input('number',['step' => 1, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'sortowanie')->label('Kolejność')->input('number') ?>
 
 

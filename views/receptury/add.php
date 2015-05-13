@@ -23,13 +23,12 @@ use yii\widgets\ActiveForm;
             ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'numer')->label('Numer') ?>
-            <?= $form->field($model, 'nawazka')->label('Naważka') ?>
-            <?= $form->field($model, 'ile_sztuk')->label('Ile sztuk z naważki') ?>
             <?= $form->field($model, 'masa_koncowa')->label('Masa końcowa') ?>
             <?= $form->field($model, 'data_od')->label('Data od której receptura obowiązuje') ?>
             <?= $form->field($model, 'data_do')->label('Data do której receptura obowiązuje') ?>
             <?= $form->field($model, 'woda')->label('Woda') ?>
             <?= $form->field($model, 'uwagi')->label('Uwagi')->textarea() ?>
+            <?= $form->field($model, 'alergen_id')->checkboxlist($allergens)->label('Możliwe dodatkowe alergeny');?>
             <div id="ingredients">
                 <h2>Składniki receptury
                     <button class="btn btn-primary add-ingredient" type="button">
@@ -48,7 +47,7 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($ifm, 'ilosc')->label('Ilość') ?>
+                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endforeach; ?>
@@ -64,7 +63,7 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość') ?>
+                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($recipe_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endif; ?>

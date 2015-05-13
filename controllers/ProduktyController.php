@@ -13,6 +13,8 @@ use app\models\Produkty;
 use app\models\Receptury;
 use app\models\StawkiVat;
 use app\models\OdbiorcyProdukty;
+use app\models\Alergeny;
+use app\models\RecepturyAlergeny;
 use Yii;
 use yii\web\Controller;
 
@@ -182,9 +184,20 @@ class ProduktyController extends Controller
             $list = Produkty::find()->where('id IN (' . $which . ')')->orderBy('sortowanie ASC')->all();
         }
         $config_list = Konfiguracja::find()->all();
+        $allergensArray = array();
+        foreach ($list as $item) {
+            $allergensForModel = RecepturyAlergeny::find()->where('receptura_id=' . $item->receptura_id)->all();
+            foreach ($allergensForModel as $afm) {
+                $allergensArray[] = $afm->alergen_id;
+            }
+        }
+
+        $allergens = Alergeny::find()->where('id IN ('.implode(',',$allergensArray).')')->all();
+
         $html = $this->renderPartial('ingredientsPdf', array(
             'config_list' => $config_list,
             'list' => $list,
+            'allergens' => $allergens,
         ));
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
@@ -220,7 +233,8 @@ class ProduktyController extends Controller
         }
     }
 
-    public function actionPrintCards(){
+    public function actionPrintCards()
+    {
         /** @noinspection PhpIncludeInspection */
         require_once("../vendor/dompdf/dompdf_config.inc.php");
         $productId = \Yii::$app->request->get('id');
@@ -237,7 +251,11 @@ class ProduktyController extends Controller
         $dompdf = new \DOMPDF();
         $dompdf->load_html($html);
         $dompdf->render();
-        $dompdf->stream("kartki_".$model->nazwa.".pdf");
+        $dompdf->stream("kartki_" . $model->nazwa . ".pdf");
+
+    }
+
+    public function actionPrintRecipes(){
 
     }
 
