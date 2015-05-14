@@ -23,10 +23,10 @@ class Konfiguracja extends ActiveRecord {
     public function handlePictureUpload(){
         if($this->klucz == 'logo'){
             if (UploadedFile::getInstance($this, 'wartosc') != null) {
-                if ($this->wartosc != null && $this->wartosc != '') {
+                if ($this->wartosc != null && $this->wartosc != '' && file_exists('uploads/' . $this->wartosc)) {
                     unlink('uploads/' . $this->wartosc);
                 }
-                $this->wartosc = UploadedFile::getInstance($this, 'grafika');
+                $this->wartosc = UploadedFile::getInstance($this, 'wartosc');
                 $this->wartosc->saveAs('uploads/' . $this->wartosc->baseName . '.' . $this->wartosc->extension);
             }
         }

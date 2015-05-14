@@ -191,8 +191,11 @@ class ProduktyController extends Controller
                 $allergensArray[] = $afm->alergen_id;
             }
         }
-
-        $allergens = Alergeny::find()->where('id IN ('.implode(',',$allergensArray).')')->all();
+        if (!empty($allergensArray)) {
+            $allergens = Alergeny::find()->where('id IN (' . implode(',', $allergensArray) . ')')->all();
+        } else {
+            $allergens = array();
+        }
 
         $html = $this->renderPartial('ingredientsPdf', array(
             'config_list' => $config_list,
@@ -255,7 +258,8 @@ class ProduktyController extends Controller
 
     }
 
-    public function actionPrintRecipes(){
+    public function actionPrintRecipes()
+    {
 
     }
 

@@ -41,12 +41,15 @@ class Receptury extends ActiveRecord
      * Saves ingredients for recipe
      * @param $ingredientsForModel array array of ingredients saved for recipe before
      * @param $post array post request array
+     * @param $remove
      */
-    public function saveIngredients($ingredientsForModel, $post)
+    public function saveIngredients($ingredientsForModel, $post, $remove = true)
     {
         /** @var $ingredient Skladniki */
-        foreach ($ingredientsForModel as $ingredient) {
-            $ingredient->delete();
+        if($remove){
+            foreach ($ingredientsForModel as $ingredient) {
+                $ingredient->delete();
+            }
         }
         foreach ($post['RecepturySkladniki']['skladnik_id'] as $key => $value) {
             if ($value != '') {
@@ -66,10 +69,12 @@ class Receptury extends ActiveRecord
      * Save allergens for recipe
      * @param $allergensForModel array array of allergens saved for recipe before
      * @param $post array post request array
+     * @param $remove
      */
-    public function saveAllergens($allergensForModel, $post)
+    public function saveAllergens($allergensForModel, $post, $remove = true)
     {
-        if (!empty($allergensForModel)) {
+        if (!empty($allergensForModel) && $remove) {
+            /** @var $allergen Alergeny */
             foreach ($allergensForModel as $allergen) {
                 $allergen->delete();
             }

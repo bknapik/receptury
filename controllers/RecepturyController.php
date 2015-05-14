@@ -107,8 +107,8 @@ class RecepturyController extends Controller
             $ret = $model->load($post, 'Receptury');
             if ($ret && $model->validate()) {
                 $model->save();
-                $model->saveIngredients($ingredientsForModel, $post);
-                $model->saveAllergens($allergensForModel, $post);
+                $model->saveIngredients($ingredientsForModel, $post, false);
+                $model->saveAllergens($allergensForModel, $post, false);
                 $this->redirect('?r=receptury/index');
             }
         }
