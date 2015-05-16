@@ -21,14 +21,18 @@ use yii\widgets\ActiveForm;
             $form = ActiveForm::begin([
                 'options' => ['class' => 'form-horizontal']
             ]) ?>
-            <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
+            <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text', ['required' => 'required']) ?>
             <?= $form->field($model, 'numer')->label('Numer') ?>
             <?= $form->field($model, 'masa_koncowa')->label('Masa końcowa') ?>
             <?= $form->field($model, 'data_od')->label('Data od której receptura obowiązuje') ?>
             <?= $form->field($model, 'data_do')->label('Data do której receptura obowiązuje') ?>
             <?= $form->field($model, 'woda')->label('Woda') ?>
             <?= $form->field($model, 'uwagi')->label('Uwagi')->textarea() ?>
-            <?= $form->field($model, 'alergen_id')->checkboxlist($allergens)->label('Możliwe dodatkowe alergeny');?>
+            <h2>Możliwe dodatkowe alergeny</h2>
+            <div class="form-section allergens">
+                <?= $form->field($model, 'alergen_id')->checkboxlist($allergens)->label(''); ?>
+                <button class="btn small btn-primary" id="check-all-allergens">Zaznacz wszystkie alergeny</button>
+            </div>
             <div id="ingredients">
                 <h2>Składniki receptury
                     <button class="btn btn-primary add-ingredient" type="button">
@@ -36,7 +40,8 @@ use yii\widgets\ActiveForm;
                     </button>
                 </h2>
                 <?php foreach ($ingredientsForModel as $ifm): ?>
-                    <div class="form-section <?= ($ifm == $ingredientsForModel[count($ingredientsForModel)-1]) ? 'last' : '' ?>">
+                    <div
+                        class="form-section with-percent <?= ($ifm == $ingredientsForModel[count($ingredientsForModel) - 1]) ? 'last' : '' ?>">
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
@@ -47,12 +52,14 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
-                        <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
+                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number', ['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <div class="col-lg-offset-2 col-lg-10 show-percent">
+                            <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
                 <?php if (empty($ingredientsForModel)): ?>
-                    <div class="form-section last">
+                    <div class="form-section with-percent last">
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
@@ -63,8 +70,10 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
-                        <?= $form->field($recipe_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
+                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number', ['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <div class="col-lg-offset-2 col-lg-10 show-percent">
+                            <?= $form->field($recipe_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
+                        </div>
                     </div>
                 <?php endif; ?>
             </div>

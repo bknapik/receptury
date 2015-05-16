@@ -144,3 +144,11 @@ jQuery('.remove-button').click(function(){
 
     return returnVal;
 });
+
+jQuery('#check-all-allergens').click(function(){
+    var inputs = jQuery('.allergens input');
+    for(var i = 1;i<inputs.length;i++){
+        inputs[i].checked = true;
+    }
+    return false;
+});

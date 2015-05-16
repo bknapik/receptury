@@ -116,7 +116,7 @@ class Skladniki extends ActiveRecord
      */
     public function getChildren()
     {
-        return $this->find()->where('rodzic_id=' . $this->id)->all();
+        return $this->ingredients;
     }
 
     /**
@@ -125,6 +125,14 @@ class Skladniki extends ActiveRecord
     public function getFunction()
     {
         return $this->hasOne(FunkcjaTechnologiczna::className(), ['id' => 'funkcja_technologiczna_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIngredients()
+    {
+        return $this->hasMany(SkladnikiSkladniki::className(), ['rodzic_id' => 'id']);
     }
 
     /**

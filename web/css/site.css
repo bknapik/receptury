@@ -127,6 +127,18 @@ label{
     width: 20%;
 }
 
+.allergens label{
+    width: 19%;
+}
+
+.show-percent label{
+    width: 50%;
+}
+
+.with-percent{
+    padding-bottom: 30px;
+}
+
 .form-control, input[type="file"]{
     width: 75%;
     display: inline-block;

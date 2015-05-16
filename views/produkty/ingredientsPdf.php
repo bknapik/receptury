@@ -73,14 +73,12 @@ foreach ($list as $produkt):
                 <?php endif; ?>
                 <?php if (!empty($ingredients) && $quantity >= 2) : ?>
                     (
-                    <?php foreach ($ingredients as $ing) : ?>
+                    <?php foreach ($ingredients as $ingr) : ?>
+                        <?php $ing = \app\models\Skladniki::findOne($ingr->skladnik_id); ?>
                         <?= $ing->nazwa_do_skladu ?>
-                        <?=
-                        (($ing->alergen) ?
-                            '<strong>' . $ing->alergen . '</strong>, ' :
-                            (($ing != $ingredients[count($ingredients) - 1]) ? ',' : '')
-                        )
-                        ?>
+                        <?= (($ing->alergen) ? '<strong>' . $ing->alergen . '</strong> ' : ''); ?>
+                        <?= ($ingr->wyswietlac_procent == 1) ? '('.$ingr->procenty*($quantity/100).'%)' : '' ?>
+                        <?= (($ingr != $ingredients[count($ingredients) - 1]) ? ',' : ''); ?>
                     <?php endforeach; ?>
                     )
                 <?php endif; ?>
