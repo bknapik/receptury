@@ -24,7 +24,10 @@ $this->title = 'Produkty';
                 <i class="glyphicon glyphicon-print"></i> Drukuj skład
             </a>
             <a class="btn btn-primary pull-right add-button" onclick="document.getElementById('choose').submit()">
-                <i class="glyphicon glyphicon-print"></i> Drukuj skład wybranych produktów
+                <i class="glyphicon glyphicon-print"></i> Drukuj skład wybranych
+            </a>
+            <a href="index.php?r=produkty/print-recipes" class="btn btn-primary pull-right add-button">
+                <i class="glyphicon glyphicon-print"></i> Drukuj receptury
             </a>
 
             <form method="POST" action="index.php?r=produkty/sklad-pdf-which" id="choose">

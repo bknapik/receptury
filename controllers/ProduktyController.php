@@ -258,9 +258,70 @@ class ProduktyController extends Controller
 
     }
 
+    /**
+     * Shows list of products with possibility to choose which recipes for products print,
+     * and how much of each product should be calculated for its recipe
+     * @return string html code
+     */
     public function actionPrintRecipes()
     {
+        $model = new Produkty();
+        $list = $model->find()->all();
+        return $this->render('printRecipes', array('list' => $list));
+    }
 
+    public function actionPrintRecipesPdf()
+    {
+        if (\Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            $recipesArray = array();
+            $reportArray = array();
+            foreach ($post['number'] as $key => $product_number) {
+                if ($product_number != '') {
+                    $model = Produkty::findOne($key);
+                    $recipe = $model->recipe;
+                    $multiplier = $product_number / $model->ile_sztuk;
+                    $recipeElement = array();
+                    $recipeElement['nazwa'] = $model->nazwa;
+                    $recipeElement['nawazka'] = $model->nawazka;
+                    $recipeElement['ile_sztuk'] = $product_number;
+                    $recipeElement['presa'] = $model->presa*$multiplier;
+                    $recipeElement['suma_skladnikow'] = 0;
+                    $recipeElement['woda'] = $recipe->woda*$multiplier;
+                    $recipeElement['uwagi'] = $recipe->uwagi;
+                    foreach ($recipe->recipeIngredients as $ingredient) {
+                        $recipeElements = array();
+                        $recipeElements['nazwa'] = $ingredient->ingredient->nazwa_skladnika;
+                        $recipeElements['ilosc'] = $ingredient->ilosc * $multiplier;
+                        $recipeElements['jednostka'] = $ingredient->jednostka;
+                        if(!isset($reportArray[$ingredient->skladnik_id])){
+                            $reportArray[$ingredient->skladnik_id] = ['suma' => 0,
+                                'nazwa' => $ingredient->ingredient->nazwa_skladnika,
+                                'jednostka' => $recipeElements['jednostka']
+                            ];
+                        }
+                        $reportArray[$ingredient->skladnik_id]['suma'] += $ingredient->ilosc * $multiplier;
+                        $recipeElement['suma_skladnikow'] += $ingredient->ilosc_przeliczona*$multiplier;
+                        $recipeElement['skladniki'][] = $recipeElements;
+                    }
+                    $recipesArray[] = $recipeElement;
+                }
+            }
+            $config_list = Konfiguracja::find()->all();
+
+            $html = $this->renderPartial('recipesPdf', array(
+                'config_list' => $config_list,
+                'recipesArray' => $recipesArray,
+                'reportArray' => $reportArray,
+            ));
+//            echo $html;die;
+            /** @noinspection PhpIncludeInspection */
+            require_once("../vendor/dompdf/dompdf_config.inc.php");
+            $dompdf = new \DOMPDF();
+            $dompdf->load_html($html);
+            $dompdf->render();
+            $dompdf->stream("receptury".date('d-m-y').".pdf");
+        }
     }
 
     /**
