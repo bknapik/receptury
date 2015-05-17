@@ -85,7 +85,6 @@ class RecepturyController extends Controller
     public function actionAddSimilar()
     {
         $model = new Receptury();
-        $model_old = new Receptury();
         $recipe_ingredient = new RecepturySkladniki();
         $recipe_id = \Yii::$app->request->get('id');
         $model->alergen_id = array();

@@ -18,7 +18,7 @@ class Receptury extends ActiveRecord
 {
 
     /**
-     *
+     * Auxiliary field to manage recipe additional allergens save
      */
     public $alergen_id = array();
 

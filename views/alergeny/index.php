@@ -1,5 +1,8 @@
 <?php
-/* @var $this yii\web\View */
+/**
+ * @var $this yii\web\View
+ * @var $list
+ */
 $this->title = 'Alergeny';
 ?>
 <div class="site-index">

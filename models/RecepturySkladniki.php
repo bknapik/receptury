@@ -24,7 +24,7 @@ class RecepturySkladniki extends ActiveRecord {
 
     /**
      * Calculates amount of ingredients in kg
-     * @return float
+     * @return float calculated amount in kg
      */
     public function countAmount(){
         switch($this->jednostka){

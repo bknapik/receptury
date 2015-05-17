@@ -13,14 +13,14 @@ use Yii;
 use yii\web\Controller;
 
 /**
- * Class FunkcjeController
+ * Class AlergenyController
  * @package app\controllers
  */
 class AlergenyController extends Controller
 {
 
     /**
-     * Displays list of functions
+     * Displays list of allergens
      * @return string html code
      */
     public function actionIndex()
@@ -31,7 +31,7 @@ class AlergenyController extends Controller
     }
 
     /**
-     * Displays form for function and saves it
+     * Displays form for allergen and saves it
      * @return string html code
      */
     public function actionAdd()
@@ -53,7 +53,7 @@ class AlergenyController extends Controller
     }
 
     /**
-     * Removes function with given id from database
+     * Removes allergen with given id from database
      */
     public function actionDel(){
         $function_id = \Yii::$app->request->get('id');

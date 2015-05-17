@@ -8,6 +8,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--suppress HtmlUnknownTarget -->
     <link href="css/print.css" rel="stylesheet">
 </head>
 <body>

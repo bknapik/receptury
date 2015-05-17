@@ -25,6 +25,11 @@ use yii\web\Controller;
 class ProduktyController extends Controller
 {
 
+    /**
+     * @var bool overrides Controller class field
+     * whether to enable CSRF validation for the actions in this controller.
+     * CSRF validation is enabled only when both this property and [[Request::enableCsrfValidation]] are true.
+     */
     public $enableCsrfValidation = false;
 
     /**
@@ -208,6 +213,9 @@ class ProduktyController extends Controller
         $dompdf->stream("sklad.pdf");
     }
 
+    /**
+     * Choose whether print all products or subset of products
+     */
     public function actionSkladPdfWhich()
     {
         if (\Yii::$app->request->isPost) {
@@ -220,6 +228,9 @@ class ProduktyController extends Controller
         }
     }
 
+    /**
+     * Selects products assigned to customer and call actionSkladPdf with selected subset
+     */
     public function actionSkladPdfCustomer()
     {
         $customer_id = \Yii::$app->request->get('id');
@@ -236,6 +247,9 @@ class ProduktyController extends Controller
         }
     }
 
+    /**
+     * Prints cards for given product
+     */
     public function actionPrintCards()
     {
         /** @noinspection PhpIncludeInspection */
@@ -270,6 +284,9 @@ class ProduktyController extends Controller
         return $this->render('printRecipes', array('list' => $list));
     }
 
+    /**
+     * Prints recipes for given products with report
+     */
     public function actionPrintRecipesPdf()
     {
         if (\Yii::$app->request->isPost) {

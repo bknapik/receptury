@@ -5,6 +5,10 @@
  * Date: 26.03.15
  * Time: 18:11
  */
+/**
+ * @var $model \app\models\Produkty
+ * @var $config_list
+ */
 $recipeIngredients = $model->recipe->recipeIngredientsWithOrder;
 $recipeIngredientsWithFunction = array();
 $recipe = $model->recipe;
@@ -73,6 +77,7 @@ endforeach; ?>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--suppress HtmlUnknownTarget -->
     <link href="css/print.css" rel="stylesheet">
 </head>
 <body class="wide">

@@ -23,10 +23,11 @@ class SkladnikiSkladniki extends ActiveRecord {
     }
 
     /**
-     * @param $percents
-     * @param $kilograms
-     * @param $sum
-     * @return float|int
+     * Counts percent amount of ingredient in ingredient when given in kilograms or return percent if given
+     * @param $percents float percent amount of ingredient in ingredient
+     * @param $kilograms float amount of ingredient in ingredient in kilograms
+     * @param $sum float sum of ingredients of ingredient in kilograms
+     * @return float|int percent amount of ingredient in ingredient
      */
     public function countPercent($percents,$kilograms,$sum){
         if(!empty($percents) && is_numeric($percents)){

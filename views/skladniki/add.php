@@ -40,6 +40,9 @@ use yii\widgets\ActiveForm;
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </h2>
+                <?php /** @var $ingredientsForModel array() */ ?>
+                <?php /** @var $ingredients array() */ ?>
+                <?php /** @var $ingredient_ingredients \app\models\SkladnikiSkladniki */ ?>
                 <?php foreach ($ingredientsForModel as $ifm): ?>
                     <div class="form-section <?= ($ifm == $ingredientsForModel[count($ingredientsForModel)-1]) ? 'last' : '' ?>">
                         <button class="btn btn-link pull-right remove-ingredient" type="button">

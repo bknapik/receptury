@@ -3,6 +3,7 @@
  * @var $ingredientsForModel
  * @var $ingredients
  * @var $recipe_ingredients
+ * @var $allergens
  */
 $this->title = 'Receptury';
 
