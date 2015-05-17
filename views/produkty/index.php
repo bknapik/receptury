@@ -49,7 +49,7 @@ $this->title = 'Produkty';
                             Presa
                         </th>
                         <th>
-                            Sztuk z presy
+                            Sztuk wg receptury
                         </th>
                         <th>
                             Kolejność

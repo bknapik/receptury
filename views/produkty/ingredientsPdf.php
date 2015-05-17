@@ -77,7 +77,7 @@ foreach ($list as $produkt):
                         <?php $ing = \app\models\Skladniki::findOne($ingr->skladnik_id); ?>
                         <?= $ing->nazwa_do_skladu ?>
                         <?= (($ing->alergen) ? '<strong>' . $ing->alergen . '</strong> ' : ''); ?>
-                        <?= ($ingr->wyswietlac_procent == 1) ? '('.$ingr->procenty*($quantity/100).'%)' : '' ?>
+                        <?= ($ingr->wyswietlac_procent == 1) ? '('.number_format($ingr->procenty*($quantity/100),2,',',' ').'%)' : '' ?>
                         <?= (($ingr != $ingredients[count($ingredients) - 1]) ? ',' : ''); ?>
                     <?php endforeach; ?>
                     )

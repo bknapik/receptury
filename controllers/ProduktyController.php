@@ -286,7 +286,7 @@ class ProduktyController extends Controller
                     $recipeElement['nawazka'] = $model->nawazka;
                     $recipeElement['ile_sztuk'] = $product_number;
                     $recipeElement['presa'] = $model->presa*$multiplier;
-                    $recipeElement['suma_skladnikow'] = 0;
+                    $recipeElement['suma_skladnikow'] = $recipe->woda*$multiplier;
                     $recipeElement['woda'] = $recipe->woda*$multiplier;
                     $recipeElement['uwagi'] = $recipe->uwagi;
                     foreach ($recipe->recipeIngredients as $ingredient) {

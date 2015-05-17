@@ -29,11 +29,13 @@ foreach ($recipeIngredients as $recipeIngredient):
     endif;
     if (!empty($ingredients) && $quantity >= 2) :
         $html .= ' (';
-        foreach ($ingredients as $ing) :
+        foreach ($ingredients as $ingr) :
+            $ing = \app\models\Skladniki::findOne($ingr->skladnik_id);
             $html .= $ing->nazwa_do_skladu;
             $html .= ($ing->alergen) ?
                 ' <strong>' . $ing->alergen . '</strong>' : '';
-            $html .= (($ing != $ingredients[count($ingredients) - 1]) ? ', ' : ')');
+            $html .= ($ingr->wyswietlac_procent == 1) ? '('.number_format($ingr->procenty*($quantity/100),2,',',' ').'%)' : '';
+            $html .= (($ingr != $ingredients[count($ingredients) - 1]) ? ', ' : ')');
         endforeach;
     endif;
     if ($recipeIngredient->wyswietlac_procent == 1):

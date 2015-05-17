@@ -92,6 +92,17 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                <tr>
+                    <td>
+                        woda
+                    </td>
+                    <td>
+                        <?= $recipe['woda'] ?>
+                    </td>
+                    <td>
+                        l
+                    </td>
+                </tr>
             </table>
         </div>
         <div>

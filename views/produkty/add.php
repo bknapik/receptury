@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'opis')->label('Opis')->textarea() ?>
             <?= $form->field($model, 'nawazka')->label('Naważka')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'presa')->label('Presa')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
-            <?= $form->field($model, 'ile_sztuk')->label('Ile sztuk z presy')->input('number',['step' => 1, 'min' => 0, 'minValue' => 0]) ?>
+            <?= $form->field($model, 'ile_sztuk')->label('Ile sztuk wg receptury')->input('number',['step' => 1, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'sortowanie')->label('Kolejność')->input('number') ?>
 
 
