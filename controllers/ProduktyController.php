@@ -34,7 +34,7 @@ class ProduktyController extends Controller
     public function actionIndex()
     {
         $model = new Produkty();
-        $list = $model->find()->all();
+        $list = $model->find()->orderBy('sortowanie ASC')->all();
         return $this->render('index', array('list' => $list));
     }
 
@@ -266,7 +266,7 @@ class ProduktyController extends Controller
     public function actionPrintRecipes()
     {
         $model = new Produkty();
-        $list = $model->find()->all();
+        $list = $model->find()->orderBy('sortowanie ASC')->all();
         return $this->render('printRecipes', array('list' => $list));
     }
 

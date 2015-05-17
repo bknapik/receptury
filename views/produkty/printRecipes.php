@@ -26,7 +26,7 @@ $this->title = 'Produkty';
                             Ile
                         </th>
                         <th>
-                            Id
+                            Kolejność
                         </th>
                         <th>
                             Nazwa
@@ -52,7 +52,7 @@ $this->title = 'Produkty';
                                 </label>
                             </td>
                             <td>
-                                <?= $produkt->id ?>
+                                <?= $produkt->sortowanie ?>
                             </td>
                             <td>
                                 <?= $produkt->nazwa ?>

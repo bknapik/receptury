@@ -37,7 +37,7 @@ $this->title = 'Produkty';
                         <th>
                         </th>
                         <th>
-                            Id
+                            Kolejność
                         </th>
                         <th>
                             Nazwa
@@ -50,9 +50,6 @@ $this->title = 'Produkty';
                         </th>
                         <th>
                             Sztuk wg receptury
-                        </th>
-                        <th>
-                            Kolejność
                         </th>
                         <th>
                             Opcje
@@ -69,7 +66,7 @@ $this->title = 'Produkty';
                                 </label>
                             </td>
                             <td>
-                                <?= $produkt->id ?>
+                                <?= $produkt->sortowanie ?>
                             </td>
                             <td>
                                 <?= $produkt->nazwa ?>
@@ -82,9 +79,6 @@ $this->title = 'Produkty';
                             </td>
                             <td>
                                 <?= $produkt->ile_sztuk ?>
-                            </td>
-                            <td>
-                                <?= $produkt->sortowanie ?>
                             </td>
                             <td>
                                 <a href="?r=produkty/add&id=<?= $produkt->id ?>" class="btn btn-primary">
