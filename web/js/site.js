@@ -152,3 +152,10 @@ jQuery('#check-all-allergens').click(function(){
     }
     return false;
 });
+
+jQuery('#set-default').click(function(){
+    var inputs = jQuery('.number-input');
+    for(var i=0;i<inputs.length;i++){
+        inputs[i].value = $(inputs[i]).data('value');
+    }
+});

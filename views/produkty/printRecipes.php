@@ -14,6 +14,9 @@ $this->title = 'Produkty';
             <a class="btn btn-primary pull-right add-button" onclick="document.getElementById('choose').submit()">
                 <i class="glyphicon glyphicon-print"></i> Drukuj receptury wybranych
             </a>
+            <a class="btn btn-primary pull-right add-button" id="set-default">
+                <i class="glyphicon glyphicon-transfer"></i> Ustaw domyślne wartości dla wszystkich produktów
+            </a>
 
             <form method="POST" action="index.php?r=produkty/print-recipes-pdf" id="choose">
                 <table class="table table-hover table-striped my-data-table">
@@ -45,7 +48,7 @@ $this->title = 'Produkty';
                         <tr>
                             <td>
                                 <label>
-                                    <input type="text" name="number[<?= $produkt->id ?>]" />
+                                    <input type="text" name="number[<?= $produkt->id ?>]" data-value="<?= $produkt->ile_sztuk ?>" class="number-input"/>
                                 </label>
                             </td>
                             <td>
