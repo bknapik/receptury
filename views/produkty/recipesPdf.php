@@ -35,34 +35,35 @@
             <table class="no-border">
                 <tr>
                     <td>
-                        <span>naważka [kg]</span>
+                        <span>naważka [kg] / presa [kg]</span>
                     </td>
                     <td>
-                        <?= $recipe['nawazka'] ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="recipe_weight">
-            <table class="no-border">
-                <tr>
-                    <td>
-                        <span>suma składników [kg] / presa [kg]</span>
+                        <?= number_format($recipe['nawazka'], 2, ',', ' ') ?>
+                        / <?= number_format($recipe['presa'], 2, ',', ' ') ?>&nbsp;&nbsp;&nbsp;
                     </td>
                     <td>
-                        <?= $recipe['suma_skladnikow'] ?> / <?= $recipe['presa'] ?>
+                        <span>masa netto [kg]</span>
                     </td>
-                </tr>
-            </table>
-        </div>
-        <div class="recipe_weight">
-            <table class="no-border">
-                <tr>
+                    <td>
+                        <?= number_format($recipe['masa_netto'], 2, ',', ' ') ?>&nbsp;&nbsp;&nbsp;
+                    </td>
                     <td>
                         <span>ile sztuk</span>
                     </td>
                     <td>
                         <?= $recipe['ile_sztuk'] ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="recipe_weight">
+            <table class="no-border">
+                <tr>
+                    <td>
+                        <span>suma składników w tym woda [kg]</span>
+                    </td>
+                    <td>
+                        <?= number_format($recipe['suma_skladnikow'], 2, ',', ' ') ?>
                     </td>
                 </tr>
             </table>
@@ -86,7 +87,7 @@
                             <?= $ingredient['nazwa'] ?>
                         </td>
                         <td>
-                            <?= $ingredient['ilosc'] ?>
+                            <?= number_format($ingredient['ilosc'], 2, ',', ' ') ?>
                         </td>
                         <td>
                             <?= $ingredient['jednostka'] ?>
@@ -98,7 +99,7 @@
                         woda
                     </td>
                     <td>
-                        <?= $recipe['woda'] ?>
+                        <?= number_format($recipe['woda'], 2, ',', ' ') ?>
                     </td>
                     <td>
                         l
@@ -131,7 +132,7 @@
                     <?= $ingredient['nazwa'] ?>
                 </td>
                 <td>
-                    <?= $ingredient['suma'] ?>
+                    <?= number_format($ingredient['suma'], 2, ',', ' ') ?>
                 </td>
                 <td>
                     <?= $ingredient['jednostka'] ?>

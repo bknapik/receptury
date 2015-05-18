@@ -306,6 +306,7 @@ class ProduktyController extends Controller
                     $recipeElement['suma_skladnikow'] = $recipe->woda*$multiplier;
                     $recipeElement['woda'] = $recipe->woda*$multiplier;
                     $recipeElement['uwagi'] = $recipe->uwagi;
+                    $recipeElement['masa_netto'] = $model->masa_netto;
                     foreach ($recipe->recipeIngredients as $ingredient) {
                         $recipeElements = array();
                         $recipeElements['nazwa'] = $ingredient->ingredient->nazwa_skladnika;
