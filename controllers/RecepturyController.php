@@ -15,6 +15,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Receptury;
 use app\models\RecepturySkladniki;
+use yii\filters\AccessControl;
 
 /**
  * Class RecepturyController
@@ -22,6 +23,26 @@ use app\models\RecepturySkladniki;
  */
 class RecepturyController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function () {
+                                return !\Yii::$app->user->getIsGuest();
+                            },
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Displays list of recipes

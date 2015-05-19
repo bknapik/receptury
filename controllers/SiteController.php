@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Konfiguracja;
+use yii\filters\AccessControl;
 
 /**
  * Class SiteController
@@ -12,13 +13,38 @@ use app\models\Konfiguracja;
  */
 class SiteController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function () {
+                                return !\Yii::$app->user->getIsGuest();
+                            },
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * Displays list of configuration elements
      * @return string html code
      */
     public function actionIndex()
     {
-        $list = Konfiguracja::find()->all();
+        if(\Yii::$app->user->getIsSuperAdmin()){
+            $list = Konfiguracja::find()->all();
+        } else {
+            $list = Konfiguracja::find()->where('klucz NOT IN ("logo","adres","nazwa")')->all();
+        }
         return $this->render('index', array('list' => $list));
     }
 

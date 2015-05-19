@@ -11,6 +11,7 @@ namespace app\controllers;
 use app\models\FunkcjaTechnologiczna;
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 
 /**
  * Class FunkcjeController
@@ -18,6 +19,26 @@ use yii\web\Controller;
  */
 class FunkcjeController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function () {
+                                return !\Yii::$app->user->getIsGuest();
+                            },
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Displays list of functions

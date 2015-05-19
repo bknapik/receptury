@@ -106,7 +106,7 @@ class ActionColumn extends Column
         if (!isset($this->buttons['view'])) {
             $this->buttons['view'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                    'title' => Yii::t('yii', 'View'),
+                    'title' => Yii::t('yii', 'Pokaż'),
                     'data-pjax' => '0',
                 ]);
             };
@@ -114,7 +114,7 @@ class ActionColumn extends Column
         if (!isset($this->buttons['update'])) {
             $this->buttons['update'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                    'title' => Yii::t('yii', 'Update'),
+                    'title' => Yii::t('yii', 'Aktualizuj'),
                     'data-pjax' => '0',
                 ]);
             };
@@ -122,8 +122,8 @@ class ActionColumn extends Column
         if (!isset($this->buttons['delete'])) {
             $this->buttons['delete'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                    'title' => Yii::t('yii', 'Delete'),
-                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                    'title' => Yii::t('yii', 'Usuń'),
+                    'data-confirm' => Yii::t('yii', 'Czy jesteś pewien, że chcesz usunąć ten element?'),
                     'data-method' => 'post',
                     'data-pjax' => '0',
                 ]);

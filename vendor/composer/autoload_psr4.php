@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'yii\\swiftmailer\\' => array($vendorDir . '/yiisoft/yii2-swiftmailer'),
     'yii\\gii\\' => array($vendorDir . '/yiisoft/yii2-gii'),
     'yii\\faker\\' => array($vendorDir . '/yiisoft/yii2-faker'),
     'yii\\debug\\' => array($vendorDir . '/yiisoft/yii2-debug'),
@@ -14,4 +15,5 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'auth\\' => array($vendorDir . '/robregonm/yii2-auth'),
 );

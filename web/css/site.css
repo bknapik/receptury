@@ -144,7 +144,7 @@ label{
     display: inline-block;
 }
 
-#DataTables_Table_0_wrapper label{
+#DataTables_Table_0_wrapper label, .field-loginform-rememberme label{
     width: 100%;
 }
 

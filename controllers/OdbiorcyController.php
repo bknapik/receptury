@@ -13,6 +13,7 @@ use app\models\OdbiorcyProdukty;
 use app\models\Produkty;
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 
 /**
  * Class OdbiorcyController
@@ -20,6 +21,26 @@ use yii\web\Controller;
  */
 class OdbiorcyController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function () {
+                                return !\Yii::$app->user->getIsGuest();
+                            },
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Displays list of customers

@@ -13,6 +13,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Skladniki;
 use app\models\SkladnikiSkladniki;
+use yii\filters\AccessControl;
 
 /**
  * Class SkladnikiController
@@ -20,6 +21,26 @@ use app\models\SkladnikiSkladniki;
  */
 class SkladnikiController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function () {
+                                return !\Yii::$app->user->getIsGuest();
+                            },
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Displays list of ingredients

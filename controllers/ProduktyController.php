@@ -17,6 +17,7 @@ use app\models\Alergeny;
 use app\models\RecepturyAlergeny;
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 
 /**
  * Class ProduktyController
@@ -24,6 +25,26 @@ use yii\web\Controller;
  */
 class ProduktyController extends Controller
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function () {
+                                return !\Yii::$app->user->getIsGuest();
+                            },
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @var bool overrides Controller class field
