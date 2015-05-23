@@ -36,7 +36,7 @@ $this->title = 'Receptury';
                             <?= $config->wartosc ?>
                         </td>
                         <td>
-                            <a href="?r=site/edit&id=<?= $config->klucz ?>" class="btn btn-primary">
+                            <a href="?r=site/edit&id=<?= $config->klucz ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
                         </td>

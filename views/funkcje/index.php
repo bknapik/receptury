@@ -39,10 +39,10 @@ $this->title = 'Funkcje technologiczne';
                             <?= $funkcja->nazwa ?>
                         </td>
                         <td>
-                            <a href="?r=funkcje/add&id=<?= $funkcja->id ?>" class="btn btn-primary">
+                            <a href="?r=funkcje/add&id=<?= $funkcja->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=funkcje/del&id=<?= $funkcja->id ?>" class="btn btn-primary remove-button">
+                            <a href="?r=funkcje/del&id=<?= $funkcja->id ?>" class="btn btn-primary remove-button btn-xs">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

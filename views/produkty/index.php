@@ -46,12 +46,6 @@ $this->title = 'Produkty';
                             Masa netto
                         </th>
                         <th>
-                            Presa
-                        </th>
-                        <th>
-                            Sztuk wg receptury
-                        </th>
-                        <th>
                             Opcje
                         </th>
                     </tr>
@@ -72,27 +66,21 @@ $this->title = 'Produkty';
                                 <?= $produkt->nazwa ?>
                             </td>
                             <td>
-                                <?= $produkt->getFormatted('masa_netto') ?>
-                            </td>
-                            <td>
-                                <?= $produkt->getFormatted('presa') ?>
-                            </td>
-                            <td>
                                 <?= $produkt->ile_sztuk ?>
                             </td>
                             <td>
-                                <a href="?r=produkty/add&id=<?= $produkt->id ?>" class="btn btn-primary">
+                                <a href="?r=produkty/add&id=<?= $produkt->id ?>" class="btn btn-primary btn-xs">
                                     <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                                 </a>
-                                <a href="?r=produkty/del&id=<?= $produkt->id ?>" class="btn btn-primary remove-button">
-                                    <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
-                                </a>
-                                <a href="?r=produkty/print-cards&id=<?= $produkt->id ?>" class="btn btn-primary">
+                                <a href="?r=produkty/print-cards&id=<?= $produkt->id ?>" class="btn btn-primary btn-xs">
                                     <i class="glyphicon glyphicon-print"></i>&nbsp;&nbsp;Drukuj kartki
                                 </a>
 
-                                <a href="?r=receptury/add&id=<?= $produkt->receptura_id ?>" class="btn btn-primary">
+                                <a href="?r=receptury/add&id=<?= $produkt->receptura_id ?>" class="btn btn-primary btn-xs">
                                     <i class="glyphicon glyphicon-arrow-right"></i>&nbsp;&nbsp;Przejdź do receptury
+                                </a>
+                                <a href="?r=produkty/del&id=<?= $produkt->id ?>" class="btn btn-primary remove-button btn-xs">
+                                    <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                                 </a>
                             </td>
                         </tr>

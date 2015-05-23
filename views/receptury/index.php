@@ -18,16 +18,10 @@ $this->title = 'Receptury';
                 <thead>
                 <tr>
                     <th>
-                        Id
-                    </th>
-                    <th>
                         Nazwa
                     </th>
                     <th>
                         Numer
-                    </th>
-                    <th>
-                        Masa końcowa
                     </th>
                     <th>
                         Opcje
@@ -39,26 +33,20 @@ $this->title = 'Receptury';
                 foreach ($list as $receptura): ?>
                     <tr>
                         <td>
-                            <?= $receptura->id ?>
-                        </td>
-                        <td>
                             <?= $receptura->nazwa ?>
                         </td>
                         <td>
                             <?= $receptura->numer ?>
                         </td>
                         <td>
-                            <?= $receptura->masa_koncowa ?>
-                        </td>
-                        <td>
-                            <a href="?r=receptury/add&id=<?= $receptura->id ?>" class="btn btn-primary">
+                            <a href="?r=receptury/add&id=<?= $receptura->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=receptury/del&id=<?= $receptura->id ?>" class="btn btn-primary remove-button">
-                                <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
-                            </a>
-                            <a href="?r=receptury/add-similar&id=<?= $receptura->id ?>" class="btn btn-primary">
+                            <a href="?r=receptury/add-similar&id=<?= $receptura->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;Dodaj podobną
+                            </a>
+                            <a href="?r=receptury/del&id=<?= $receptura->id ?>" class="btn btn-primary remove-button btn-xs">
+                                <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>
                     </tr>

@@ -69,6 +69,13 @@ class SkladnikiController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
+            $post['Skladniki']['przelicznik_szt_kg'] = str_replace(',','.',$post['Skladniki']['przelicznik_szt_kg']);
+            $post['Skladniki']['przelicznik_l_kg'] = str_replace(',','.',$post['Skladniki']['przelicznik_l_kg']);
+            $post['Skladniki']['wartosc_cal'] = str_replace(',','.',$post['Skladniki']['wartosc_cal']);
+            $post['Skladniki']['bialko'] = str_replace(',','.',$post['Skladniki']['bialko']);
+            $post['Skladniki']['tluszcz'] = str_replace(',','.',$post['Skladniki']['tluszcz']);
+            $post['Skladniki']['weglowodany'] = str_replace(',','.',$post['Skladniki']['weglowodany']);
+            $post['Skladniki']['cukier'] = str_replace(',','.',$post['Skladniki']['cukier']);
             $ret = $model->load($post, 'Skladniki');
 //            var_dump($model->validate());die;
             if ($ret && $model->validate()) {

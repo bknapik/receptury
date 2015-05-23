@@ -51,10 +51,10 @@ $this->title = 'StawkiVat VAT';
                             <?= $stawka->litera ?>
                         </td>
                         <td>
-                            <a href="?r=stawki/add&id=<?= $stawka->id ?>" class="btn btn-primary">
+                            <a href="?r=stawki/add&id=<?= $stawka->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=stawki/del&id=<?= $stawka->id ?>" class="btn btn-primary remove-button">
+                            <a href="?r=stawki/del&id=<?= $stawka->id ?>" class="btn btn-primary remove-button btn-xs">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

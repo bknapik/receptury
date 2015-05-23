@@ -75,6 +75,8 @@ class RecepturyController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
+            $post['Receptury']['masa_koncowa'] = str_replace(',','.',$post['Receptury']['masa_koncowa']);
+            $post['Receptury']['woda'] = str_replace(',','.',$post['Receptury']['woda']);
             $ret = $model->load($post, 'Receptury');
             if ($ret && $model->validate()) {
                 $model->save();

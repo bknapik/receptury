@@ -79,6 +79,13 @@ class ProduktyController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = \Yii::$app->request->post();
+            $post['Produkty']['masa_netto'] = str_replace(',','.',$post['Produkty']['masa_netto']);
+            $post['Produkty']['cena_det_netto'] = str_replace(',','.',$post['Produkty']['cena_det_netto']);
+            $post['Produkty']['cena_det_brutto'] = str_replace(',','.',$post['Produkty']['cena_det_brutto']);
+            $post['Produkty']['cena_hurt_netto'] = str_replace(',','.',$post['Produkty']['cena_hurt_netto']);
+            $post['Produkty']['cena_hurt_brutto'] = str_replace(',','.',$post['Produkty']['cena_hurt_brutto']);
+            $post['Produkty']['nawazka'] = str_replace(',','.',$post['Produkty']['nawazka']);
+            $post['Produkty']['presa'] = str_replace(',','.',$post['Produkty']['presa']);
             $grafika = $model->grafika;
             $ret = $model->load($post, 'Produkty');
             $model->grafika = $grafika;

@@ -18,9 +18,6 @@ $this->title = 'Składniki';
                 <thead>
                 <tr>
                     <th>
-                        Id
-                    </th>
-                    <th>
                         Nazwa
                     </th>
                     <th>
@@ -42,9 +39,6 @@ $this->title = 'Składniki';
                 foreach ($list as $skladnik): ?>
                     <tr>
                         <td>
-                            <?= $skladnik->id ?>
-                        </td>
-                        <td>
                             <?= $skladnik->nazwa_skladnika ?>
                         </td>
                         <td>
@@ -57,10 +51,10 @@ $this->title = 'Składniki';
                             <?= $skladnik->wersja ?>
                         </td>
                         <td>
-                            <a href="?r=skladniki/add&id=<?= $skladnik->id ?>" class="btn btn-primary">
+                            <a href="?r=skladniki/add&id=<?= $skladnik->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=skladniki/del&id=<?= $skladnik->id ?>" class="btn btn-primary remove-button">
+                            <a href="?r=skladniki/del&id=<?= $skladnik->id ?>" class="btn btn-primary remove-button btn-xs">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

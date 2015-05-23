@@ -148,11 +148,14 @@ class Skladniki extends ActiveRecord
         }
         $sum = 0;
         if (isset($post['SkladnikiSkladniki']['skladnik_id'][0]) && !empty($post['SkladnikiSkladniki']['skladnik_id'][0])) {
+            $post['SkladnikiSkladniki']['skladnik_id'] = array_unique($post['SkladnikiSkladniki']['skladnik_id']);
             foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
                 $sum += $post['SkladnikiSkladniki']['kilogramy'][$key];
             }
             foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
                 if ($value != '') {
+                    $post['SkladnikiSkladniki']['kilogramy'][$key] = str_replace(',','.',$post['SkladnikiSkladniki']['kilogramy'][$key]);
+                    $post['SkladnikiSkladniki']['procenty'][$key] = str_replace(',','.',$post['SkladnikiSkladniki']['procenty'][$key]);
                     $ss = new SkladnikiSkladniki();
                     $ss->skladnik_id = $value;
                     $ss->rodzic_id = $this->id;

@@ -39,10 +39,10 @@ $this->title = 'Alergeny';
                             <?= $alergen->nazwa ?>
                         </td>
                         <td>
-                            <a href="?r=alergeny/add&id=<?= $alergen->id ?>" class="btn btn-primary">
+                            <a href="?r=alergeny/add&id=<?= $alergen->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=alergeny/del&id=<?= $alergen->id ?>" class="btn btn-primary remove-button">
+                            <a href="?r=alergeny/del&id=<?= $alergen->id ?>" class="btn btn-primary remove-button btn-xs">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>

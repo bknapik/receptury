@@ -51,8 +51,10 @@ class Receptury extends ActiveRecord
                 $ingredient->delete();
             }
         }
+        $post['RecepturySkladniki']['skladnik_id'] = array_unique($post['RecepturySkladniki']['skladnik_id']);
         foreach ($post['RecepturySkladniki']['skladnik_id'] as $key => $value) {
             if ($value != '') {
+                $post['RecepturySkladniki']['ilosc'][$key] = str_replace(',','.',$post['RecepturySkladniki']['ilosc'][$key]);
                 $rs = new RecepturySkladniki();
                 $rs->skladnik_id = $value;
                 $rs->receptura_id = $this->id;

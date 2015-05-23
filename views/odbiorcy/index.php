@@ -44,17 +44,17 @@ $this->title = 'Odbiorcy';
                             <?= ($odbiorca->aktywny == 1) ? 'Tak' : 'Nie' ?>
                         </td>
                         <td>
-                            <a href="?r=odbiorcy/add&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="?r=odbiorcy/add&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
-                            <a href="?r=odbiorcy/products&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="?r=odbiorcy/products&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Produkty
                             </a>
-                            <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary remove-button">
-                                <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
-                            </a>
-                            <a href="index.php?r=produkty/sklad-pdf-customer&id=<?= $odbiorca->id ?>" class="btn btn-primary">
+                            <a href="index.php?r=produkty/sklad-pdf-customer&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-print"></i> Drukuj skład produktów odbiorcy
+                            </a>
+                            <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs remove-button">
+                                <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń
                             </a>
                         </td>
                     </tr>
