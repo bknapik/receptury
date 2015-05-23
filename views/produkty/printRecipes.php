@@ -14,7 +14,7 @@ $this->title = 'Produkty';
             <a class="btn btn-primary pull-right add-button" onclick="document.getElementById('choose').submit()">
                 <i class="glyphicon glyphicon-print"></i> Drukuj receptury wybranych
             </a>
-            <a class="btn btn-primary pull-right add-button" id="set-default">
+            <a class="btn btn-primary pull-right add-button" id="set-default" data-check="true">
                 <i class="glyphicon glyphicon-transfer"></i> Ustaw domyślne wartości dla wszystkich produktów
             </a>
 
@@ -38,7 +38,7 @@ $this->title = 'Produkty';
                             Presa
                         </th>
                         <th>
-                            Sztuk z presy
+                            Sztuk wg receptury
                         </th>
                     </tr>
                     </thead>

@@ -108,6 +108,54 @@ class ProduktyController extends Controller
     }
 
     /**
+     * Displays form for product, and saves it
+     * @return string rendered page with product form
+     */
+    public function actionAddSimilar()
+    {
+        $model = new Produkty();
+        $product_id = \Yii::$app->request->get('id');
+        if ($product_id) {
+            $model_old = Produkty::findOne($product_id);
+            foreach ($model_old->oldAttributes as $key => $value) {
+                if ($key != 'id') {
+                    $model->$key = $value;
+                }
+            }
+        } else {
+            $model->setDefault();
+        }
+        if (\Yii::$app->request->isPost) {
+            $post = \Yii::$app->request->post();
+            $post['Produkty']['masa_netto'] = str_replace(',','.',$post['Produkty']['masa_netto']);
+            $post['Produkty']['cena_det_netto'] = str_replace(',','.',$post['Produkty']['cena_det_netto']);
+            $post['Produkty']['cena_det_brutto'] = str_replace(',','.',$post['Produkty']['cena_det_brutto']);
+            $post['Produkty']['cena_hurt_netto'] = str_replace(',','.',$post['Produkty']['cena_hurt_netto']);
+            $post['Produkty']['cena_hurt_brutto'] = str_replace(',','.',$post['Produkty']['cena_hurt_brutto']);
+            $post['Produkty']['nawazka'] = str_replace(',','.',$post['Produkty']['nawazka']);
+            $post['Produkty']['presa'] = str_replace(',','.',$post['Produkty']['presa']);
+            $grafika = $model->grafika;
+            $ret = $model->load($post, 'Produkty');
+            $model->grafika = $grafika;
+            if ($ret && $model->validate()) {
+                $model->handlePictureUpload();
+                $model->save();
+                $this->redirect('?r=produkty/index');
+            }
+        }
+        $recipeModel = new Receptury();
+        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR data_od <= NOW())
+                                                    && (data_do IS NULL OR data_do >= NOW())');
+        $rateModel = new StawkiVat();
+        $vat_arr = $rateModel->getAssocArr();
+        return $this->render('add', array(
+            'model' => $model,
+            'recipes' => $recipes_arr,
+            'vat' => $vat_arr
+        ));
+    }
+
+    /**
      * Removes product with given id from database
      */
     public function actionDel()

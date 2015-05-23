@@ -49,8 +49,8 @@ use yii\widgets\ActiveForm;
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
                         <?= $form->field($ifm, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
-                        <?= $form->field($ifm, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
-                        <?= $form->field($ifm, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ifm, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ifm, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endforeach; ?>
@@ -60,8 +60,8 @@ use yii\widgets\ActiveForm;
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
                         <?= $form->field($ingredient_ingredients, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
-                        <?= $form->field($ingredient_ingredients, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
-                        <?= $form->field($ingredient_ingredients, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ingredient_ingredients, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ingredient_ingredients, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ingredient_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                     </div>
                 <?php endif; ?>

@@ -19,11 +19,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        '//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css',
+        'libs/datatables/media/css/jquery.dataTables.css',
         'libs/datepicker/css/datepicker.css',
     ];
     public $js = [
-        '//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js',
+        'libs/datatables/media/js/jquery.dataTables.js',
         'libs/datepicker/js/bootstrap-datepicker.js',
         'js/site.js',
     ];

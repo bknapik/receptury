@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
             <h2>Możliwe dodatkowe alergeny</h2>
             <div class="form-section allergens">
                 <?= $form->field($model, 'alergen_id')->checkboxlist($allergens)->label(''); ?>
-                <button class="btn small btn-primary" id="check-all-allergens">Zaznacz wszystkie alergeny</button>
+                <button class="btn small btn-primary" id="check-all-allergens" data-check="true">Zaznacz wszystkie alergeny</button>
             </div>
             <div id="ingredients">
                 <h2>Składniki receptury
@@ -53,7 +53,7 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number', ['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number', ['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <div class="col-lg-offset-2 col-lg-10 show-percent">
                             <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                         </div>
@@ -71,7 +71,7 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number', ['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number', ['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <div class="col-lg-offset-2 col-lg-10 show-percent">
                             <?= $form->field($recipe_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                         </div>

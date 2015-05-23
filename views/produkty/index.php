@@ -72,10 +72,12 @@ $this->title = 'Produkty';
                                 <a href="?r=produkty/add&id=<?= $produkt->id ?>" class="btn btn-primary btn-xs">
                                     <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                                 </a>
+                                <a href="?r=produkty/add-similar&id=<?= $produkt->id ?>" class="btn btn-primary btn-xs">
+                                    <i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;Dodaj podobny
+                                </a>
                                 <a href="?r=produkty/print-cards&id=<?= $produkt->id ?>" class="btn btn-primary btn-xs">
                                     <i class="glyphicon glyphicon-print"></i>&nbsp;&nbsp;Drukuj kartki
                                 </a>
-
                                 <a href="?r=receptury/add&id=<?= $produkt->receptura_id ?>" class="btn btn-primary btn-xs">
                                     <i class="glyphicon glyphicon-arrow-right"></i>&nbsp;&nbsp;Przejdź do receptury
                                 </a>

@@ -54,7 +54,7 @@ jQuery('.add-ingredient').click(function () {
     }
     var $formInput = jQuery('.last input[type="text"]');
     $formInput.val('');
-    $formInput =  jQuery('.last input[type="checkbox"]');
+    $formInput = jQuery('.last input[type="checkbox"]');
     try {
         $formInput[0].checked = false
         $formInput[1].checked = false
@@ -80,7 +80,7 @@ jQuery('.remove-ingredient').click(function () {
     var $removeVal = false;
 
     $removeVal = confirm('Na pewno usunąć?');
-    if($removeVal){
+    if ($removeVal) {
         var $this = jQuery(this);
         var $parent = jQuery($this.parents('div')[0]);
         if ($parent.hasClass('last')) {
@@ -137,7 +137,7 @@ jQuery(function () {
     jQuery("#skladniki-do_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
 });
 
-jQuery('.remove-button').click(function(){
+jQuery('.remove-button').click(function () {
     var returnVal = false;
 
     returnVal = confirm('Na pewno usunąć?');
@@ -145,17 +145,39 @@ jQuery('.remove-button').click(function(){
     return returnVal;
 });
 
-jQuery('#check-all-allergens').click(function(){
-    var inputs = jQuery('.allergens input');
-    for(var i = 1;i<inputs.length;i++){
-        inputs[i].checked = true;
+jQuery('#check-all-allergens').click(function () {
+    if ($(this).data('check')) {
+        var inputs = jQuery('.allergens input');
+        for (var i = 1; i < inputs.length; i++) {
+            inputs[i].checked = true;
+        }
+        $(this).data('check',false);
+        $(this)[0].innerText = 'Odznacz wszystkie alergeny';
+    } else {
+        var inputs = jQuery('.allergens input');
+        for (var i = 1; i < inputs.length; i++) {
+            inputs[i].checked = false;
+        }
+        $(this).data('check',true);
+        $(this)[0].innerText = 'Zaznacz wszystkie alergeny';
     }
     return false;
 });
 
 jQuery('#set-default').click(function(){
-    var inputs = jQuery('.number-input');
-    for(var i=0;i<inputs.length;i++){
-        inputs[i].value = $(inputs[i]).data('value');
+    if ($(this).data('check')) {
+        var inputs = jQuery('.number-input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].value = $(inputs[i]).data('value');
+        }
+        $(this).data('check',false);
+        $(this)[0].innerHTML = '<i class="glyphicon glyphicon-transfer"></i> Usuń wartości dla wszystkich produktów';
+    } else {
+        var inputs = jQuery('.number-input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+        $(this).data('check',true);
+        $(this)[0].innerHTML = '<i class="glyphicon glyphicon-transfer"></i> Ustaw domyślne wartości dla wszystkich produktów';
     }
 });
