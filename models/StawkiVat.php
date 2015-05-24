@@ -22,7 +22,7 @@ class StawkiVat extends ActiveRecord {
      * @return array assoc array id => {$name}
      */
     public function getAssocArr($where = '1', $name = 'nazwa', $nullValue = ''){
-        $vatRates = StawkiVat::find()->where($where)->all();
+        $vatRates = StawkiVat::find()->where($where)->orderBy('litera ASC')->all();
         $vat_arr = array();
         if($nullValue != ''){
             $vat_arr[null] = $nullValue;

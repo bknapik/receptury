@@ -99,7 +99,7 @@ class Receptury extends ActiveRecord
      */
     public function getAssocArr($where = '1', $name = 'nazwa', $nullValue = '')
     {
-        $recipes = Receptury::find()->where($where)->all();
+        $recipes = Receptury::find()->where($where)->orderBy('nazwa ASC')->all();
         $recipes_arr = array();
         if ($nullValue != '') {
             $recipes_arr[null] = $nullValue;

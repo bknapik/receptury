@@ -100,7 +100,7 @@ class Skladniki extends ActiveRecord
      */
     public function getAssocArr($where = '1', $name = 'nazwa_skladnika', $nullValue = '')
     {
-        $parents = $this->find()->where($where)->all();
+        $parents = $this->find()->where($where)->orderBy('nazwa_skladnika ASC')->all();
         $parents_arr = array();
         if ($nullValue != '') {
             $parents_arr[null] = 'Wybierz';
