@@ -29,7 +29,7 @@ $this->title = 'Składniki';
                     <th>
                         Wersja
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         Opcje
                     </th>
                 </tr>
@@ -50,7 +50,7 @@ $this->title = 'Składniki';
                         <td>
                             <?= $skladnik->wersja ?>
                         </td>
-                        <td>
+                        <td class="col-md-2">
                             <a href="?r=skladniki/add&id=<?= $skladnik->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>

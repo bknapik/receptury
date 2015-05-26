@@ -106,7 +106,7 @@ class Skladniki extends ActiveRecord
             $parents_arr[null] = 'Wybierz';
         }
         foreach ($parents as $parent) {
-            $parents_arr[$parent->id] = $parent->{$name};
+            $parents_arr[$parent->id] = substr($parent->{$name},0,50).((strlen($parent->{$name})>50) ? '(...)' : '');
         }
         return $parents_arr;
     }
@@ -154,7 +154,7 @@ class Skladniki extends ActiveRecord
             }
             foreach ($post['SkladnikiSkladniki']['skladnik_id'] as $key => $value) {
                 if ($value != '') {
-                    $post['SkladnikiSkladniki']['kilogramy'][$key] = str_replace(',','.',$post['SkladnikiSkladniki']['kilogramy'][$key]);
+                    $post['SkladnikiSkladniki']['kilogramy'][$key] = ($post['SkladnikiSkladniki']['kilogramy'][$key] != null) ? str_replace(',','.',$post['SkladnikiSkladniki']['kilogramy'][$key]) : 0;
                     $post['SkladnikiSkladniki']['procenty'][$key] = str_replace(',','.',$post['SkladnikiSkladniki']['procenty'][$key]);
                     $ss = new SkladnikiSkladniki();
                     $ss->skladnik_id = $value;

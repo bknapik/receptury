@@ -53,7 +53,7 @@ class Receptury extends ActiveRecord
         }
         $post['RecepturySkladniki']['skladnik_id'] = array_unique($post['RecepturySkladniki']['skladnik_id']);
         foreach ($post['RecepturySkladniki']['skladnik_id'] as $key => $value) {
-            if ($value != '') {
+            if ($value != '' && $post['RecepturySkladniki']['ilosc'][$key] != null && $post['RecepturySkladniki']['ilosc'][$key] != 0) {
                 $post['RecepturySkladniki']['ilosc'][$key] = str_replace(',','.',$post['RecepturySkladniki']['ilosc'][$key]);
                 $rs = new RecepturySkladniki();
                 $rs->skladnik_id = $value;

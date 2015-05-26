@@ -53,7 +53,7 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number', ['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($ifm, 'ilosc')->label('Ilość')->input('number', ['step' => 0.001, 'min' => 0, 'minValue' => 0, 'required' => 'required']) ?>
                         <div class="col-lg-offset-2 col-lg-10 show-percent">
                             <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                         </div>
@@ -71,7 +71,7 @@ use yii\widgets\ActiveForm;
                             'szt' => 'sztuki',
                             'l' => 'litry'
                         ]) ?>
-                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number', ['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
+                        <?= $form->field($recipe_ingredients, 'ilosc')->label('Ilość')->input('number', ['step' => 0.001, 'min' => 0, 'minValue' => 0, 'required' => 'required']) ?>
                         <div class="col-lg-offset-2 col-lg-10 show-percent">
                             <?= $form->field($recipe_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
                         </div>
