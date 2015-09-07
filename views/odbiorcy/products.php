@@ -22,10 +22,6 @@ use yii\widgets\ActiveForm;
                         Opcje
                     </th>
                     <th>
-                        Id
-                    </th>
-
-                    <th>
                         Nazwa
                     </th>
 
@@ -37,13 +33,10 @@ use yii\widgets\ActiveForm;
                     <tr>
                         <td>
                             <label>
-                                <input type="checkbox" name="produkt_id[]"
+                                <input type="checkbox" name="produkt_id[]" class="products"
                                        value="<?= $produkt->id ?>"
                                     <?= (in_array($produkt->id,$ids)) ? 'checked="checked"' : '' ?>/>
                             </label>
-                        </td>
-                        <td>
-                            <?= $produkt->id ?>
                         </td>
                         <td>
                             <?= $produkt->nazwa ?>
@@ -54,6 +47,7 @@ use yii\widgets\ActiveForm;
             </table>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
+                    <button class="btn small btn-primary" id="check-all-products" data-check="true">Zaznacz wszystkie produkty</button>
                     <?= HTML::a(Html::button('Anuluj', ['class' => 'btn btn-primary']),'?r=odbiorcy&index') ?>
                     <?= Html::submitButton('Zapisz', ['class' => 'btn btn-primary']) ?>
                 </div>

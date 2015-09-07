@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'Funkcje technologiczne';
+$this->title = 'Alergeny';
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;

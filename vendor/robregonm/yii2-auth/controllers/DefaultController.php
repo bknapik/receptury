@@ -70,6 +70,7 @@ class DefaultController extends Controller
 
 		if ($model->load($_POST) and $model->login()) {
 			$this->setLoginAttempts(0); //if login is successful, reset the attempts
+            \Yii::$app->user->setReturnUrl('index.php?r=produkty');
 			return $this->goBack();
 		}
 		//if login is not successful, increase the attempts

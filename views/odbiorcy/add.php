@@ -17,6 +17,14 @@ use yii\widgets\ActiveForm;
                 'options' => ['class' => 'form-horizontal']
             ]) ?>
             <?= $form->field($model, 'nazwa')->label('Nazwa')->input('text',['required' => 'required']) ?>
+            <?= $form->field($model, 'nazwa_skrocona')->label('Skrócona nazwa') ?>
+            <?= $form->field($model, 'nip')->label('NIP/PESEL') ?>
+            <?= $form->field($model, 'adres')->label('Adres') ?>
+            <?= $form->field($model, 'telefon')->label('Telefon') ?>
+            <?= $form->field($model, 'email')->label('Email') ?>
+            <?= $form->field($model, 'osoby_kontaktowe')->label('Osoby kontaktowe') ?>
+            <?= $form->field($model, 'status')->label('Status') ?>
+            <?= $form->field($model, 'uwagi')->label('Uwagi')->textarea() ?>
             <?= $form->field($model, 'aktywny')->label('Czy odbiorca aktywny')->checkbox() ?>
 
 

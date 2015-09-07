@@ -95,7 +95,7 @@ class OdbiorcyController extends Controller
     public function actionProducts()
     {
         $customer_id = \Yii::$app->request->get('id');
-        $list = Produkty::find()->all();
+        $list = Produkty::find()->orderBy('sortowanie')->all();
         $model = new OdbiorcyProdukty();
         $listFilled = $model->find()->where('odbiorca_id=' . $customer_id)->all();
         if (\Yii::$app->request->isPost) {

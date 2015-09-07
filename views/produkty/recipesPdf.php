@@ -5,10 +5,10 @@
  * @var $reportArray
  */
 ?>
+<!DOCTYPE>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!--suppress HtmlUnknownTarget -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
     <link href="css/print.css" rel="stylesheet">
 </head>
 <body>
@@ -20,92 +20,92 @@
 <?php foreach ($recipesArray as $recipe): ?>
     <div class="page_break">
         <div class="recipe_header">
-            <table class="no-border">
-                <tr>
-                    <td>
+            <div class="no-border">
+                <div>
+                    <div style="display:inline-block">
                         <span>Nazwa produktu </span>
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <?= $recipe['nazwa'] ?>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="recipe_weight">
-            <table class="no-border">
-                <tr>
-                    <td>
+            <div class="no-border">
+                <div>
+                    <div style="display:inline-block">
                         <span>naważka [kg] / presa [kg]</span>
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <?= number_format($recipe['nawazka'], 2, ',', ' ') ?>
                         / <?= number_format($recipe['presa'], 2, ',', ' ') ?>&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <span>masa netto [kg]</span>
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <?= number_format($recipe['masa_netto'], 2, ',', ' ') ?>&nbsp;&nbsp;&nbsp;
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <span>ile sztuk</span>
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <?= $recipe['ile_sztuk'] ?>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="recipe_weight">
-            <table class="no-border">
-                <tr>
-                    <td>
+            <div class="no-border">
+                <div>
+                    <div style="display:inline-block">
                         <span>suma składników w tym woda [kg]</span>
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <?= number_format($recipe['suma_skladnikow'], 2, ',', ' ') ?>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
-            <table>
-                <tr>
-                    <th>
+            <div>
+                <div>
+                    <div style="display:inline-block">
                         nazwa
-                    </th>
-                    <th>
+                    </div>
+                    <div style="display:inline-block">
                         ilość
-                    </th>
-                    <th>
+                    </div>
+                    <div style="display:inline-block">
                         jednostka
-                    </th>
-                </tr>
+                    </div>
+                </div>
                 <?php foreach ($recipe['skladniki'] as $ingredient): ?>
-                    <tr>
-                        <td>
+                    <div>
+                        <div style="display:inline-block">
                             <?= $ingredient['nazwa'] ?>
-                        </td>
-                        <td>
+                        </div>
+                        <div style="display:inline-block">
                             <?= number_format($ingredient['ilosc'], 2, ',', ' ') ?>
-                        </td>
-                        <td>
+                        </div>
+                        <div style="display:inline-block">
                             <?= $ingredient['jednostka'] ?>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
-                <tr>
-                    <td>
+                <div>
+                    <div style="display:inline-block">
                         woda
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         <?= number_format($recipe['woda'], 2, ',', ' ') ?>
-                    </td>
-                    <td>
+                    </div>
+                    <div style="display:inline-block">
                         l
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
             <?= $recipe['uwagi'] ?>
@@ -113,34 +113,34 @@
     </div>
 <?php endforeach; ?>
 <div class="page_break">
-    <h1>Suma składników potrzebna do wyprodukowania powyższych produktów</h1>
-    <table>
-        <tr>
-            <th>
+    <h1>Suma składników podivzebna do wyprodukowania powyższych produktów</h1>
+    <div>
+        <div>
+            <div style="display:inline-block">
                 nazwa
-            </th>
-            <th>
+            </div>
+            <div style="display:inline-block">
                 ilość
-            </th>
-            <th>
+            </div>
+            <div style="display:inline-block">
                 jednostka
-            </th>
-        </tr>
+            </div>
+        </div>
         <?php foreach ($reportArray as $ingredient): ?>
-            <tr>
-                <td>
+            <div>
+                <div style="display:inline-block">
                     <?= $ingredient['nazwa'] ?>
-                </td>
-                <td>
+                </div>
+                <div style="display:inline-block">
                     <?= number_format($ingredient['suma'], 2, ',', ' ') ?>
-                </td>
-                <td>
+                </div>
+                <div style="display:inline-block">
                     <?= $ingredient['jednostka'] ?>
-                </td>
-            </tr>
+                </div>
+            </div>
 
         <?php endforeach; ?>
-    </table>
+    </div>
 </div>
 </body>
 </html>

@@ -84,7 +84,7 @@ jQuery('.remove-ingredient').click(function () {
         var $this = jQuery(this);
         var $parent = jQuery($this.parents('div')[0]);
         if ($parent.hasClass('last')) {
-            var $formSections = jQuery('.form-section');
+            var $formSections = jQuery('.form-section.with-percent');
             var $len = $formSections.length;
             if ($len >= 2) {
                 jQuery($formSections[$len - 2]).addClass('last');
@@ -135,6 +135,9 @@ jQuery(function () {
     jQuery("#receptury-data_do").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
     jQuery("#skladniki-od_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
     jQuery("#skladniki-do_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#zamowienia-data").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#zamowienia-zrealizowane").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#zamowienia-zafakturowane").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
 });
 
 jQuery('.remove-button').click(function () {
@@ -180,4 +183,23 @@ jQuery('#set-default').click(function(){
         $(this).data('check',true);
         $(this)[0].innerHTML = '<i class="glyphicon glyphicon-transfer"></i> Ustaw domyślne wartości dla wszystkich produktów';
     }
+});
+
+jQuery('#check-all-products').click(function () {
+    if ($(this).data('check')) {
+        var inputs = jQuery('.products');
+        for (var i = 1; i < inputs.length; i++) {
+            inputs[i].checked = true;
+        }
+        $(this).data('check',false);
+        $(this)[0].innerText = 'Odznacz wszystkie produkty';
+    } else {
+        var inputs = jQuery('.products');
+        for (var i = 1; i < inputs.length; i++) {
+            inputs[i].checked = false;
+        }
+        $(this).data('check',true);
+        $(this)[0].innerText = 'Zaznacz wszystkie alergeny';
+    }
+    return false;
 });

@@ -2,7 +2,7 @@
 /* @var $this yii\web\View
  * @var $list
  */
-$this->title = 'Receptury';
+$this->title = 'RecePik';
 ?>
 <div class="site-index">
 

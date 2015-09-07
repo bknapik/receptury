@@ -27,7 +27,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'Receptury',
+                'brandLabel' => 'RecePik',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -52,7 +52,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; Receptury <?= date('Y') ?></p>
+            <p class="pull-left">&copy; RecePik <?= (date('Y') != 2015) ? '2015 - ' : '' ?><?= date('Y') ?></p>
         </div>
     </footer>
 

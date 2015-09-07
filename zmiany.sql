@@ -1,3 +1,1 @@
-ALTER TABLE `skladniki_skladniki` CHANGE `kilogramy` `kilogramy` FLOAT NOT NULL DEFAULT '0';
-
-ALTER TABLE `produkty` CHANGE `ile_sztuk` `ile_sztuk` FLOAT NULL DEFAULT NULL;
+ALTER TABLE `odbiorcy` ADD `nip` INT NULL , ADD `adres` VARCHAR(255) NULL , ADD `nazwa_skrocona` VARCHAR(255) NULL , ADD `uwagi` TEXT NULL , ADD `status` VARCHAR(255) NULL , ADD `telefon` VARCHAR(255) NULL , ADD `email` VARCHAR(255) NULL , ADD `osoby_kontaktowe` VARCHAR(255) NULL ;

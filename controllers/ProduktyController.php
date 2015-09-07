@@ -373,6 +373,7 @@ class ProduktyController extends Controller
                 if ($product_number != '') {
                     $model = Produkty::findOne($key);
                     $recipe = $model->recipe;
+                    $model->ile_sztuk = ($model->ile_sztuk > 0) ? $model->ile_sztuk : 1;
                     $multiplier = $product_number / $model->ile_sztuk;
                     $recipeElement = array();
                     $recipeElement['nazwa'] = $model->nazwa;
@@ -383,7 +384,8 @@ class ProduktyController extends Controller
                     $recipeElement['woda'] = $recipe->woda*$multiplier;
                     $recipeElement['uwagi'] = $recipe->uwagi;
                     $recipeElement['masa_netto'] = $model->masa_netto;
-                    foreach ($recipe->recipeIngredients as $ingredient) {
+                    $ingredients = $recipe->recipeIngredients;
+                    foreach ($ingredients as $ingredient) {
                         $recipeElements = array();
                         $recipeElements['nazwa'] = $ingredient->ingredient->nazwa_skladnika;
                         $recipeElements['ilosc'] = $ingredient->ilosc * $multiplier;

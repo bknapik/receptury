@@ -44,7 +44,7 @@ use yii\widgets\ActiveForm;
                 <?php /** @var $ingredients array() */ ?>
                 <?php /** @var $ingredient_ingredients \app\models\SkladnikiSkladniki */ ?>
                 <?php foreach ($ingredientsForModel as $ifm): ?>
-                    <div class="form-section <?= ($ifm == $ingredientsForModel[count($ingredientsForModel)-1]) ? 'last' : '' ?>">
+                    <div class="form-section with-percent <?= ($ifm == $ingredientsForModel[count($ingredientsForModel)-1]) ? 'last' : '' ?>">
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
@@ -55,7 +55,7 @@ use yii\widgets\ActiveForm;
                     </div>
                 <?php endforeach; ?>
                 <?php if (empty($ingredientsForModel)): ?>
-                    <div class="form-section last">
+                    <div class="form-section with-percent last">
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>

@@ -50,6 +50,9 @@ $this->title = 'Odbiorcy';
                             <a href="?r=odbiorcy/products&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Produkty
                             </a>
+                            <a href="?r=zamowienia/index&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
+                                <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Zamówienia
+                            </a>
                             <a href="index.php?r=produkty/sklad-pdf-customer&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-print"></i> Drukuj skład produktów odbiorcy
                             </a>
