@@ -1,6 +1,5 @@
 <?php
 /**
- * @var $config_list
  * @var $recipesArray
  * @var $reportArray
  */
@@ -13,9 +12,9 @@
 </head>
 <body>
 <div class="header">
-    <?= $config_list[3]->wartosc ?><br/>
+    <?= \app\models\Konfiguracja::trans('nazwa') ?><br/>
     <?= date('d.m.y') ?>
-    <img class="logo" src="uploads/<?= $config_list[2]->wartosc ?>"/>
+    <img class="logo" src="uploads/<?= \app\models\Konfiguracja::trans('logo') ?>"/>
 </div>
 <?php foreach ($recipesArray as $recipe): ?>
     <div class="page_break">
@@ -23,7 +22,7 @@
             <div class="no-border">
                 <div>
                     <div style="display:inline-block">
-                        <span>Nazwa produktu </span>
+                        <span>Nazwa <?= \app\models\Konfiguracja::trans('produktu') ?> </span>
                     </div>
                     <div style="display:inline-block">
                         <?= $recipe['nazwa'] ?>
@@ -60,7 +59,7 @@
             <div class="no-border">
                 <div>
                     <div style="display:inline-block">
-                        <span>suma składników w tym woda [kg]</span>
+                        <span>suma <?= \app\models\Konfiguracja::trans('skladnikow') ?> w tym woda [kg]</span>
                     </div>
                     <div style="display:inline-block">
                         <?= number_format($recipe['suma_skladnikow'], 2, ',', ' ') ?>
@@ -113,7 +112,7 @@
     </div>
 <?php endforeach; ?>
 <div class="page_break">
-    <h1>Suma składników podivzebna do wyprodukowania powyższych produktów</h1>
+    <h1>Suma <?= \app\models\Konfiguracja::trans('skladnikow') ?> potrzebna do wyprodukowania powyższych <?= \app\models\Konfiguracja::trans('produktow') ?></h1>
     <div>
         <div>
             <div style="display:inline-block">

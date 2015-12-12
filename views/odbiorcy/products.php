@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
     <div class="body-content">
 
         <div class="row">
-            <h1>Produkty przypisane do odbiorcy</h1>
+            <h1><?= \app\models\Konfiguracja::trans('produkty') ?> przypisane do odbiorcy</h1>
             <?php $form = ActiveForm::begin() ?>
             <table class="table table-hover table-striped">
                 <thead>
@@ -47,7 +47,7 @@ use yii\widgets\ActiveForm;
             </table>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
-                    <button class="btn small btn-primary" id="check-all-products" data-check="true">Zaznacz wszystkie produkty</button>
+                    <button class="btn small btn-primary" id="check-all-products" data-check="true">Zaznacz wszystkie <?= strtolower(\app\models\Konfiguracja::trans('produkty')) ?></button>
                     <?= HTML::a(Html::button('Anuluj', ['class' => 'btn btn-primary']),'?r=odbiorcy&index') ?>
                     <?= Html::submitButton('Zapisz', ['class' => 'btn btn-primary']) ?>
                 </div>

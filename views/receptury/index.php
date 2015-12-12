@@ -14,7 +14,7 @@ $this->title = 'Receptury';
             <a href="index.php?r=receptury/add" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-plus"></i> Dodaj nową recepturę
             </a>
-            <table class="table table-hover table-striped my-data-table">
+            <table class="table table-hover table-striped my-data-table recipe-table">
                 <thead>
                 <tr>
                     <th>
@@ -22,6 +22,9 @@ $this->title = 'Receptury';
                     </th>
                     <th>
                         Numer
+                    </th>
+                    <th>
+                        Aktywna
                     </th>
                     <th>
                         Opcje
@@ -37,6 +40,14 @@ $this->title = 'Receptury';
                         </td>
                         <td>
                             <?= $receptura->numer ?>
+                        </td>
+                        <td>
+                            <?= (($receptura->data_od == null ||
+                                    $receptura->data_od == '0000-00-00' ||
+                                    $receptura->data_od <= date('Y-m-d')) &&
+                                ($receptura->data_do == null ||
+                                    $receptura->data_do == '0000-00-00' ||
+                                    $receptura->data_do >= date('Y-m-d'))) ? 'TAK' : 'NIE' ?>
                         </td>
                         <td>
                             <a href="?r=receptury/add&id=<?= $receptura->id ?>" class="btn btn-primary btn-xs">

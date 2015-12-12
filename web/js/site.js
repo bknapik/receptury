@@ -110,6 +110,12 @@ jQuery('.remove-ingredient').click(function () {
 });
 
 jQuery(document).ready(function () {
+    var order;
+    if(jQuery('.my-data-table').hasClass('recipe-table')){
+        order = [[ 1, 'asc' ]];
+    } else {
+        order = [[ 0, 'asc' ]];
+    }
     jQuery('.my-data-table').DataTable({
         "language": {
             "paginate": {
@@ -125,7 +131,10 @@ jQuery(document).ready(function () {
             "lengthMenu": "Pokazuj _MENU_ wpisów",
             "search": "Szukaj: ",
             "zeroRecords": "Brak wpisów do pokazania"
-        }
+        },
+        "iDisplayLength": 25,
+        "aLengthMenu": [[ 10, 25, 50, 100, -1 ],[10,25,50,100,"Wszystkie"]],
+        "order": order
     });
 });
 jQuery(function () {

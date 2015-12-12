@@ -2,7 +2,7 @@
 /** @var $this yii\web\View
  * @var $list array Skladniki
  */
-$this->title = 'Składniki';
+$this->title = \app\models\Konfiguracja::trans('skladniki');
 ?>
 <div class="site-index">
 
@@ -10,9 +10,9 @@ $this->title = 'Składniki';
     <div class="body-content">
 
         <div class="row">
-            <h1>Składniki</h1>
+            <h1><?= \app\models\Konfiguracja::trans('skladniki') ?></h1>
             <a href="index.php?r=skladniki/add" class="btn btn-primary pull-right add-button">
-                <i class="glyphicon glyphicon-plus"></i> Dodaj nowy składnik
+                <i class="glyphicon glyphicon-plus"></i> Dodaj nowy <?= \app\models\Konfiguracja::trans('skladnik') ?>
             </a>
             <table class="table table-hover table-striped my-data-table">
                 <thead>

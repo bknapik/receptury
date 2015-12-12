@@ -48,13 +48,13 @@ $this->title = 'Odbiorcy';
                                 <i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Edytuj
                             </a>
                             <a href="?r=odbiorcy/products&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
-                                <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Produkty
+                                <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;<?= \app\models\Konfiguracja::trans('produkty') ?>
                             </a>
                             <a href="?r=zamowienia/index&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
                                 <i class="glyphicon glyphicon-list"></i>&nbsp;&nbsp;Zamówienia
                             </a>
                             <a href="index.php?r=produkty/sklad-pdf-customer&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs">
-                                <i class="glyphicon glyphicon-print"></i> Drukuj skład produktów odbiorcy
+                                <i class="glyphicon glyphicon-print"></i> Drukuj skład <?= \app\models\Konfiguracja::trans('produktow') ?> odbiorcy
                             </a>
                             <a href="?r=odbiorcy/del&id=<?= $odbiorca->id ?>" class="btn btn-primary btn-xs remove-button">
                                 <i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Usuń

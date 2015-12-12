@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
                 <button class="btn small btn-primary" id="check-all-allergens" data-check="true">Zaznacz wszystkie alergeny</button>
             </div>
             <div id="ingredients">
-                <h2>Składniki receptury
+                <h2><?= \app\models\Konfiguracja::trans('skladniki') ?> receptury
                     <button class="btn btn-primary add-ingredient" type="button">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
@@ -46,7 +46,7 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($ifm, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?= $form->field($ifm, 'skladnik_id')->label(ucfirst(\app\models\Konfiguracja::trans('skladnik')))->dropDownList($ingredients) ?>
                         <?=
                         $form->field($ifm, 'jednostka')->label('Jednostka')->dropDownList([
                             'kg' => 'kilogramy',
@@ -64,7 +64,7 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($recipe_ingredients, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?= $form->field($recipe_ingredients, 'skladnik_id')->label( ucfirst(\app\models\Konfiguracja::trans('skladnik')))->dropDownList($ingredients) ?>
                         <?=
                         $form->field($recipe_ingredients, 'jednostka')->label('Jednostka')->dropDownList([
                             'kg' => 'kilogramy',
@@ -79,7 +79,7 @@ use yii\widgets\ActiveForm;
                 <?php endif; ?>
             </div>
             <button class="btn btn-primary add-ingredient" type="button">
-                <i class="glyphicon glyphicon-plus"></i> Dodaj następny składnik
+                <i class="glyphicon glyphicon-plus"></i> Dodaj następny <?= \app\models\Konfiguracja::trans('skladnik') ?>
             </button>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">

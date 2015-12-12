@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\Konfiguracja;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -37,14 +38,14 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Składniki', 'url' => ['/skladniki/index']],
-                ['label' => 'Receptury', 'url' => ['/receptury/index']],
-                ['label' => 'Produkty', 'url' => ['/produkty/index']],
-                ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
+                ['label' => \app\models\Konfiguracja::trans('skladniki'), 'url' => ['/skladniki/index']],
+                ['label' => \app\models\Konfiguracja::trans('receptury'), 'url' => ['/receptury/index']],
+                ['label' => \app\models\Konfiguracja::trans('produkty'), 'url' => ['/produkty/index']],
+                ['label' => \app\models\Konfiguracja::trans('odbiorcy'), 'url' => ['/odbiorcy/index']],
                 ['label' => 'Inne', 'items' => [
-                    ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
-                    ['label' => 'Stawki VAT', 'url' => ['/stawki/index']],
-                    ['label' => 'Alergeny', 'url' => ['/alergeny/index']],
+                    ['label' => \app\models\Konfiguracja::trans('funkcje'), 'url' => ['/funkcje/index']],
+                    ['label' => \app\models\Konfiguracja::trans('stawki'), 'url' => ['/stawki/index']],
+                    ['label' => \app\models\Konfiguracja::trans('alergeny_'), 'url' => ['/alergeny/index']],
                 ]],
                 ['label' => \Yii::$app->user->getIdentity()->getName(), 'items' => [
                     ['label' => 'Profil', 'url' => ['/auth/profile/view']],
@@ -57,14 +58,14 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Składniki', 'url' => ['/skladniki/index']],
-                ['label' => 'Receptury', 'url' => ['/receptury/index']],
-                ['label' => 'Produkty', 'url' => ['/produkty/index']],
-                ['label' => 'Odbiorcy', 'url' => ['/odbiorcy/index']],
+                ['label' => \app\models\Konfiguracja::trans('skladniki'), 'url' => ['/skladniki/index']],
+                ['label' => \app\models\Konfiguracja::trans('receptury'), 'url' => ['/receptury/index']],
+                ['label' => \app\models\Konfiguracja::trans('produkty'), 'url' => ['/produkty/index']],
+                ['label' => \app\models\Konfiguracja::trans('odbiorcy'), 'url' => ['/odbiorcy/index']],
                 ['label' => 'Inne', 'items' => [
-                    ['label' => 'Funkcje technologiczne', 'url' => ['/funkcje/index']],
-                    ['label' => 'Stawki VAT', 'url' => ['/stawki/index']],
-                    ['label' => 'Alergeny', 'url' => ['/alergeny/index']],
+                    ['label' => \app\models\Konfiguracja::trans('funkcje'), 'url' => ['/funkcje/index']],
+                    ['label' => \app\models\Konfiguracja::trans('stawki'), 'url' => ['/stawki/index']],
+                    ['label' => \app\models\Konfiguracja::trans('alergeny_'), 'url' => ['/alergeny/index']],
                 ]],
                 ['label' => \Yii::$app->user->getIdentity()->getName(), 'items' => [
                     ['label' => 'Profil', 'url' => ['/auth/profile/view']],

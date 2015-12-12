@@ -17,6 +17,8 @@ use yii\web\UploadedFile;
  */
 class Konfiguracja extends ActiveRecord {
 
+    public static $translateArray = null;
+
     /**
      * Saves company logo if edited key is 'logo'
      */
@@ -30,5 +32,31 @@ class Konfiguracja extends ActiveRecord {
                 $this->wartosc->saveAs('uploads/' . $this->wartosc->baseName . '.' . $this->wartosc->extension);
             }
         }
+    }
+
+    /**
+     * Retrieves config value with specific key
+     * @param string $key key of config value
+     *
+     * @return static $configValue config object
+     */
+    public function getByKey($key){
+        $configValue = Konfiguracja::findOne($key);
+        return $configValue;
+    }
+
+    /**
+     * @param $text
+     * @return mixed
+     */
+    public static function trans($text){
+        if(self::$translateArray == null){
+            $list = Konfiguracja::find()->all();
+            self::$translateArray = array();
+            foreach($list as $value){
+                self::$translateArray[$value->klucz] = $value->wartosc;
+            }
+        }
+        return (isset(self::$translateArray[$text])) ? self::$translateArray[$text] : $text;
     }
 } 

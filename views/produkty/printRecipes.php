@@ -2,7 +2,7 @@
 /* @var $this yii\web\View
  * @var $list
  */
-$this->title = 'Produkty';
+$this->title = \app\models\Konfiguracja::trans('produkty');
 ?>
 <div class="site-index">
 
@@ -10,12 +10,12 @@ $this->title = 'Produkty';
     <div class="body-content">
 
         <div class="row">
-            <h1>Produkty</h1>
+            <h1><?= \app\models\Konfiguracja::trans('produkty') ?></h1>
             <a class="btn btn-primary pull-right add-button" onclick="document.getElementById('choose').submit()">
                 <i class="glyphicon glyphicon-print"></i> Drukuj receptury wybranych
             </a>
             <a class="btn btn-primary pull-right add-button" id="set-default" data-check="true">
-                <i class="glyphicon glyphicon-transfer"></i> Ustaw domyślne wartości dla wszystkich produktów
+                <i class="glyphicon glyphicon-transfer"></i> Ustaw domyślne wartości dla wszystkich <?= \app\models\Konfiguracja::trans('produktow') ?>
             </a>
 
             <form method="POST" action="index.php?r=produkty/print-recipes-pdf" id="choose">

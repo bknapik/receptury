@@ -13,12 +13,12 @@
 </head>
 <body>
 <div class="header">
-    <?= $config_list[3]->wartosc ?><br/>
-    <?= $config_list[0]->wartosc ?>
-    <img class="logo" src="uploads/<?= $config_list[2]->wartosc ?>"/>
+    <?= \app\models\Konfiguracja::trans('nazwa') ?><br/>
+    <?= \app\models\Konfiguracja::trans('adres') ?>
+    <img class="logo" src="uploads/<?= \app\models\Konfiguracja::trans('logo') ?>"/>
 </div>
 <div class="first-page-logo">
-    <img class="logo-big" src="uploads/<?= $config_list[2]->wartosc ?>"/>
+    <img class="logo-big" src="uploads/<?= \app\models\Konfiguracja::trans('logo') ?>"/>
 </div>
 <?php /** @var $produkt \app\models\Produkty */
 foreach ($list as $produkt):
@@ -37,7 +37,7 @@ foreach ($list as $produkt):
             <table class="no-border">
                 <tr>
                     <td>
-                        <span>Nazwa produktu </span>
+                        <span>Nazwa <?= \app\models\Konfiguracja::trans('produktu') ?> </span>
                     </td>
                     <td>
                         <?= $produkt->nazwa ?>
@@ -121,11 +121,11 @@ foreach ($list as $produkt):
 <?php endforeach; ?>
 <div class="footer bigger">
     <p>
-        Produkty mogą dodatkowo zawierać alergen:
+        <?= \app\models\Konfiguracja::trans('produkty') ?> mogą dodatkowo zawierać alergen:
         <?php foreach($allergens as $allergen): ?>
             <?= $allergen->nazwa_bez ?>
             <strong><?= $allergen->nazwa_z ?></strong>,
         <?php endforeach; ?>
-        <strong><?= $config_list[1]->wartosc ?></strong>
+        <strong><?= \app\models\Konfiguracja::trans('alergeny') ?></strong>
     </p>
 </div>

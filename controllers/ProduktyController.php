@@ -96,8 +96,8 @@ class ProduktyController extends Controller
             }
         }
         $recipeModel = new Receptury();
-        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR data_od <= NOW())
-                                                    && (data_do IS NULL OR data_do >= NOW())');
+        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR OR data_od="0000-00-00" OR data_od <= NOW())
+                                                    && (data_do IS NULL OR data_do="0000-00-00" OR data_do >= NOW())');
         $rateModel = new StawkiVat();
         $vat_arr = $rateModel->getAssocArr();
         return $this->render('add', array(
@@ -144,8 +144,8 @@ class ProduktyController extends Controller
             }
         }
         $recipeModel = new Receptury();
-        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR data_od <= NOW())
-                                                    && (data_do IS NULL OR data_do >= NOW())');
+        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR data_od="0000-00-00" OR data_od <= NOW())
+                                                    && (data_do IS NULL OR data_do="0000-00-00" OR data_do >= NOW())');
         $rateModel = new StawkiVat();
         $vat_arr = $rateModel->getAssocArr();
         return $this->render('add', array(
@@ -264,7 +264,6 @@ class ProduktyController extends Controller
         } else {
             $list = Produkty::find()->where('id IN (' . $which . ')')->orderBy('sortowanie ASC')->all();
         }
-        $config_list = Konfiguracja::find()->all();
         $allergensArray = array();
         foreach ($list as $item) {
             $allergensForModel = RecepturyAlergeny::find()->where('receptura_id=' . $item->receptura_id)->all();
@@ -279,7 +278,6 @@ class ProduktyController extends Controller
         }
 
         $html = $this->renderPartial('ingredientsPdf', array(
-            'config_list' => $config_list,
             'list' => $list,
             'allergens' => $allergens,
         ));
@@ -333,10 +331,7 @@ class ProduktyController extends Controller
         $productId = \Yii::$app->request->get('id');
         $model = Produkty::findOne($productId);
 
-        $config_list = Konfiguracja::find()->all();
-
         $html = $this->renderPartial('cards', array(
-            'config_list' => $config_list,
             'model' => $model,
         ));
         //echo $html;die;
@@ -403,10 +398,8 @@ class ProduktyController extends Controller
                     $recipesArray[] = $recipeElement;
                 }
             }
-            $config_list = Konfiguracja::find()->all();
 
             $html = $this->renderPartial('recipesPdf', array(
-                'config_list' => $config_list,
                 'recipesArray' => $recipesArray,
                 'reportArray' => $reportArray,
             ));
@@ -426,14 +419,13 @@ class ProduktyController extends Controller
      */
     public function makeHeader()
     {
-        $config_list = Konfiguracja::find()->all();
         return '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                     <link href="css/print.css" rel="stylesheet">
                     </head><body>
                     <div class="header">
-                        ' . $config_list[3]->wartosc . '<br/>
-                        ' . $config_list[0]->wartosc . '
-                        <img class="logo" src="uploads/' . $config_list[2]->wartosc . '" />
+                        ' . Konfiguracja::trans('nazwa') . '<br/>
+                        ' . Konfiguracja::trans('adres') . '
+                        <img class="logo" src="uploads/' . Konfiguracja::trans('logo') . '" />
                     </div>';
     }
 

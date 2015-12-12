@@ -4,7 +4,7 @@
  * @var $functions array
  */
 
-$this->title = 'Składniki';
+$this->title = \app\models\Konfiguracja::trans('skladniki');
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -15,12 +15,12 @@ use yii\widgets\ActiveForm;
     <div class="body-content">
 
         <div class="row">
-            <h1>Dodaj/edytuj składnik</h1>
+            <h1>Dodaj/edytuj <?= \app\models\Konfiguracja::trans('skladnik') ?></h1>
             <?php
             $form = ActiveForm::begin([
                 'options' => ['class' => 'form-horizontal']
             ]) ?>
-            <?= $form->field($model, 'nazwa_skladnika')->label('Nazwa składnika')->input('text',['required' => 'required']) ?>
+            <?= $form->field($model, 'nazwa_skladnika')->label('Nazwa '.\app\models\Konfiguracja::trans('skladnika') )->input('text',['required' => 'required']) ?>
             <?= $form->field($model, 'nazwa_do_skladu')->label('Nazwa do składu') ?>
             <?= $form->field($model, 'alergen')->label('Alergen') ?>
             <?= $form->field($model, 'jednostka')->label('Jednostka')->dropDownList(['kg' => 'kilogramy','szt'=>'sztuki','l'=>'litry']) ?>
@@ -32,10 +32,10 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'tluszcz')->label('Tłuszcz na 100g') ?>
             <?= $form->field($model, 'weglowodany')->label('Węglowodany na 100g') ?>
             <?= $form->field($model, 'cukier')->label('Cukier na 100g') ?>
-            <?= $form->field($model, 'od_kiedy')->label('Od kiedy składnik dostępny') ?>
-            <?= $form->field($model, 'do_kiedy')->label('Do kiedy składnik dostępny') ?>
+            <?= $form->field($model, 'od_kiedy')->label('Od kiedy '.\app\models\Konfiguracja::trans('skladnik').' dostępny') ?>
+            <?= $form->field($model, 'do_kiedy')->label('Do kiedy '.\app\models\Konfiguracja::trans('skladnik').' dostępny') ?>
             <div id="ingredients">
-                <h2>Składniki składnika
+                <h2><?= \app\models\Konfiguracja::trans('skladniki') ?> <?= \app\models\Konfiguracja::trans('skladnika') ?>
                     <button class="btn btn-primary add-ingredient" type="button">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($ifm, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?= $form->field($ifm, 'skladnik_id')->label(\app\models\Konfiguracja::trans('skladniki') )->dropDownList($ingredients) ?>
                         <?= $form->field($ifm, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
@@ -59,7 +59,7 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($ingredient_ingredients, 'skladnik_id')->label('Składnik')->dropDownList($ingredients) ?>
+                        <?= $form->field($ingredient_ingredients, 'skladnik_id')->label( \app\models\Konfiguracja::trans('skladnik'))->dropDownList($ingredients) ?>
                         <?= $form->field($ingredient_ingredients, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ingredient_ingredients, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ingredient_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
@@ -67,7 +67,7 @@ use yii\widgets\ActiveForm;
                 <?php endif; ?>
             </div>
             <button class="btn btn-primary add-ingredient" type="button">
-                <i class="glyphicon glyphicon-plus"></i> Dodaj następny składnik
+                <i class="glyphicon glyphicon-plus"></i> Dodaj następny <?= \app\models\Konfiguracja::trans('skladnik') ?>
             </button>
 
             <div class="form-group">

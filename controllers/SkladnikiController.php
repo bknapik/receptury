@@ -13,6 +13,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Skladniki;
 use app\models\SkladnikiSkladniki;
+use app\models\Konfiguracja;
 use yii\filters\AccessControl;
 
 /**
@@ -50,7 +51,8 @@ class SkladnikiController extends Controller
     {
         $model = new Skladniki();
         $list = $model->find()->all();
-        return $this->render('index', array('list' => $list));
+        $configObject = new Konfiguracja();
+        return $this->render('index', array('list' => $list, 'configObject' => $configObject));
     }
 
     /**

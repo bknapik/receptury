@@ -3,7 +3,7 @@
  * @var $recipes
  * @var $vat
  */
-$this->title = 'Produkty';
+$this->title = \app\models\Konfiguracja::trans('produkty');
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     <div class="body-content">
 
         <div class="row">
-            <h1>Dodaj/edytuj produkt</h1>
+            <h1>Dodaj/edytuj <?= \app\models\Konfiguracja::trans('produkt') ?></h1>
             <?php
             $form = ActiveForm::begin([
             'options' => ['enctype' => 'multipart/form-data', 'class' => 'form-horizontal'],
@@ -27,8 +27,8 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'cena_hurt_netto')->label('Cena hurtowa netto')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'cena_hurt_brutto')->label('Cena hurtowa brutto')->input('number',['step' => 0.01, 'min' => 0, 'minValue' => 0]) ?>
             <?= $form->field($model, 'vat_id')->label('Stawka VAT')->dropDownList($vat) ?>
-            <?= $form->field($model, 'data_od')->label('Data od której obowiązuje produkt') ?>
-            <?= $form->field($model, 'data_do')->label('Data do której obowiązuje produkt') ?>
+            <?= $form->field($model, 'data_od')->label('Data od której obowiązuje '. \app\models\Konfiguracja::trans('produkt')) ?>
+            <?= $form->field($model, 'data_do')->label('Data do której obowiązuje '. \app\models\Konfiguracja::trans('produkt')) ?>
             <?php if($model->grafika != '' && $model->grafika != null): ?>
                 <img src="uploads/<?= $model->grafika ?>"/>
                 <?= $form->field($model,'file_rem')->checkbox(array('label'=>'Usuń grafikę')) ?>

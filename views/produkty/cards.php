@@ -86,8 +86,8 @@ endforeach; ?>
         <tr>
             <?php for ($i = 0; $i < $break; $i++): ?>
                 <td>
-                    <?= $config_list[3]->wartosc ?><br/>
-                    <?= $config_list[0]->wartosc ?><br/>
+                    <?= \app\models\Konfiguracja::trans('nazwa') ?><br/>
+                    <?= \app\models\Konfiguracja::trans('adres') ?><br/>
                     <?= $model->nazwa ?><br/>
                     <span class="mass">masa netto <?= $model->getFormatted('masa_netto') ?> kg</span><br/>
                     <?= $html; ?>

@@ -10,9 +10,9 @@ $this->title = 'Produkty';
     <div class="body-content">
 
         <div class="row">
-            <h1>Produkty</h1>
+            <h1><?= \app\models\Konfiguracja::trans('produkty') ?></h1>
             <a href="index.php?r=produkty/add" class="btn btn-primary pull-right add-button">
-                <i class="glyphicon glyphicon-plus"></i> Dodaj nowy produkt
+                <i class="glyphicon glyphicon-plus"></i> Dodaj nowy <?= \app\models\Konfiguracja::trans('produkt') ?>
             </a>
             <a href="index.php?r=produkty/ceny-pdf" class="btn btn-primary pull-right add-button">
                 <i class="glyphicon glyphicon-print"></i> Drukuj ceny hurt detal
