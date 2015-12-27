@@ -79,13 +79,13 @@ class ProduktyController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = \Yii::$app->request->post();
-            $post['Produkty']['masa_netto'] = str_replace(',','.',$post['Produkty']['masa_netto']);
-            $post['Produkty']['cena_det_netto'] = str_replace(',','.',$post['Produkty']['cena_det_netto']);
-            $post['Produkty']['cena_det_brutto'] = str_replace(',','.',$post['Produkty']['cena_det_brutto']);
-            $post['Produkty']['cena_hurt_netto'] = str_replace(',','.',$post['Produkty']['cena_hurt_netto']);
-            $post['Produkty']['cena_hurt_brutto'] = str_replace(',','.',$post['Produkty']['cena_hurt_brutto']);
-            $post['Produkty']['nawazka'] = str_replace(',','.',$post['Produkty']['nawazka']);
-            $post['Produkty']['presa'] = str_replace(',','.',$post['Produkty']['presa']);
+            $post['Produkty']['masa_netto'] = str_replace(',', '.', $post['Produkty']['masa_netto']);
+            $post['Produkty']['cena_det_netto'] = str_replace(',', '.', $post['Produkty']['cena_det_netto']);
+            $post['Produkty']['cena_det_brutto'] = str_replace(',', '.', $post['Produkty']['cena_det_brutto']);
+            $post['Produkty']['cena_hurt_netto'] = str_replace(',', '.', $post['Produkty']['cena_hurt_netto']);
+            $post['Produkty']['cena_hurt_brutto'] = str_replace(',', '.', $post['Produkty']['cena_hurt_brutto']);
+            $post['Produkty']['nawazka'] = str_replace(',', '.', $post['Produkty']['nawazka']);
+            $post['Produkty']['presa'] = str_replace(',', '.', $post['Produkty']['presa']);
             $grafika = $model->grafika;
             $ret = $model->load($post, 'Produkty');
             $model->grafika = $grafika;
@@ -96,7 +96,7 @@ class ProduktyController extends Controller
             }
         }
         $recipeModel = new Receptury();
-        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR OR data_od="0000-00-00" OR data_od <= NOW())
+        $recipes_arr = $recipeModel->getAssocArr('(data_od IS NULL OR data_od="0000-00-00" OR data_od <= NOW())
                                                     && (data_do IS NULL OR data_do="0000-00-00" OR data_do >= NOW())');
         $rateModel = new StawkiVat();
         $vat_arr = $rateModel->getAssocArr();
@@ -127,13 +127,13 @@ class ProduktyController extends Controller
         }
         if (\Yii::$app->request->isPost) {
             $post = \Yii::$app->request->post();
-            $post['Produkty']['masa_netto'] = str_replace(',','.',$post['Produkty']['masa_netto']);
-            $post['Produkty']['cena_det_netto'] = str_replace(',','.',$post['Produkty']['cena_det_netto']);
-            $post['Produkty']['cena_det_brutto'] = str_replace(',','.',$post['Produkty']['cena_det_brutto']);
-            $post['Produkty']['cena_hurt_netto'] = str_replace(',','.',$post['Produkty']['cena_hurt_netto']);
-            $post['Produkty']['cena_hurt_brutto'] = str_replace(',','.',$post['Produkty']['cena_hurt_brutto']);
-            $post['Produkty']['nawazka'] = str_replace(',','.',$post['Produkty']['nawazka']);
-            $post['Produkty']['presa'] = str_replace(',','.',$post['Produkty']['presa']);
+            $post['Produkty']['masa_netto'] = str_replace(',', '.', $post['Produkty']['masa_netto']);
+            $post['Produkty']['cena_det_netto'] = str_replace(',', '.', $post['Produkty']['cena_det_netto']);
+            $post['Produkty']['cena_det_brutto'] = str_replace(',', '.', $post['Produkty']['cena_det_brutto']);
+            $post['Produkty']['cena_hurt_netto'] = str_replace(',', '.', $post['Produkty']['cena_hurt_netto']);
+            $post['Produkty']['cena_hurt_brutto'] = str_replace(',', '.', $post['Produkty']['cena_hurt_brutto']);
+            $post['Produkty']['nawazka'] = str_replace(',', '.', $post['Produkty']['nawazka']);
+            $post['Produkty']['presa'] = str_replace(',', '.', $post['Produkty']['presa']);
             $grafika = $model->grafika;
             $ret = $model->load($post, 'Produkty');
             $model->grafika = $grafika;
@@ -361,6 +361,16 @@ class ProduktyController extends Controller
     public function actionPrintRecipesPdf()
     {
         if (\Yii::$app->request->isPost) {
+            require('../vendor/fpdf/fpdf.php');
+            require('../vendor/fpdf/pdf.php');
+
+            $pdf = new \PDF();
+            $pdf->AliasNbPages();
+            $pdf->logo = "uploads/" . Konfiguracja::trans('logo');
+            $pdf->name = Konfiguracja::trans('nazwa');
+            $pdf->adres = date('d.m.y');
+            $pdf->AddPage();
+            $pdf->SetFont('Arial', '', 12);
             $post = Yii::$app->request->post();
             $recipesArray = array();
             $reportArray = array();
@@ -374,9 +384,9 @@ class ProduktyController extends Controller
                     $recipeElement['nazwa'] = $model->nazwa;
                     $recipeElement['nawazka'] = $model->nawazka;
                     $recipeElement['ile_sztuk'] = $product_number;
-                    $recipeElement['presa'] = $model->presa*$multiplier;
-                    $recipeElement['suma_skladnikow'] = $recipe->woda*$multiplier;
-                    $recipeElement['woda'] = $recipe->woda*$multiplier;
+                    $recipeElement['presa'] = $model->presa * $multiplier;
+                    $recipeElement['suma_skladnikow'] = $recipe->woda * $multiplier;
+                    $recipeElement['woda'] = $recipe->woda * $multiplier;
                     $recipeElement['uwagi'] = $recipe->uwagi;
                     $recipeElement['masa_netto'] = $model->masa_netto;
                     $ingredients = $recipe->recipeIngredients;
@@ -385,31 +395,45 @@ class ProduktyController extends Controller
                         $recipeElements['nazwa'] = $ingredient->ingredient->nazwa_skladnika;
                         $recipeElements['ilosc'] = $ingredient->ilosc * $multiplier;
                         $recipeElements['jednostka'] = $ingredient->jednostka;
-                        if(!isset($reportArray[$ingredient->skladnik_id])){
+                        if (!isset($reportArray[$ingredient->skladnik_id])) {
                             $reportArray[$ingredient->skladnik_id] = ['suma' => 0,
                                 'nazwa' => $ingredient->ingredient->nazwa_skladnika,
                                 'jednostka' => $recipeElements['jednostka']
                             ];
                         }
                         $reportArray[$ingredient->skladnik_id]['suma'] += $ingredient->ilosc * $multiplier;
-                        $recipeElement['suma_skladnikow'] += $ingredient->ilosc_przeliczona*$multiplier;
+                        $recipeElement['suma_skladnikow'] += $ingredient->ilosc_przeliczona * $multiplier;
                         $recipeElement['skladniki'][] = $recipeElements;
                     }
                     $recipesArray[] = $recipeElement;
                 }
             }
+            $header = array('nazwa', 'ilość', 'jednostka');
+            foreach ($recipesArray as $recipe) {
+                $data = array();
+                foreach ($recipe['skladniki'] as $ingredient) {
+                    $data[] = array(
+                        $ingredient['nazwa'],
+                        number_format($ingredient['ilosc'], 2, ',', ' '),
+                        $ingredient['jednostka']);
+                }
+                $pdf->Table($header, $data);
+                $pdf->Ln(20);
+            }
+//
+//            $html = $this->renderPartial('recipesPdf', array(
+//                'recipesArray' => $recipesArray,
+//                'reportArray' => $reportArray,
+//            ));
+////            echo $html;die;
+//            /** @noinspection PhpIncludeInspection */
+//            require_once("../vendor/dompdf/dompdf_config.inc.php");
+//            $dompdf = new \DOMPDF();
+//            $dompdf->load_html($html);
+//            $dompdf->render();
+//            $dompdf->stream("receptury".date('d-m-y').".pdf");
 
-            $html = $this->renderPartial('recipesPdf', array(
-                'recipesArray' => $recipesArray,
-                'reportArray' => $reportArray,
-            ));
-//            echo $html;die;
-            /** @noinspection PhpIncludeInspection */
-            require_once("../vendor/dompdf/dompdf_config.inc.php");
-            $dompdf = new \DOMPDF();
-            $dompdf->load_html($html);
-            $dompdf->render();
-            $dompdf->stream("receptury".date('d-m-y').".pdf");
+//            $pdf->Output();
         }
     }
 
@@ -457,4 +481,4 @@ class ProduktyController extends Controller
         return '<div class="footer">' . date('Y-m-d') . '</div></tbody>
                 </table></body></html>';
     }
-} 
+}
