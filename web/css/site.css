@@ -152,3 +152,7 @@ label{
     margin-right: 0;
     margin-left: 0;
 }
+
+td:last-child {
+    min-width: 130px;
+}

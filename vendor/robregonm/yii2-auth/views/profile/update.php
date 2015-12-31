@@ -10,7 +10,7 @@ use auth\models\User;
  * @var yii\widgets\ActiveForm $form
  */
 
-$this->title = \Yii::t('auth.user', 'Aktualizuj profil');
+$this->title = \Yii::t('auth.user', 'Edytuj profil');
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <div class="panel panel-primary">
@@ -41,7 +41,7 @@ $this->title = \Yii::t('auth.user', 'Aktualizuj profil');
 
 	</div>
 	<div class="panel-footer">
-		<?= Html::submitButton(Yii::t('auth.user', $model->isNewRecord ? 'Stwórz' : 'Aktualizuj'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= Html::submitButton(Yii::t('auth.user', $model->isNewRecord ? 'Stwórz' : 'Edytuj'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	</div>
 </div>
 <?php ActiveForm::end(); ?>

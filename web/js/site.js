@@ -132,7 +132,7 @@ jQuery(document).ready(function () {
             "search": "Szukaj: ",
             "zeroRecords": "Brak wpisów do pokazania"
         },
-        "iDisplayLength": 25,
+        "iDisplayLength": defaultNumberOfItems,
         "aLengthMenu": [[ 10, 25, 50, 100, -1 ],[10,25,50,100,"Wszystkie"]],
         "order": order
     });

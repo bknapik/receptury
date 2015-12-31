@@ -114,7 +114,7 @@ class ActionColumn extends Column
         if (!isset($this->buttons['update'])) {
             $this->buttons['update'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                    'title' => Yii::t('yii', 'Aktualizuj'),
+                    'title' => Yii::t('yii', 'Edytuj'),
                     'data-pjax' => '0',
                 ]);
             };

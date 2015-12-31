@@ -7,7 +7,7 @@ use yii\helpers\Html;
  * @var auth\models\User $model
  */
 
-$this->title = Yii::t('auth.user', 'Aktualizuj użytkownika') . ': ' . $model->username;
+$this->title = Yii::t('auth.user', 'Edytuj użytkownika') . ': ' . $model->username;
 ?>
 <div class="user-update">
 

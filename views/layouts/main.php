@@ -93,6 +93,9 @@ AppAsset::register($this);
         <p class="pull-left">&copy; RecePik <?= (date('Y') != 2015) ? '2015 - ' : '' ?><?= date('Y') ?></p>
     </div>
 </footer>
+<script>
+    var defaultNumberOfItems = <?= Konfiguracja::trans('liczba_wpisow') ?>
+</script>
 
 <?php $this->endBody() ?>
 </body>

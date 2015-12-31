@@ -130,3 +130,7 @@ span.mass{
 #pageHeader{
     position: running(pageHeader);
 }
+
+td:last-child {
+    min-width: 0px;
+}

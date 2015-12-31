@@ -29,7 +29,7 @@ use auth\models\User;
 	]) ?>
 
 	<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? Yii::t('auth.user', 'Stwórz') : Yii::t('auth.user', 'Aktualizuj'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			<?= Html::submitButton($model->isNewRecord ? Yii::t('auth.user', 'Stwórz') : Yii::t('auth.user', 'Edytuj'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

@@ -15,7 +15,7 @@ $this->title = $model->username;
 	<h1>Widok użytkownika: '<?= Html::encode($this->title) ?>'</h1>
 
 	<p>
-		<?= Html::a(Yii::t('auth.user', 'Aktualizuj'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		<?= Html::a(Yii::t('auth.user', 'Edytuj'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 		<?php echo Html::a(Yii::t('auth.user', 'Usuń'), ['delete', 'id' => $model->id], [
 			'class' => 'btn btn-danger',
 			'data-confirm' => Yii::t('app', 'Czy jesteś pewny, że chcesz usunąć tego użytkownika?'),
