@@ -67,6 +67,10 @@ protected $LayoutMode;         // layout display mode
 protected $metadata;           // document properties
 protected $PDFVersion;         // PDF version number
 
+public $logo;
+    public $name;
+    public $adres;
+
 /*******************************************************************************
 *                               Public methods                                 *
 *******************************************************************************/
