@@ -418,11 +418,12 @@ class ProduktyController extends Controller
                 $pdf->Ln();
                 $pdf->Write(10,'naważka [kg] / presa [kg]: ');
                 $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10,number_format($recipe['nawazka'], 2, ',', ' ').'/'.number_format($recipe['presa'], 2, ',', ' '));
+                $pdf->Write(10,number_format($recipe['nawazka'], 4, ',', ' ').'/'.number_format($recipe['presa'], 4, ',', ' '));
                 $pdf->SetFont('DejaVu','B',12);
-                $pdf->Write(10,'          masa netto [kg]: ');
+                $pdf->Ln();
+                $pdf->Write(10,'masa netto [kg]: ');
                 $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10, number_format($recipe['masa_netto'], 2, ',', ' ').'           ');
+                $pdf->Write(10, number_format($recipe['masa_netto'], 4, ',', ' ').'        ');
                 $pdf->SetFont('DejaVu','B',12);
                 $pdf->Write(10,'ile sztuk: ');
                 $pdf->SetFont('DejaVu','',12);
