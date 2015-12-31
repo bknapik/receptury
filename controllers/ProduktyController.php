@@ -473,8 +473,7 @@ class ProduktyController extends Controller
 //            $dompdf->render();
 //            $dompdf->stream("receptury".date('d-m-y').".pdf");
 
-//            $pdf->Output("receptury".date('d-m-y').".pdf",'D');
-            $pdf->Output();
+            $pdf->Output("receptury".date('d-m-y').".pdf",'D');
         }
     }
 
