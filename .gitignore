@@ -15,6 +15,12 @@ Thumbs.db
 # composer vendor dir
 #/vendor
 
+/yii.bat
+/yii
+/receptury (15).sql
+/receptury (14).sql
+/config/db.php
+/vendor/dompdf/lib/fonts/log.htm
 # composer itself is not needed
 #composer.phar
 
