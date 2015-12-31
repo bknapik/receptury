@@ -360,17 +360,20 @@ class ProduktyController extends Controller
      */
     public function actionPrintRecipesPdf()
     {
+        setlocale(LC_ALL, 'pl_PL');
         if (\Yii::$app->request->isPost) {
-            require('../vendor/fpdf/fpdf.php');
-            require('../vendor/fpdf/pdf.php');
-
-            $pdf = new \PDF();
-            $pdf->AliasNbPages();
-            $pdf->logo = "uploads/" . Konfiguracja::trans('logo');
-            $pdf->name = Konfiguracja::trans('nazwa');
-            $pdf->adres = date('d.m.y');
-            $pdf->AddPage();
-            $pdf->SetFont('Arial', '', 12);
+//            require('../vendor/fpdf/tfpdf.php');
+//            require('../vendor/fpdf/pdf.php');
+//
+//            $pdf = new \PDF();
+//            $pdf->AliasNbPages();
+//            $pdf->logo = "uploads/" . Konfiguracja::trans('logo');
+//            $pdf->name = Konfiguracja::trans('nazwa');
+//            $pdf->adres = date('d.m.y');
+//            $pdf->AddPage();
+//            $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
+//            $pdf->AddFont('DejaVu','B','DejaVuSansCondensed-Bold.ttf',true);
+//            $pdf->SetFont('DejaVu','',12);
             $post = Yii::$app->request->post();
             $recipesArray = array();
             $reportArray = array();
@@ -408,30 +411,44 @@ class ProduktyController extends Controller
                     $recipesArray[] = $recipeElement;
                 }
             }
-            $header = array('nazwa', 'ilość', 'jednostka');
-            foreach ($recipesArray as $recipe) {
-                $data = array();
-                foreach ($recipe['skladniki'] as $ingredient) {
-                    $data[] = array(
-                        $ingredient['nazwa'],
-                        number_format($ingredient['ilosc'], 2, ',', ' '),
-                        $ingredient['jednostka']);
-                }
-                $pdf->Table($header, $data);
-                $pdf->Ln(20);
-            }
+//            $header = array('nazwa', 'ilość', 'jednostka');
+//            foreach ($recipesArray as $recipe) {
+//                $data = array();
+//                foreach ($recipe['skladniki'] as $ingredient) {
+//                    $data[] = array(
+//                        $ingredient['nazwa'],
+//                        number_format($ingredient['ilosc'], 2, ',', ' '),
+//                        $ingredient['jednostka']);
+//                }
+//                $pdf->Table($header, $data);
+//                $pdf->Ln(20);
+//            }
+//            $tableTitle = 'Suma '.Konfiguracja::trans('skladnikow') .' potrzebna do wyprodukowania powyższych '. Konfiguracja::trans('produktow');
+//            $pdf->SetFont('DejaVu','B',16);
+//            $pdf->Write(10,$tableTitle);
+//            $pdf->Ln(20);
+//            $pdf->SetFont('DejaVu','',12);
+//            $data = array();
+//            foreach ($reportArray as $ingredient) {
 //
-//            $html = $this->renderPartial('recipesPdf', array(
-//                'recipesArray' => $recipesArray,
-//                'reportArray' => $reportArray,
-//            ));
-////            echo $html;die;
-//            /** @noinspection PhpIncludeInspection */
-//            require_once("../vendor/dompdf/dompdf_config.inc.php");
-//            $dompdf = new \DOMPDF();
-//            $dompdf->load_html($html);
-//            $dompdf->render();
-//            $dompdf->stream("receptury".date('d-m-y').".pdf");
+//                $data[] = array($ingredient['nazwa'],
+//                number_format($ingredient['suma'], 2, ',', ' '),
+//                $ingredient['jednostka']);
+//            }
+//            $pdf->Table($header, $data);
+//            $pdf->Ln(20);
+
+            $html = $this->renderPartial('recipesPdf', array(
+                'recipesArray' => $recipesArray,
+                'reportArray' => $reportArray,
+            ));
+//            echo $html;die;
+            /** @noinspection PhpIncludeInspection */
+            require_once("../vendor/dompdf/dompdf_config.inc.php");
+            $dompdf = new \DOMPDF();
+            $dompdf->load_html($html);
+            $dompdf->render();
+            $dompdf->stream("receptury".date('d-m-y').".pdf");
 
 //            $pdf->Output();
         }
