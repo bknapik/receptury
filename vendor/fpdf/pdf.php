@@ -55,7 +55,7 @@ class PDF extends tFPDF
         foreach($data as $row)
         {
             $this->Cell($w[0],6,$row[0],1);
-            $this->Cell($w[1],6,$row[1],1);
+            $this->Cell($w[1],6,$row[1],1,0,'R');
             $this->Cell($w[2],6,$row[2],1);
             $this->Ln();
         }

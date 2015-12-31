@@ -378,6 +378,7 @@ class ProduktyController extends Controller
             $recipesArray = array();
             $reportArray = array();
             foreach ($post['number'] as $key => $product_number) {
+                $product_number = str_replace(',','.',$product_number);
                 if ($product_number != '') {
                     $model = Produkty::findOne($key);
                     $recipe = $model->recipe;
