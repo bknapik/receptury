@@ -60,4 +60,14 @@ class PDF extends tFPDF
             $this->Ln();
         }
     }
+
+    /**
+     * @param $h
+     */
+    function CheckPageBreak($h)
+    {
+        //If the height h would cause an overflow, add a new page immediately
+        if($this->GetY()+$h>$this->PageBreakTrigger)
+            $this->AddPage($this->CurOrientation);
+    }
 }

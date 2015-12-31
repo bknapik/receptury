@@ -413,22 +413,6 @@ class ProduktyController extends Controller
             }
             $header = array('nazwa', 'ilość', 'jednostka');
             foreach ($recipesArray as $recipe) {
-                $pdf->SetFont('DejaVu','B',12);
-                $pdf->Write(10,'Nazwa '.Konfiguracja::trans('produktu').': '.$recipe['nazwa']);
-                $pdf->Ln();
-                $pdf->Write(10,'naważka [kg] / presa [kg]: ');
-                $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10,number_format($recipe['nawazka'], 4, ',', ' ').'/'.number_format($recipe['presa'], 4, ',', ' '));
-                $pdf->SetFont('DejaVu','B',12);
-                $pdf->Ln();
-                $pdf->Write(10,'masa netto [kg]: ');
-                $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10, number_format($recipe['masa_netto'], 4, ',', ' ').'        ');
-                $pdf->SetFont('DejaVu','B',12);
-                $pdf->Write(10,'ile sztuk: ');
-                $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10,number_format($recipe['ile_sztuk'], 2, ',', ' '));
-                $pdf->Ln();
                 $data = array();
                 foreach ($recipe['skladniki'] as $ingredient) {
                     $data[] = array(
@@ -436,8 +420,30 @@ class ProduktyController extends Controller
                         number_format($ingredient['ilosc'], 4, ',', ' '),
                         $ingredient['jednostka']);
                 }
+                $nb=0;
+                for($i=0;$i<count($data);$i++)
+                    $nb++;
+                $h=($nb + 6)*5;
+                //Issue a page break first if needed
+                $pdf->CheckPageBreak($h);
+                $pdf->SetFont('DejaVu','B',12);
+                $pdf->Write(10,'Nazwa '.Konfiguracja::trans('produktu').': '.$recipe['nazwa']);
+                $pdf->Ln(6);
+                $pdf->Write(10,'naważka [kg] / presa [kg]: ');
+                $pdf->SetFont('DejaVu','',12);
+                $pdf->Write(10,number_format($recipe['nawazka'], 4, ',', ' ').'/'.number_format($recipe['presa'], 4, ',', ' '));
+                $pdf->SetFont('DejaVu','B',12);
+                $pdf->Ln(6);
+                $pdf->Write(10,'masa netto [kg]: ');
+                $pdf->SetFont('DejaVu','',12);
+                $pdf->Write(10, number_format($recipe['masa_netto'], 4, ',', ' ').'        ');
+                $pdf->SetFont('DejaVu','B',12);
+                $pdf->Write(10,'ile sztuk: ');
+                $pdf->SetFont('DejaVu','',12);
+                $pdf->Write(10,number_format($recipe['ile_sztuk'], 2, ',', ' '));
+                $pdf->Ln(6);
                 $pdf->Table($header, $data);
-                $pdf->Ln(15);
+                $pdf->Ln(10);
             }
             $pdf->AddPage();
             $tableTitle = 'Suma '.Konfiguracja::trans('skladnikow') .' potrzebna do wyprodukowania powyższych '. Konfiguracja::trans('produktow');
@@ -467,7 +473,8 @@ class ProduktyController extends Controller
 //            $dompdf->render();
 //            $dompdf->stream("receptury".date('d-m-y').".pdf");
 
-            $pdf->Output("receptury".date('d-m-y').".pdf",'D');
+//            $pdf->Output("receptury".date('d-m-y').".pdf",'D');
+            $pdf->Output();
         }
     }
 
