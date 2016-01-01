@@ -30,6 +30,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'wartosc_cal')->label('Wartość kaloryczna na 100g') ?>
             <?= $form->field($model, 'bialko')->label('Białko na 100g') ?>
             <?= $form->field($model, 'tluszcz')->label('Tłuszcz na 100g') ?>
+            <?= $form->field($model, 'tluszcz_nasycony')->label('Tłuszcz nasycony na 100g') ?>
             <?= $form->field($model, 'weglowodany')->label('Węglowodany na 100g') ?>
             <?= $form->field($model, 'cukier')->label('Cukier na 100g') ?>
             <?= $form->field($model, 'od_kiedy')->label('Od kiedy '.\app\models\Konfiguracja::trans('skladnik').' dostępny') ?>
