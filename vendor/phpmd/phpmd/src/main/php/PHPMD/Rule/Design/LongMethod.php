@@ -66,11 +66,12 @@ class LongMethod extends AbstractRule implements FunctionAware, MethodAware
     public function apply(AbstractNode $node)
     {
         $threshold = $this->getIntProperty('minimum');
-        $ignoreWhitespace = $this->getBooleanProperty('ignore-whitespace');
 
-        if ($ignoreWhitespace) {
+        $loc = -1;
+        if ($this->getBooleanProperty('ignore-whitespace')) {
             $loc = $node->getMetric('eloc');
-        } else {
+        }
+        if (-1 === $loc) {
             $loc = $node->getMetric('loc');
         }
 
@@ -78,9 +79,14 @@ class LongMethod extends AbstractRule implements FunctionAware, MethodAware
             return;
         }
 
-        $type = explode('_', get_class($node));
-        $type = strtolower(array_pop($type));
-
-        $this->addViolation($node, array($type, $node->getName(), $loc, $threshold));
+        $this->addViolation(
+            $node,
+            array(
+                $node->getType(),
+                $node->getName(),
+                $loc,
+                $threshold
+            )
+        );
     }
 }

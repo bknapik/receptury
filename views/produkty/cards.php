@@ -90,6 +90,7 @@ endforeach; ?>
                     <?= \app\models\Konfiguracja::trans('adres') ?><br/>
                     <?= $model->nazwa ?><br/>
                     <span class="mass">masa netto <?= $model->getFormatted('masa_netto') ?> kg</span><br/>
+                    składniki<br />
                     <?= $html; ?>
                 </td>
             <?php endfor; ?>

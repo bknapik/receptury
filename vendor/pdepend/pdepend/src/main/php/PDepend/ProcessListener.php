@@ -1,10 +1,10 @@
 <?php
 /**
  * This file is part of PDepend.
- * 
+ *
  * PHP Version 5
  *
- * Copyright (c) 2008-2013, Manuel Pichler <mapi@pdepend.org>.
+ * Copyright (c) 2008-2015, Manuel Pichler <mapi@pdepend.org>.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * @copyright 2008-2013 Manuel Pichler. All rights reserved.
+ * @copyright 2008-2015 Manuel Pichler. All rights reserved.
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
   */
 
@@ -44,14 +44,14 @@ namespace PDepend;
 
 // @codeCoverageIgnoreStart
 use PDepend\Metrics\AnalyzerListener;
+use PDepend\Source\ASTVisitor\ASTVisitListener;
 use PDepend\Source\Builder\Builder;
 use PDepend\Source\Tokenizer\Tokenizer;
-use PDepend\Source\ASTVisitor\ASTVisitListener;
 
 /**
  * This listener can be used to get informations about the current pdepend process.
  *
- * @copyright 2008-2013 Manuel Pichler. All rights reserved.
+ * @copyright 2008-2015 Manuel Pichler. All rights reserved.
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 interface ProcessListener extends ASTVisitListener, AnalyzerListener
@@ -59,7 +59,7 @@ interface ProcessListener extends ASTVisitListener, AnalyzerListener
     /**
      * Is called when PDepend starts the file parsing process.
      *
-     * @param \PDepend\Source\Builder\Builder $builder The used node builder instance.
+     * @param  \PDepend\Source\Builder\Builder $builder The used node builder instance.
      * @return void
      */
     public function startParseProcess(Builder $builder);
@@ -67,7 +67,7 @@ interface ProcessListener extends ASTVisitListener, AnalyzerListener
     /**
      * Is called when PDepend has finished the file parsing process.
      *
-     * @param \PDepend\Source\Builder\Builder $builder The used node builder instance.
+     * @param  \PDepend\Source\Builder\Builder $builder The used node builder instance.
      * @return void
      */
     public function endParseProcess(Builder $builder);
@@ -75,7 +75,7 @@ interface ProcessListener extends ASTVisitListener, AnalyzerListener
     /**
      * Is called when PDepend starts parsing of a new file.
      *
-     * @param \PDepend\Source\Tokenizer\Tokenizer $tokenizer
+     * @param  \PDepend\Source\Tokenizer\Tokenizer $tokenizer
      * @return void
      */
     public function startFileParsing(Tokenizer $tokenizer);
@@ -83,21 +83,21 @@ interface ProcessListener extends ASTVisitListener, AnalyzerListener
     /**
      * Is called when PDepend has finished a file.
      *
-     * @param \PDepend\Source\Tokenizer\Tokenizer $tokenizer
+     * @param  \PDepend\Source\Tokenizer\Tokenizer $tokenizer
      * @return void
      */
     public function endFileParsing(Tokenizer $tokenizer);
     
     /**
      * Is called when PDepend starts the analyzing process.
-     * 
+     *
      * @return void
      */
     public function startAnalyzeProcess();
     
     /**
      * Is called when PDepend has finished the analyzing process.
-     * 
+     *
      * @return void
      */
     public function endAnalyzeProcess();

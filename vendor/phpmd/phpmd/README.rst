@@ -17,6 +17,10 @@ http://phpmd.org
    :target: https://travis-ci.org/phpmd/phpmd
    :alt: Travis Build Status
 
+.. image:: https://ci.appveyor.com/api/projects/status/pc08owbun2y00kwk?svg=true
+   :target: https://ci.appveyor.com/project/phpmd/phpmd
+   :alt: AppVeyor Build Status
+
 .. image:: https://scrutinizer-ci.com/g/phpmd/phpmd/badges/build.png?b=master
    :target: https://scrutinizer-ci.com/g/phpmd/phpmd/build-status/master
    :alt: Scrutinizer Build Status
@@ -58,7 +62,7 @@ You can pass a file name or a directory name containing PHP source
 code to PHPMD.
 
 The `PHPMD Phar distribution`__ includes the rule set files inside
-its archive, even if the "rulesets/codesize.xml" parameter above looks 
+its archive, even if the "rulesets/codesize.xml" parameter above looks
 like a filesystem reference.
 
 __ http://phpmd.org/download/index.html
@@ -79,16 +83,16 @@ Command line options
   - ``--minimumpriority`` - The rule priority threshold; rules with lower
     priority than they will not be used.
 
-  - ``--reportfile`` - Sends the report output to the specified file, 
+  - ``--reportfile`` - Sends the report output to the specified file,
     instead of the default output target ``STDOUT``.
 
-  - ``--suffixes`` - Comma-separated string of valid source code filename 
+  - ``--suffixes`` - Comma-separated string of valid source code filename
     extensions.
 
-  - ``--exclude`` - Comma-separated string of patterns that are used to ignore 
+  - ``--exclude`` - Comma-separated string of patterns that are used to ignore
     directories.
 
-  - ``--strict`` - Also report those nodes with a @SuppressWarnings annotation. 
+  - ``--strict`` - Also report those nodes with a @SuppressWarnings annotation.
 
   An example command line: ::
 
@@ -97,7 +101,7 @@ Command line options
 Using multiple rule sets
 ````````````````````````
 
-PHPMD uses so called rule sets that configure/define a set of rules which will 
+PHPMD uses so called rule sets that configure/define a set of rules which will
 be applied against the source under test. The default distribution of PHPMD is
 already shipped with a few default sets, that can be used out-of-box. You can
 call PHPMD's cli tool with a set's name to apply this configuration: ::
@@ -114,7 +118,7 @@ You can also mix custom `rule set files`__ with build-in rule sets: ::
 
   ~ $ phpmd /path/to/source text codesize,/my/rules.xml
 
-__ /documentation/creating-a-ruleset.html
+__ http://phpmd.org/documentation/creating-a-ruleset.html
 
 That's it. With this behavior you can specify you own combination of rule sets
 that will check the source code.

@@ -74,7 +74,7 @@ class Parser extends AbstractASTVisitor implements CodeAwareGenerator
     /**
      * The metric containing analyzer instances.
      *
-     * @var \PDepend\Metrics\Analyzer[]
+     * @var \PDepend\Metrics\AnalyzerNodeAware[]
      */
     private $analyzers = array();
 
@@ -166,7 +166,7 @@ class Parser extends AbstractASTVisitor implements CodeAwareGenerator
      * Closes the logger process and writes the output file.
      *
      * @return void
-     * @throws PDepend\Report\NoLogOutputException If the no log target exists.
+     * @throws \PDepend\Report\NoLogOutputException If the no log target exists.
      */
     public function close()
     {
@@ -266,7 +266,7 @@ class Parser extends AbstractASTVisitor implements CodeAwareGenerator
     /**
      * Sets the context code nodes.
      *
-     * @param \PDepend\Source\AST\ASTArtifactList $code
+     * @param \PDepend\Source\AST\ASTArtifactList $artifacts
      * @return void
      */
     public function setArtifacts(ASTArtifactList $artifacts)

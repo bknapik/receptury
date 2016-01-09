@@ -162,6 +162,9 @@ class ProduktyController extends Controller
     {
         $product_id = \Yii::$app->request->get('id');
         if ($product_id) {
+            /**
+             * @var $model Produkty
+             */
             $model = Produkty::findOne($product_id);
             $model->delete();
             $this->redirect('?r=produkty/index');
@@ -360,11 +363,9 @@ class ProduktyController extends Controller
      */
     public function actionPrintRecipesPdf()
     {
-        setlocale(LC_ALL, 'pl_PL');
         if (\Yii::$app->request->isPost) {
             require('../vendor/fpdf/tfpdf.php');
             require('../vendor/fpdf/pdf.php');
-
             $pdf = new \PDF();
             $pdf->AliasNbPages();
             $pdf->logo = "uploads/" . Konfiguracja::trans('logo');
@@ -375,25 +376,25 @@ class ProduktyController extends Controller
             $pdf->AddFont('DejaVu','B','DejaVuSansCondensed-Bold.ttf',true);
             $pdf->SetFont('DejaVu','',12);
             $post = Yii::$app->request->post();
-            $recipesArray = array();
             $reportArray = array();
+            $header = array('nazwa', 'ilość', 'jednostka');
             foreach ($post['number'] as $key => $product_number) {
                 $product_number = str_replace(',','.',$product_number);
                 if ($product_number != '') {
                     $model = Produkty::findOne($key);
-                    $recipe = $model->recipe;
+                    $recipeModel = $model->recipe;
                     $model->ile_sztuk = ($model->ile_sztuk > 0) ? $model->ile_sztuk : 1;
                     $multiplier = $product_number / $model->ile_sztuk;
-                    $recipeElement = array();
-                    $recipeElement['nazwa'] = $model->nazwa;
-                    $recipeElement['nawazka'] = $model->nawazka;
-                    $recipeElement['ile_sztuk'] = $product_number;
-                    $recipeElement['presa'] = $model->presa * $multiplier;
-                    $recipeElement['suma_skladnikow'] = $recipe->woda * $multiplier;
-                    $recipeElement['woda'] = $recipe->woda * $multiplier;
-                    $recipeElement['uwagi'] = $recipe->uwagi;
-                    $recipeElement['masa_netto'] = $model->masa_netto;
-                    $ingredients = $recipe->recipeIngredients;
+                    $recipe = array();
+                    $recipe['nazwa'] = $model->nazwa;
+                    $recipe['nawazka'] = $model->nawazka;
+                    $recipe['ile_sztuk'] = $product_number;
+                    $recipe['presa'] = $model->presa * $multiplier;
+                    $recipe['suma_skladnikow'] = $recipeModel->woda * $multiplier;
+                    $recipe['woda'] = $recipeModel->woda * $multiplier;
+                    $recipe['uwagi'] = $recipeModel->uwagi;
+                    $recipe['masa_netto'] = $model->masa_netto;
+                    $ingredients = $recipeModel->recipeIngredients;
                     foreach ($ingredients as $ingredient) {
                         $recipeElements = array();
                         $recipeElements['nazwa'] = $ingredient->ingredient->nazwa_skladnika;
@@ -406,45 +407,46 @@ class ProduktyController extends Controller
                             ];
                         }
                         $reportArray[$ingredient->skladnik_id]['suma'] += $ingredient->ilosc * $multiplier;
-                        $recipeElement['suma_skladnikow'] += $ingredient->ilosc_przeliczona * $multiplier;
-                        $recipeElement['skladniki'][] = $recipeElements;
+                        $recipe['suma_skladnikow'] += $ingredient->ilosc_przeliczona * $multiplier;
+                        $recipe['skladniki'][] = $recipeElements;
                     }
-                    $recipesArray[] = $recipeElement;
+                    $data = array();
+                    foreach ($recipe['skladniki'] as $ingredient) {
+                        $data[] = array(
+                            $ingredient['nazwa'],
+                            number_format($ingredient['ilosc'], 4, ',', ' '),
+                            $ingredient['jednostka']);
+                    }
+                    $nb=0;
+                    for($i=0;$i<count($data);$i++)
+                        $nb++;
+                    $h=($nb + 6)*5;
+                    //Issue a page break first if needed
+                    $pdf->CheckPageBreak($h);
+                    $pdf->SetFont('DejaVu','B',12);
+                    $pdf->Write(10,'Nazwa '.Konfiguracja::trans('produktu').': '.$recipe['nazwa']);
+                    $pdf->Ln(7);
+                    $pdf->Write(10,'naważka [kg] / presa [kg]: ');
+                    $pdf->SetFont('DejaVu','',12);
+                    $pdf->Write(10,number_format($recipe['nawazka'], 4, ',', ' ').'/'.number_format($recipe['presa'], 4, ',', ' '));
+                    $pdf->SetFont('DejaVu','B',12);
+                    $pdf->Ln(7);
+                    $pdf->Write(10,'masa netto [kg]: ');
+                    $pdf->SetFont('DejaVu','',12);
+                    $pdf->Write(10, number_format($recipe['masa_netto'], 4, ',', ' ').'                       ');
+                    $pdf->SetFont('DejaVu','B',12);
+                    $pdf->Write(10,'ile sztuk: ');
+                    $pdf->SetFont('DejaVu','',12);
+                    $pdf->Write(10,number_format($recipe['ile_sztuk'], 2, ',', ' '));
+                    $pdf->Ln(7);
+                    $pdf->SetFont('DejaVu','B',12);
+                    $pdf->Write(10,'suma '.Konfiguracja::trans('skladnikow').' w tym woda [kg]: ');
+                    $pdf->SetFont('DejaVu','',12);
+                    $pdf->Write(10, number_format($recipe['suma_skladnikow'], 4, ',', ' '));
+                    $pdf->Ln(10);
+                    $pdf->Table($header, $data);
+                    $pdf->Ln(10);
                 }
-            }
-            $header = array('nazwa', 'ilość', 'jednostka');
-            foreach ($recipesArray as $recipe) {
-                $data = array();
-                foreach ($recipe['skladniki'] as $ingredient) {
-                    $data[] = array(
-                        $ingredient['nazwa'],
-                        number_format($ingredient['ilosc'], 4, ',', ' '),
-                        $ingredient['jednostka']);
-                }
-                $nb=0;
-                for($i=0;$i<count($data);$i++)
-                    $nb++;
-                $h=($nb + 6)*5;
-                //Issue a page break first if needed
-                $pdf->CheckPageBreak($h);
-                $pdf->SetFont('DejaVu','B',12);
-                $pdf->Write(10,'Nazwa '.Konfiguracja::trans('produktu').': '.$recipe['nazwa']);
-                $pdf->Ln(6);
-                $pdf->Write(10,'naważka [kg] / presa [kg]: ');
-                $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10,number_format($recipe['nawazka'], 4, ',', ' ').'/'.number_format($recipe['presa'], 4, ',', ' '));
-                $pdf->SetFont('DejaVu','B',12);
-                $pdf->Ln(6);
-                $pdf->Write(10,'masa netto [kg]: ');
-                $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10, number_format($recipe['masa_netto'], 4, ',', ' ').'        ');
-                $pdf->SetFont('DejaVu','B',12);
-                $pdf->Write(10,'ile sztuk: ');
-                $pdf->SetFont('DejaVu','',12);
-                $pdf->Write(10,number_format($recipe['ile_sztuk'], 2, ',', ' '));
-                $pdf->Ln(6);
-                $pdf->Table($header, $data);
-                $pdf->Ln(10);
             }
             $pdf->AddPage();
             $tableTitle = 'Suma '.Konfiguracja::trans('skladnikow') .' potrzebna do wyprodukowania powyższych '. Konfiguracja::trans('produktow');
@@ -454,26 +456,12 @@ class ProduktyController extends Controller
             $pdf->SetFont('DejaVu','',12);
             $data = array();
             foreach ($reportArray as $ingredient) {
-
                 $data[] = array($ingredient['nazwa'],
                 number_format($ingredient['suma'], 4, ',', ' '),
                 $ingredient['jednostka']);
             }
             $pdf->Table($header, $data);
             $pdf->Ln(15);
-
-//            $html = $this->renderPartial('recipesPdf', array(
-//                'recipesArray' => $recipesArray,
-//                'reportArray' => $reportArray,
-//            ));
-////            echo $html;die;
-//            /** @noinspection PhpIncludeInspection */
-//            require_once("../vendor/dompdf/dompdf_config.inc.php");
-//            $dompdf = new \DOMPDF();
-//            $dompdf->load_html($html);
-//            $dompdf->render();
-//            $dompdf->stream("receptury".date('d-m-y').".pdf");
-
             $pdf->Output("receptury".date('d-m-y').".pdf",'D');
         }
     }
@@ -482,7 +470,7 @@ class ProduktyController extends Controller
      * Makes head and header with configuration elements
      * @return string html code with head and header
      */
-    public function makeHeader()
+    private function makeHeader()
     {
         return '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                     <link href="css/print.css" rel="stylesheet">
@@ -499,7 +487,7 @@ class ProduktyController extends Controller
      * @param $ths array with names of table headers
      * @return string html code
      */
-    public function makeTableHeader($ths)
+    private function makeTableHeader($ths)
     {
         $html = '<table>
                     <thead>
@@ -517,7 +505,7 @@ class ProduktyController extends Controller
      * Makes footer
      * @return string html code
      */
-    public function makeSimpleFooter()
+    private function makeSimpleFooter()
     {
         return '<div class="footer">' . date('Y-m-d') . '</div></tbody>
                 </table></body></html>';

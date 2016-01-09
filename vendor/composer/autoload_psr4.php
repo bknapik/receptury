@@ -16,4 +16,8 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'auth\\' => array($vendorDir . '/robregonm/yii2-auth'),
+    'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
+    'Symfony\\Component\\DependencyInjection\\' => array($vendorDir . '/symfony/dependency-injection'),
+    'Symfony\\Component\\Config\\' => array($vendorDir . '/symfony/config'),
+    'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

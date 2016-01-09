@@ -57,7 +57,7 @@ foreach ($list as $produkt):
                 </tr>
             </table>
         </div>
-        <div class="recipe_ingredient"><p class="ingredient_header">skład</p></div>
+        <div class="recipe_ingredient"><p class="ingredient_header">składniki</p></div>
         <div class="recipe_ingredient">
             <?php foreach ($recipeIngredients as $recipeIngredient): ?>
                 <?php /** @var $ingredient \app\models\Skladniki */ ?>

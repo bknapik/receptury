@@ -4,7 +4,7 @@
  *
  * PHP Version 5
  *
- * Copyright (c) 2008-2013, Manuel Pichler <mapi@pdepend.org>.
+ * Copyright (c) 2008-2015, Manuel Pichler <mapi@pdepend.org>.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * @copyright 2008-2013 Manuel Pichler. All rights reserved.
+ * @copyright 2008-2015 Manuel Pichler. All rights reserved.
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
@@ -47,7 +47,7 @@ use PDepend\Source\ASTVisitor\ASTVisitor;
 /**
  * Represents a php class node.
  *
- * @copyright 2008-2013 Manuel Pichler. All rights reserved.
+ * @copyright 2008-2015 Manuel Pichler. All rights reserved.
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 class ASTClass extends AbstractASTClassOrInterface
@@ -94,7 +94,6 @@ class ASTClass extends AbstractASTClassOrInterface
                 $declarators = $declaration->findChildrenOfType('PDepend\\Source\\AST\\ASTVariableDeclarator');
 
                 foreach ($declarators as $declarator) {
-
                     $property = new ASTProperty($declaration, $declarator);
                     $property->setDeclaringClass($this);
                     $property->setCompilationUnit($this->getCompilationUnit());
@@ -110,7 +109,7 @@ class ASTClass extends AbstractASTClassOrInterface
     /**
      * Checks that this user type is a subtype of the given <b>$type</b> instance.
      *
-     * @param \PDepend\Source\AST\AbstractASTType $type
+     * @param  \PDepend\Source\AST\AbstractASTType $type
      * @return boolean
      */
     public function isSubtypeOf(AbstractASTType $type)
@@ -136,7 +135,7 @@ class ASTClass extends AbstractASTClassOrInterface
      * Returns the declared modifiers for this type.
      *
      * @return integer
-     * @since 0.9.4
+     * @since  0.9.4
      */
     public function getModifiers()
     {
@@ -150,11 +149,11 @@ class ASTClass extends AbstractASTClassOrInterface
      * This method will throw an exception when the value of given <b>$modifiers</b>
      * contains an invalid/unexpected modifier
      *
-     * @param integer $modifiers
+     * @param  integer $modifiers
      * @return void
      * @throws \BadMethodCallException
      * @throws \InvalidArgumentException
-     * @since 0.9.4
+     * @since  0.9.4
      */
     public function setModifiers($modifiers)
     {
@@ -178,7 +177,7 @@ class ASTClass extends AbstractASTClassOrInterface
     /**
      * ASTVisitor method for node tree traversal.
      *
-     * @param \PDepend\Source\ASTVisitor\ASTVisitor $visitor
+     * @param  \PDepend\Source\ASTVisitor\ASTVisitor $visitor
      * @return void
      */
     public function accept(ASTVisitor $visitor)
@@ -193,7 +192,7 @@ class ASTClass extends AbstractASTClassOrInterface
      * context.
      *
      * @return void
-     * @since 0.10.0
+     * @since  0.10.0
      */
     public function __wakeup()
     {

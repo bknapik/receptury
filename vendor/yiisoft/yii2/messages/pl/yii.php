@@ -53,7 +53,7 @@ return [
     'Unable to verify your data submission.' => 'Nie udało się zweryfikować przesłanych danych.',
     'Unknown command "{command}".' => 'Nieznane polecenie "{command}".',
     'Unknown option: --{name}' => 'Nieznana opcja: --{name}',
-    'Update' => 'Edytuj',
+    'Update' => 'Aktualizuj',
     'View' => 'Zobacz szczegóły',
     'Yes' => 'Tak',
     'You are not allowed to perform this action.' => 'Brak upoważnienia do wykonania tej czynności.',
