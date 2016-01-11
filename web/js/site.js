@@ -138,15 +138,15 @@ jQuery(document).ready(function () {
     });
 });
 jQuery(function () {
-    jQuery("#produkty-data_od").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#produkty-data_do").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#receptury-data_od").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#receptury-data_do").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#skladniki-od_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#skladniki-do_kiedy").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#zamowienia-data").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#zamowienia-zrealizowane").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
-    jQuery("#zamowienia-zafakturowane").datepicker({format: 'dd-mm-yyyy', weekStart: 1});
+    jQuery("#produkty-data_od").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#produkty-data_do").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#receptury-data_od").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#receptury-data_do").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#skladniki-od_kiedy").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#skladniki-do_kiedy").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#zamowienia-data").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#zamowienia-zrealizowane").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
+    jQuery("#zamowienia-zafakturowane").datepicker({format: 'yyyy-mm-dd', weekStart: 1});
 });
 
 jQuery('.remove-button').click(function () {

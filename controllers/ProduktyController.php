@@ -367,14 +367,15 @@ class ProduktyController extends Controller
             require('../vendor/fpdf/tfpdf.php');
             require('../vendor/fpdf/pdf.php');
             $pdf = new \PDF();
+            $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
+            $pdf->AddFont('DejaVu','B','DejaVuSansCondensed-Bold.ttf',true);
+            $pdf->AddFont('DejaVu','I','DejaVuSansCondensed-Oblique.ttf',true);
+            $pdf->SetFont('DejaVu','',12);
             $pdf->AliasNbPages();
             $pdf->logo = "uploads/" . Konfiguracja::trans('logo');
             $pdf->name = Konfiguracja::trans('nazwa');
             $pdf->adres = date('d.m.y');
             $pdf->AddPage();
-            $pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
-            $pdf->AddFont('DejaVu','B','DejaVuSansCondensed-Bold.ttf',true);
-            $pdf->SetFont('DejaVu','',12);
             $post = Yii::$app->request->post();
             $reportArray = array();
             $header = array('nazwa', 'ilość', 'jednostka');

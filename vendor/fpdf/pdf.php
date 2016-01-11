@@ -16,7 +16,7 @@ class PDF extends tFPDF
         // Logo
         $this->Image($this->logo, 170, 6, 30);
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 15);
+        $this->SetFont('DejaVu', 'B', 15);
         // Title
         $this->Cell(20, 10, $this->name, 0, 0, 'L');
         $this->Ln(8);
@@ -32,7 +32,7 @@ class PDF extends tFPDF
         // Position at 1.5 cm from bottom
         $this->SetY(-15);
         // Arial italic 8
-        $this->SetFont('Arial', 'I', 8);
+        $this->SetFont('DejaVu', 'I', 8);
         // Page number
         $this->Cell(0, 10, 'Strona ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
