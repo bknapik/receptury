@@ -90,7 +90,11 @@ class SkladnikiController extends Controller
         $functionModel = new FunkcjaTechnologiczna();
         $functions_arr = $functionModel->getAssocArr('1','nazwa','Wybierz');
         $ingredientsModel = new Skladniki();
-        $ingredients_arr = $ingredientsModel->getAssocArr('1','nazwa_skladnika','Wybierz');
+        if($ingredient_id) {
+            $ingredients_arr = $ingredientsModel->getAssocArr('id != '.$ingredient_id, 'nazwa_skladnika', 'Wybierz');
+        } else {
+            $ingredients_arr = $ingredientsModel->getAssocArr('1', 'nazwa_skladnika', 'Wybierz');
+        }
         $ingredient_ingredients = new SkladnikiSkladniki();
         return $this->render('add', array('model' => $model,
                                             'parents' => $parents_arr,

@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($ifm, 'skladnik_id')->label(\app\models\Konfiguracja::trans('skladniki') )->dropDownList($ingredients) ?>
+                        <?= $form->field($ifm, 'skladnik_id')->label(\app\models\Konfiguracja::trans('skladniki').' <span style="font-size:8px;">Żeby powrócić do składnika niezłożonego zamień na -Wybierz-</span>' )->dropDownList($ingredients) ?>
                         <?= $form->field($ifm, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ifm, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
@@ -60,7 +60,7 @@ use yii\widgets\ActiveForm;
                         <button class="btn btn-link pull-right remove-ingredient" type="button">
                             <i class="glyphicon glyphicon-remove"></i>
                         </button>
-                        <?= $form->field($ingredient_ingredients, 'skladnik_id')->label( \app\models\Konfiguracja::trans('skladnik'))->dropDownList($ingredients) ?>
+                        <?= $form->field($ingredient_ingredients, 'skladnik_id')->label( \app\models\Konfiguracja::trans('skladnik').' <span style="font-size:8px;">Żeby powrócić do składnika niezłożonego zamień na -Wybierz-</span>')->dropDownList($ingredients) ?>
                         <?= $form->field($ingredient_ingredients, 'kilogramy')->label('Ilość w kilogramach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ingredient_ingredients, 'procenty')->label('Ilość w procentach')->input('number',['step' => 0.001, 'min' => 0, 'minValue' => 0]) ?>
                         <?= $form->field($ingredient_ingredients, 'wyswietlac_procent')->checkbox(array('label' => 'Wyświetlać procent w składzie?')) ?>
